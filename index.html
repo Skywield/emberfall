@@ -1,0 +1,23 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>Emberfall Chronicle — Skywield Games demo</title>
+<style>
+html,body{margin:0;height:100%;background:#05060c;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none;font-family:monospace}
+#wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column}
+canvas{image-rendering:pixelated;image-rendering:crisp-edges;background:#000;display:block}
+#pad{display:none;position:fixed;left:0;right:0;bottom:0;pointer-events:none}
+.touch #pad{display:block}
+.btn{position:absolute;pointer-events:auto;background:rgba(40,60,160,.55);border:2px solid rgba(220,230,255,.7);color:#fff;font:bold 18px monospace;display:flex;align-items:center;justify-content:center;border-radius:12px}
+.btn.on{background:rgba(120,150,255,.8)}
+#dpad{position:absolute;left:14px;bottom:18px;width:150px;height:150px}
+#dpad .btn{width:50px;height:50px}
+#u{left:50px;top:0}#d{left:50px;top:100px}#l{left:0;top:50px}#r{left:100px;top:50px}
+#ab{position:absolute;right:14px;bottom:24px;width:150px;height:140px}
+#a{right:0;top:30px;width:64px;height:64px;border-radius:50%}
+#b{right:76px;top:70px;width:56px;height:56px;border-radius:50%}
+#m{right:20px;top:-30px;width:70px;height:34px;font-size:13px}
+</style></head><body>
+<div id="wrap"><canvas id="c" width="256" height="224"></canvas></div>
+<div id="pad"><div id="dpad"><div class="btn" id="u" data-k="up">▲</div><div class="btn" id="d" data-k="down">▼</div><div class="btn" id="l" data-k="left">◀</div><div class="btn" id="r" data-k="right">▶</div></div>
+<div id="ab"><div class="btn" id="m" data-k="menu">MENU</div><div class="btn" id="a" data-k="a">A</div><div class="btn" id="b" data-k="b">B</div></div></div>
+<script src="game.js"></script></body></html>
