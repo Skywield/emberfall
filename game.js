@@ -52,7 +52,7 @@ function stopMus(){if(!AC)return;const t=AC.currentTime;MUS.voices.forEach(v=>{t
 function setMusic(k){if(!AC||MUS.want===k)return;MUS.want=k;if(!k){stopMus();return;}
  getMus(k).then(b=>{if(!b||MUS.want!==k||MUS.cur===k)return;stopMus();MUS.cur=k;const t=AC.currentTime+0.05;musVoice(b,t,true);MUS.next=t+b.duration-MXF;});}
 function tickMusic(){if(!AC||!MUS.cur)return;const b=MBUF[MUS.cur];if(b&&AC.currentTime>MUS.next-0.5){const t=MUS.next;musVoice(b,t,true);MUS.next=t+b.duration-MXF;}}
-function musicFor(){if(scene==='battle'&&B)return B.boss?'boss':'battle';if(scene==='map')return MFILES[G.map]?G.map:'town';if(scene==='title'||scene==='intro'||scene==='ending')return 'town';return null;}
+function musicFor(){if(XSCN[scene]&&XSCN[scene].mus)return XSCN[scene].mus();if(scene==='battle'&&B)return B.boss?'boss':'battle';if(scene==='map')return MFILES[G.map]?G.map:'town';if(scene==='title'||scene==='intro'||scene==='ending')return 'town';return null;}
 function tone(f,d,type='square',v=0.06,slide=0,delay=0){if(!AC)return;const t=AC.currentTime+delay,o=AC.createOscillator(),g=AC.createGain();
  o.type=type;o.frequency.setValueAtTime(f,t);if(slide)o.frequency.exponentialRampToValueAtTime(Math.max(30,f+slide),t+d);
  g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(0.0001,t+d);o.connect(g);g.connect(SBUS);o.start(t);o.stop(t+d);}
@@ -187,7 +187,7 @@ for(const k in MAPS){const m=MAPS[k];m.w=Math.max(...m.rows.map(r=>r.length));m.
 const NPCS={town:[
  {x:7,y:7,s:'elder',d:'down',lines:()=>G.flags.boss?['Elder Bran: The vale breathes again. Thornwick owes you everything.']:
    ['Elder Bran: Kael, Lyra, Mira... you came.','The Ember Crown shattered, and its shards fell into Hollowdeep Cavern.','Something wakes there. Gravemaw, the Hollow Warden, feeds on the shard\'s light.','Rest at the inn, buy what you need from Tessa, then go east through Ashen Vale.']},
- {x:13,y:12,s:'kid',d:'left',wander:1,lines:()=>['Pip: I saw glowing bats by the river!','Pip: Mom says Lyra\'s fire spells work best on slimes.']},
+ {x:13,y:12,s:'kid',d:'left',wander:1,lines:()=>['Tam: I saw glowing bats by the river!','Tam: Mom says Lyra\'s fire spells work best on slimes.']},
  {x:11,y:14,s:'guard',d:'down',lines:()=>['Guard Hollis: The road east leads to Ashen Vale.','Bone Sentries in the cave hate fire. Wisps hate the cold. Remember that.']},
  {x:16,y:5,s:'merch',d:'down',lines:()=>['Tessa: Shop\'s right behind me. Better blades, better odds!']},
  {x:3,y:5,s:'inn',d:'down',lines:()=>['Marla: Inn\'s open! A warm bed is 20G. Rest restores HP and MP.']},
@@ -242,7 +242,7 @@ function updMenu(u,dt){const s=u.sub;
   if(MOPTS[u.i]==='Music'||MOPTS[u.i]==='Sound FX'){const key=MOPTS[u.i]==='Music'?'mus':'sfx';let d=held('right',dt)?1:held('left',dt)?-1:0;if(P.a)d=AOPT[key]?-AOPT[key]:3;if(d){AOPT[key]=Math.max(0,Math.min(3,AOPT[key]+d));saveAOpt();sfx('move');return;}}
   if(P.b||P.menu){UI.pop();sfx('no');return;}
   if(P.a){sfx('ok');const o=MOPTS[u.i];if(o==='Close')UI.pop();else if(o==='Save'){save();toast('Game saved to this browser.');}
-   else if(o==='Items')u.sub={k:'items',i:0,pick:-1};else if(o==='Equip')u.sub={k:'eqwho',i:0};else u.sub={k:'status',i:0};}return;}
+   else if(o==='Items')u.sub={k:'items',i:0,pick:-1};else if(o==='Equip')u.sub={k:'eqwho',i:0};else if(o==='Ship'&&XUI.shipinfo)UI.push({k:'shipinfo'});else u.sub={k:'status',i:0};}return;}
  if(s.k==='status'){if(held('left',dt)||held('up',dt)){s.i=(s.i+2)%3;sfx('move');}if(held('right',dt)||held('down',dt)){s.i=(s.i+1)%3;sfx('move');}if(P.b||P.a){u.sub=null;sfx('no');}}
  else if(s.k==='items'){const L=Object.keys(G.items).filter(k=>G.items[k]>0);
   if(s.pick<0){if(!L.length){if(P.a||P.b)u.sub=null;return;}s.i=Math.min(s.i,L.length-1);
@@ -264,7 +264,7 @@ function drawPartyPanel(x,y,sel){G.party.forEach((m,i)=>{const s=st(m),yy=y+i*44
  txt(m.name,x+28,yy+4,m.hp>0?'#fff':'#f66');txt('Lv'+m.lv,x+110,yy+4,'#9cf');txt(HERO_DEF[m.id].role,x+28,yy+13,'#bbd',7);
  txt(`HP ${m.hp}/${s.hp}`,x+28,yy+22,'#fff',7);bar(x+28,yy+31,60,m.hp/s.hp,'#30c060','#a0ff80');txt(`MP ${m.mp}/${s.mp}`,x+96,yy+22,'#fff',7);bar(x+96,yy+31,44,m.mp/s.mp,'#3060e0','#80c0ff');
  if(sel===i)cursor(x-6,yy+8);});}
-function drawMenu(u){X.fillStyle='#0008';X.fillRect(0,0,W,H);win(4,4,76,98);MOPTS.forEach((o,i)=>{const vk=o==='Music'?'mus':o==='Sound FX'?'sfx':null;txt(vk?(o==='Music'?'Music':'SFX'):o,20,10+i*13);if(vk)txt(VOLTXT[AOPT[vk]],74,10+i*13,AOPT[vk]?'#9cf':'#f88',7,'right');if(!u.sub&&i===u.i)cursor(8,10+i*13);});
+function drawMenu(u){X.fillStyle='#0008';X.fillRect(0,0,W,H);win(4,4,76,MOPTS.length*13+7);MOPTS.forEach((o,i)=>{const vk=o==='Music'?'mus':o==='Sound FX'?'sfx':null;txt(vk?(o==='Music'?'Music':'SFX'):o,20,10+i*13);if(vk)txt(VOLTXT[AOPT[vk]],74,10+i*13,AOPT[vk]?'#9cf':'#f88',7,'right');if(!u.sub&&i===u.i)cursor(8,10+i*13);});
  win(4,H-40,76,36);txt('Gold',10,H-34,'#ffd860');txt(G.gold+' G',74,H-22,'#fff',8,'right');
  
  const s=u.sub;win(84,4,168,H-8);
@@ -311,12 +311,12 @@ function updField(dt){G.time+=dt;F.anim+=dt;
   if(Math.abs(nx-n.ox)<3&&Math.abs(ny-n.oy)<3&&!SOLID.has(tileAt(G.map,nx,ny))&&!(nx===G.x&&ny===G.y)&&!npcAt(nx,ny)&&!MAPS[G.map].doors?.[nx+','+ny]){n.x=nx;n.y=ny;}}});
  if(F.mv>0){F.mv-=dt*7;if(F.mv<=0){F.mv=0;arrived();}return;}
  if(P.menu){openMenu();return;}
- if(P.a){const[a,b]=DIRS[G.d],tx=G.x+a,ty=G.y+b,n=npcAt(tx,ty);if(n){n.d={up:'down',down:'up',left:'right',right:'left'}[G.d];sfx('ok');dialog(n.lines());return;}
+ if(P.a){const[a,b]=DIRS[G.d],tx=G.x+a,ty=G.y+b,n=npcAt(tx,ty);if(n){n.d={up:'down',down:'up',left:'right',right:'left'}[G.d];sfx('ok');n.act?n.act():dialog(n.lines());return;}
   const t=tileAt(G.map,tx,ty);if(t==='c'){const ch=MAPS[G.map].chests[tx+','+ty];setTile(G.map,tx,ty,'o');G.flags['c'+G.map+tx+','+ty]=1;G.items[ch]=(G.items[ch]||0)+1;sfx('coin');toast('Found '+ITEMS[ch].n+'!');return;}}
  for(const d of ['up','down','left','right'])if(K[d]){G.d=d;const[a,b]=DIRS[d];if(!blocked(G.x+a,G.y+b)){F.fx=G.x;F.fy=G.y;G.x+=a;G.y+=b;F.mv=1;}break;}}
 function arrived(){const M=MAPS[G.map];G.steps++;
  const w=M.warps.find(w=>w.x===G.x&&w.y===G.y);if(w){sfx('ok');return transition(()=>enterMap(w.to,w.tx,w.ty,w.d));}
- const dr=M.doors&&M.doors[G.x+','+G.y];if(dr){G.y++;G.d='down';if(dr==='inn')openInn();else if(dr==='shop')openShop();else dialog(['The elder\'s house is quiet. Bran is out by the fountain.']);return;}
+ const dr=M.doors&&M.doors[G.x+','+G.y];if(dr){G.y++;G.d='down';if(dr==='inn')openInn();else if(dr==='shop')openShop();else if(XDOOR[dr])XDOOR[dr]();else dialog(['The elder\'s house is quiet. Bran is out by the fountain.']);return;}
  if(G.map==='cave'&&!G.flags.boss&&G.y===3){return bossEvent();}
  if(M.enc&&G.steps>4&&Math.random()<1/M.enc&&!G.flags.noenc){G.steps=0;const grp=M.pool[Math.random()*M.pool.length|0];startBattle(grp,G.map==='cave');}}
 function bossEvent(){dialog(['Mira: The air is freezing... and the shard\'s glow is right there.','Gravemaw: LITTLE EMBERS. YOU SMELL OF THE CROWN.','Gravemaw: I WILL SWALLOW YOUR LIGHT AS I SWALLOWED ITS OWN.','Kael: Lyra, Mira — together!'],()=>startBattle(['boss'],true,true));}
@@ -327,7 +327,7 @@ function drawField(){const M=MAPS[G.map],[cx,cy,ppx,ppy]=camera();X.fillStyle='#
  const ents=F.npcs.map(n=>({y:n.y*16,dr:()=>X.drawImage(SPR[n.s][n.d][0],n.x*16-cx+2,n.y*16-cy-2)}));
  const fr=F.mv>0?(1+(Math.floor(F.anim*8)%2)):0;ents.push({y:ppy,dr:()=>X.drawImage(SPR.kael[G.d][fr],ppx-cx+2,ppy-cy-2)});
  if(G.map==='cave'&&!G.flags.boss){const b=EN_ART.boss.c,bob=Math.sin(T*2)*1.5;ents.push({y:32,dr:()=>{X.globalAlpha=0.9;X.drawImage(b,12*16-cx-b.width/2,1*16-cy-4+bob);X.globalAlpha=1;}});}
- ents.sort((a,b)=>a.y-b.y).forEach(e=>e.dr());
+ ents.sort((a,b)=>a.y-b.y).forEach(e=>e.dr());if(window.XFIELD)XFIELD(cx,cy);
  if(G.map==='town'){const fx=10*16-cx,fy=6*16-cy;for(let i=0;i<4;i++){const p=(T*1.5+i/4)%1;X.fillStyle='#bfe0ff';X.fillRect(fx+14+Math.sin(i*2)*6*p,fy+12-Math.sin(p*Math.PI)*10,2,2);}}
  if(M.dark){const g=X.createRadialGradient(ppx-cx+8,ppy-cy+8,24,ppx-cx+8,ppy-cy+8,140);g.addColorStop(0,'rgba(0,0,10,0)');g.addColorStop(1,'rgba(0,0,10,0.85)');X.fillStyle=g;X.fillRect(0,0,W,H);}
  if(F.banner>0){F.banner-=1/60;X.globalAlpha=Math.min(1,F.banner);win(W/2-70,8,140,20);txt(M.name,W/2,14,'#fff',8,'center');X.globalAlpha=1;}
@@ -408,7 +408,7 @@ function checkEnd(){if(!alive(B.en).length){B.end='win';B.endT=0;sfx('win');cons
    let l=`${m.name} reached Lv ${m.lv}!`;const ns=HERO_DEF[m.id].sk.find(k=>SK[k].lv===m.lv);if(ns)l+=` Learned ${SK[ns].n}!`;B.lines.push(l);setTimeout(()=>sfx('lvl'),600);}});
   if(Math.random()<0.3&&!B.boss){G.items.potion=(G.items.potion||0)+1;B.lines.push('Found a Potion!');}}
  else if(!alive(B.pt).length){B.end='lose';B.endT=0;sfx('no');}}
-function finishWin(){const boss=B.boss;transition(()=>{scene='map';B=null;if(boss){G.flags.boss=1;dialog(['The shard of the Ember Crown pulses warmly in Lyra\'s hands.','Lyra: One shard... six more to go.','Mira: Then we\'d better head back and tell Elder Bran.'],()=>transition(()=>{scene='ending';}));}});}
+function finishWin(){const boss=B.boss;transition(()=>{scene='map';B=null;if(boss){G.flags.boss=1;dialog(['The shard of the Ember Crown pulses warmly in Lyra\'s hands.','Lyra: One shard... six more to go.','Mira: Then we\'d better head back and tell Elder Bran.'],()=>afterGravemaw());}});}
 function drawBattle(){const sh=B.shake?(Math.random()-0.5)*B.shake:0;X.save();X.translate(sh,0);
  const g=X.createLinearGradient(0,0,0,150);if(B.cave){g.addColorStop(0,'#0a0814');g.addColorStop(0.55,'#2a2040');g.addColorStop(1,'#3a3050');}else{g.addColorStop(0,'#4a7ad8');g.addColorStop(0.5,'#a8c8f0');g.addColorStop(0.52,'#5a9a4a');g.addColorStop(1,'#3a7a2e');}
  X.fillStyle=g;X.fillRect(-4,0,W+8,152);
@@ -476,22 +476,25 @@ function drawIntro(){X.fillStyle='#05030c';X.fillRect(0,0,W,H);drawEmbers();cons
  const cx=W/2,cy=70;const sh=p>=2?Math.min(1,(p-2+IN.t)):0;for(let i=0;i<7;i++){const a=i/7*6.28+T*0.3,r=18+sh*60*(1+i%3*0.3);X.fillStyle=['#ff6020','#ffb030','#ffe060'][i%3];X.fillRect(cx+Math.cos(a)*r-2,cy+Math.sin(a)*r*0.6-2,4,4);}
  X.fillStyle='#ffd060';if(sh<1){X.globalAlpha=1-sh;X.fillRect(cx-10,cy-4,20,6);for(let i=0;i<5;i++)X.fillRect(cx-10+i*5,cy-9,2,5);X.globalAlpha=1;}
  X.globalAlpha=Math.min(1,IN.t*1.5);wrap(INTRO[p],38).forEach((l,i)=>txt(l,W/2,140+i*12,'#fff',8,'center'));X.globalAlpha=1;txt('A: next   B: skip',W-6,H-10,'#888',6,'right');}
-function drawEnd(){X.fillStyle='#05030c';X.fillRect(0,0,W,H);drawEmbers();txt('DEMO COMPLETE',W/2,40,'#ffd060',16,'center');txt('The first shard is reclaimed.',W/2,70,'#fff',8,'center');
+function drawEnd(){X.fillStyle='#05030c';X.fillRect(0,0,W,H);drawEmbers();txt('DEMO COMPLETE',W/2,40,'#ffd060',16,'center');txt(G.flags.corsair?'The skies of Emberfall are open.':'The first shard is reclaimed.',W/2,70,'#fff',8,'center');
  G.party.forEach((m,i)=>{X.drawImage(SPR[m.id].down[Math.floor(T*4+i)%3],W/2-60+i*44,94,24,32);txt(m.name+' Lv'+m.lv,W/2-48+i*44,130,'#fff',6,'center');});
  txt('Thank you for playing Emberfall.',W/2,160,'#fff',8,'center');txt('Skywield Games',W/2,174,'#c8a8c8',7,'center');txt('Press A to return to title',W/2,200,'#888',7,'center');}
 function drawOver(){X.fillStyle='#000';X.fillRect(0,0,W,H);txt('GAME OVER',W/2,80,'#c33',20,'center');txt('The ember gutters... but does not die.',W/2,116,'#ccc',7,'center');txt(hasSave()?'A: Load last save    B: Title':'A/B: Title',W/2,150,'#fff',7,'center');}
 
+// ---------- extension hooks (sky.js) ----------
+const XSCN={},XUI={},XDOOR={};
 // ---------- main loop ----------
 let last=performance.now();
 function frame(now){const dt=Math.min(0.05,(now-last)/1000);last=now;T+=dt;
  if(fadeDir){fade+=dt*(fadeDir>0?4:-4);if(fadeDir>0&&fade>=1){fade=1;fadeDir=-1;const cb=fadeCb;fadeCb=null;cb&&cb();}else if(fadeDir<0&&fade<=0){fade=0;fadeDir=0;}}
- else if(UI.length){const u=UI[UI.length-1];({dlg:updDlg,choice:updChoice,menu:updMenu,shop:updShop})[u.k](u,dt);}
+ else if(UI.length){const u=UI[UI.length-1];(XUI[u.k]?XUI[u.k].u:({dlg:updDlg,choice:updChoice,menu:updMenu,shop:updShop})[u.k])(u,dt);}
  else if(scene==='title')updTitle(dt);else if(scene==='intro')updIntro(dt);else if(scene==='map')updField(dt);else if(scene==='battle'){G.time+=dt;updBattle(dt);}
+ else if(XSCN[scene]){G.time+=dt;XSCN[scene].u(dt);}
  else if(scene==='ending'){if(P.a){sfx('ok');transition(()=>{scene='title';});}}
  else if(scene==='gameover'){if(P.a&&hasSave()){load();transition(()=>{scene='map';enterMap(G.map,G.x,G.y,G.d);});}else if(P.a||P.b)transition(()=>{scene='title';});}
  if(AC){setMusic(musicFor());tickMusic();}
- setT();if(scene==='title')drawTitle();else if(scene==='intro')drawIntro();else if(scene==='map')drawField();else if(scene==='battle')drawBattle();else if(scene==='ending')drawEnd();else drawOver();
- UI.forEach(u=>({dlg:drawDlg,choice:drawChoice,menu:drawMenu,shop:drawShop})[u.k](u));
+ setT();if(scene==='title')drawTitle();else if(scene==='intro')drawIntro();else if(scene==='map')drawField();else if(scene==='battle')drawBattle();else if(XSCN[scene])XSCN[scene].d();else if(scene==='ending')drawEnd();else drawOver();
+ UI.forEach(u=>(XUI[u.k]?XUI[u.k].d:({dlg:drawDlg,choice:drawChoice,menu:drawMenu,shop:drawShop})[u.k])(u));
  if(fade>0){X.fillStyle=`rgba(0,0,0,${fade})`;X.fillRect(0,0,W,H);}
  for(const k in P)delete P[k];requestAnimationFrame(frame);}
 requestAnimationFrame(frame);
