@@ -14,7 +14,9 @@ function blob(x,y,r,c,a=1){X.globalAlpha=a;X.fillStyle=c;X.beginPath();X.arc(x,y
 SPR.orrin=charSet({H:'#4a3a2a',h:'#8a7a5a',s:'#d8a878',O:'#2a3a6a',A:'#c8a050',L:'#2a2a3a',b:'#2a1a0a'});
 SPR.saffa=charSet({H:'#1a1a1a',h:'#5a4040',s:'#b07850',O:'#a83030',A:'#e0b040',L:'#3a2a2a',b:'#1a1010'});
 SPR.dagny=charSet({H:'#d87830',h:'#ffb060',s:'#f0c8a0',O:'#5a6a3a',A:'#8a8a9a',L:'#3a3a2a',b:'#3a2010'});
-TILES.k=[0,1].map(f=>tileCanvas(g=>{px(g,'#7ab8f0',0,0,16,16);px(g,'#9ccaf6',0,9,16,7);px(g,'#ffffff',(3+f*5)%12,5,6,2);px(g,'#e8f4ff',(9+f*3)%12,12,5,2);}));
+// open sky below the cliffs: pale, soft cloud puffs (no water-like stripes)
+TILES.k=[0,1].map(f=>tileCanvas(g=>{const gr=g.createLinearGradient(0,0,0,16);gr.addColorStop(0,'#b8dcfa');gr.addColorStop(1,'#d8ecfc');g.fillStyle=gr;g.fillRect(0,0,16,16);
+ g.fillStyle='#ffffff';g.globalAlpha=0.9;[[(2+f*4)%16,6,4],[(10+f*2)%16,11,3]].forEach(([x,y,r])=>{g.beginPath();g.arc(x,y,r,0,7);g.arc(x+r,y+1,r*0.8,0,7);g.arc(x-r,y+1,r*0.7,0,7);g.fill();});g.globalAlpha=1;}));
 TILES.H=[tileCanvas(g=>{grass(g);px(g,'#8a5a2a',2,5,12,9);for(let x=2;x<14;x+=3)px(g,'#6a4020',x,5,1,9);px(g,'#5a3418',7,0,1,6);px(g,'#e04030',8,0,5,3);})];
 SOLID.add('k');
 
@@ -30,10 +32,10 @@ const YARD=[{k:'repair',n:'Repair hull',d:'Free for the Cinderwing\'s crew.'},{k
  {k:'keel',n:'Stormkeel',p:250,craft:{feather:2,iron:2},once:1,d:'Crafted. Lets the Cinderwing cut through storm walls.'},{k:'leave',n:'Leave'}];
 const CREW={pip:{n:'Pip the Lookout',b:'Sees all 4 enemy telegraphs; fewer random battles'},saffa:{n:'Gunner Saffa',b:'Cannon damage +25%'}};
 const SKYEN={
- gloomray:{n:'Gloomray',hull:520,atk:46,spd:7,weak:'side',art:'gloomray',hollow:1,w:{hit:3,red:1.5,purple:1.2,green:1.5},g:120,drop:{ichor:1},sc:0.9},
- roc:{n:'Rotwing Roc',hull:820,atk:56,spd:13,weak:'back',art:'roc',hollow:1,w:{hit:3,red:2,purple:1,green:1.2},g:180,drop:{feather:2},sc:0.85},
- skiff:{n:'Ashclaw Skiff',hull:700,atk:50,spd:10,weak:'front',art:'corsair',pirate:1,w:{hit:3,red:1.5,purple:1,green:1.5},g:220,drop:{iron:2},sc:0.8},
- corsair:{n:'Ashclaw Corsair',hull:1700,atk:70,spd:11,weak:'front',art:'corsair',pirate:1,boss:1,w:{hit:3,red:2,purple:1.5,green:1},g:900,drop:{iron:3,ichor:2},sc:1.05}};
+ gloomray:{n:'Gloomray',hull:520,atk:46,spd:7,weak:'side',art:'gloomray',hollow:1,w:{hit:3,red:1.5,purple:1.2,green:1.5},g:120,xp:70,drop:{ichor:1},sc:0.9},
+ roc:{n:'Rotwing Roc',hull:820,atk:56,spd:13,weak:'back',art:'roc',hollow:1,w:{hit:3,red:2,purple:1,green:1.2},g:180,xp:110,drop:{feather:2},sc:0.85},
+ skiff:{n:'Ashclaw Skiff',hull:700,atk:50,spd:10,weak:'front',art:'corsair',pirate:1,w:{hit:3,red:1.5,purple:1,green:1.5},g:220,xp:95,drop:{iron:2},sc:0.8},
+ corsair:{n:'Ashclaw Corsair',hull:1700,atk:70,spd:11,weak:'front',art:'corsair',pirate:1,boss:1,w:{hit:3,red:2,purple:1.5,green:1},g:900,xp:600,drop:{iron:3,ichor:2},sc:1.05}};
 function newSky(){return {hull:800,tier:1,parts:{deck:2},kits:2,mat:{ichor:0,feather:0,iron:0},crew:{},key:{},loot:{},x:0,y:0,alt:0,altT:0,face:1,enc:700,tut:0,rocs:0,flags:{}};}
 function shipStats(){const S=G.sky,t=TIERS[S.tier];const mounted=Object.keys(S.parts).filter(k=>CANNON[k]).flatMap(k=>Array(S.parts[k]).fill(k)).sort((a,b)=>CANNON[b].dmg-CANNON[a].dmg).slice(0,t.slots);
  return {hull:t.hull,arm:t.arm+(S.parts.plating?6:0),spd:8+(S.parts.sail?4:0),cannons:mounted,slots:t.slots,lance:S.parts.core?1.5:1};}
@@ -59,6 +61,8 @@ MAPS.harbor={name:'Galewright Point',rows:[
 "T.f..,.........,...T","T....,,,,,,,,,,,..fT","T..........,.......T","kkkkkkk....,....kkkk","kkkkkkkk...,...kkkkk","kkkkkkkkkkkBkkkkkkkk","kkkkkkkkkkkBkkkkkkkk","kkkkkkkkkkkBkkkkkkkk"],
  enc:0,warps:[{x:11,y:13,to:'__ship'}],doors:{'3,4':'hinn','15,4':'yard'}};
 MAPS.harbor.w=20;MAPS.harbor.h=14;
+// where land drops off into the sky, draw a cliff face instead of open sky
+MAPS.harbor.rows=MAPS.harbor.rows.map((r,y)=>r.split('').map((c,x)=>c==='k'&&y>0&&!'kqB'.includes(MAPS.harbor.rows[y-1][x])?'q':c).join(''));
 NPCS.harbor=[
  {x:12,y:10,s:'orrin',d:'down',act:()=>orrinAct()},
  {x:6,y:6,s:'kid',d:'down',act:()=>pipAct()},
@@ -192,7 +196,7 @@ function drawSkyMap(){const S=G.sky,a=S.altT,[cx,cy]=skyCam();
  win(4,4,124,30);txt(np?np.n:'Sea of Clouds',10,9,'#ffd860',7);const ss=shipStats();txt('HULL',10,20,'#9cf',6);bar(32,22,60,S.hull/ss.hull,'#30b050','#a0ff80');txt(`${S.hull}`,124,19,'#fff',6,'right');
  const mm=miniMap();win(W-56,4,52,40);X.drawImage(mm,W-54,6);if(Math.sin(T*8)>-0.3){X.fillStyle='#ff4020';X.fillRect(W-54+S.x/16-1,6+S.y/16-1,3,3);}
  const altTxt=S.alt?'ALT: HIGH':'ALT: LOW';win(4,H-22,W-8,18);
- const hint=np?(S.alt?'B: descend to land':'A: '+({dock:'Land at ',wreck:'Explore ',ruin:'Explore ',hide:'Approach '}[np.k])+np.n):(S.parts.sail?'B: change altitude':'Fly with the D-pad');
+ const hint=np?(S.alt?'B: descend to land':'A: '+({dock:'Land at ',ash:'Land at ',wreck:'Explore ',ruin:'Explore ',hide:'Approach '}[np.k]||'')+np.n):(S.parts.sail?'B: change altitude':'Fly with the D-pad');
  txt(altTxt,10,H-17,S.alt?'#9cf':'#fff',7);txt(hint,W-10,H-17,'#ffd860',7,'right');
  if(isTouch&&!UI.length)txt('MENU: party',W-6,48,'#fff8',6,'right');}
 XSCN.skymap={u:updSkyMap,d:drawSkyMap,mus:()=>'sky'};
@@ -257,14 +261,14 @@ function evStart(e){const E=SB.en,S=G.sky,hero=r=>G.party[r].name;e.dur=0.55;
   else{SB.rot=3;SB.spirit=Math.max(0,SB.spirit-2);say('Hollow rot eats at the hull! (-2 SP)');sfx('bolt');}break;}
  case 'endturn':e.dur=0.2;if(SB.rot>0){const d=Math.round(SB.mhull*0.03);SB.hull=Math.max(0,SB.hull-d);SB.rot--;addN(shipXY()[0],50,d,'#c080ff');}SB.spirit=Math.min(12,SB.spirit+1);break;}}
 function skyCheckEnd(){if(SB.end)return;
- if(SB.en.hp<=0){SB.end='win';SB.phase='end';SB.endT=0;sfx('win');const E=SB.en,S=G.sky;G.gold+=E.g;SB.lines=[`Victory!  +${E.g} G`];
+ if(SB.en.hp<=0){SB.end='win';SB.phase='end';SB.endT=0;sfx('win');const E=SB.en,S=G.sky;G.gold+=E.g;const xp=SB.tut?40:(E.xp||0);SB.lines=[`Victory!  +${xp} EXP   +${E.g} G`,...gainXP(xp,true)];
   for(const m in E.drop){S.mat[m]+=E.drop[m];SB.lines.push(`Got ${MATN[m]} x${E.drop[m]}!`);}if(SB.k==='roc'){S.rocs++;if(S.flags.saffaQ&&!S.crew.saffa)SB.lines.push('Saffa will want to hear about this...');}}
  else if(SB.hull<=0){if(SB.tut){SB.hull=1;say('Orrin: She holds! Keep firing!');}else{SB.end='lose';SB.phase='end';SB.endT=0;sfx('no');SB.lines=['The Cinderwing is crippled...','Orrin limps her back to Galewright Point.'];}}}
 function finishSky(){const win_=SB.end==='win',k=SB.k,tut=SB.tut,S=G.sky;S.hull=win_?SB.hull:Math.round(SB.mhull*0.5);
  transition(()=>{SB=null;if(!win_){scene='map';enterMap('harbor',11,12,'up');return;}scene='skymap';
   if(tut){S.tut=1;save();dialog(['Orrin Vey: Ha! The Cinderwing bites back!','Orrin Vey: Fly with the D-pad. Land at islands with A. MENU checks the ship.','Orrin Vey: Galewright Point is right below us — the shipyard sells parts and crafts from beast drops.','Orrin Vey: Somewhere out there, the shard\'s pull continues...']);}
   if(k==='corsair'){S.flags.corsair=1;G.flags.corsair=1;G.gold+=600;S.mat.iron+=3;save();
-   dialog(['Captain Varra Kade: This isn\'t over, Cinderwing! The Ashclaw never forget!','(The corsair limps into the storm. Her hideout holds 600 G and Cinder Iron x3.)','Lyra: The shard is pulling further... beyond the clouds.'],()=>choice('The skies are open. View the ending?',['Ending','Keep flying'],i=>{if(i===0)transition(()=>{scene='ending';});}));}});}
+   dialog(['Captain Varra Kade: This isn\'t over, Cinderwing! The Ashclaw never forget!','(The corsair limps into the storm. Her hideout holds 600 G and Cinder Iron x3.)','Lyra: The shard is pulling further... beyond the clouds.','Lyra: No — two pulls now. One burns to the south-east. Ashmarch, the volcano isles.','Orrin Vey: Cinderholt\'s the only town out there. Land on the smoking isle when you\'re ready.'],()=>choice('The skies are open. View the ending?',['Ending','Keep flying'],i=>{if(i===0)transition(()=>{scene='ending';});}));}});}
 function updSkyBattle(dt){const E=SB.en;SB.intro=Math.max(0,SB.intro-dt*1.5);E.flash=Math.max(0,E.flash-dt*3);SB.shipFlash=Math.max(0,SB.shipFlash-dt*3);SB.shake=Math.max(0,SB.shake-dt);
  E.dx*=Math.pow(0.02,dt);SB.nums.forEach(n=>n.t+=dt);SB.nums=SB.nums.filter(n=>n.t<1.1);SB.fx.forEach(f=>f.t+=dt);SB.fx=SB.fx.filter(f=>f.t<f.dur);if(SB.intro>0.3)return;
  if(SB.phase==='plan')return updPlan(dt);
