@@ -231,10 +231,10 @@
   },
   "tyrant": {
    "n": "Slag Tyrant",
-   "hp": 3900,
-   "atk": 46,
+   "hp": 5070,
+   "atk": 51,
    "def": 18,
-   "mag": 35,
+   "mag": 39,
    "spd": 11,
    "xp": 1400,
    "g": 1200,
@@ -639,8 +639,8 @@
   },
   "vorthane2": {
    "n": "Vorthane, Heart Unbound",
-   "hp": 22000,
-   "atk": 118,
+   "hp": 19800,
+   "atk": 114,
    "def": 50,
    "mag": 100,
    "spd": 18,
@@ -879,7 +879,7 @@
   },
   "vasska": {
    "n": "Grand Champion Vasska",
-   "hp": 25000,
+   "hp": 27000,
    "atk": 130,
    "def": 48,
    "mag": 84,

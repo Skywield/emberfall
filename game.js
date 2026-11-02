@@ -1,5 +1,5 @@
 'use strict';
-// Emberfall Chronicle — playable demo (Skywield Games). All art generated in code.
+// Emberfall Chronicle (Skywield Games). All art generated in code.
 const C=document.getElementById('c'),X=C.getContext('2d'),SC=3,W=256,H=224;
 C.width=W*SC;C.height=H*SC;
 function setT(){X.setTransform(SC,0,0,SC,0,0);X.imageSmoothingEnabled=false;}
@@ -354,7 +354,7 @@ function updBattle(dt){B.t+=dt;if(B.swirl>0){B.swirl-=dt*1.4;return;}
  B.nums=B.nums.filter(n=>(n.t+=dt)<1.1);B.parts=B.parts.filter(p=>{p.t+=dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=p.g*dt;return p.t<p.life;});
  [...B.en,...B.pt].forEach(u=>{u.flash=Math.max(0,u.flash-dt*4);u.dx*=0.8;});B.shake=Math.max(0,B.shake-dt*20);if(B.msgT>0)B.msgT-=dt;
  if(B.end){B.endT+=dt;if(B.endT>0.8&&(P.a||P.b)){if(B.end==='win'){if(B.lines.length){B.lines.shift();sfx('move');if(B.lines.length)return;}finishWin();}else if(B.end==='lose'){scene='gameover';}}return;}
- const waiting=B.menu&&B.menu.k!=='cmd';
+ const waiting=window.ATBWAIT?ATBWAIT(B):B.menu&&B.menu.k!=='cmd';
  if(!B.busy&&!waiting){[...alive(B.en),...alive(B.pt)].forEach(u=>{if(u.pend)return;u.atb=Math.min(100,u.atb+(ustat(u).spd+8)*dt*3.2);
    if(u.atb>=100){u.pend=1;if(u.side==='E')B.q.push(enemyAI(u));else B.ready.push(u.i);}});}
  if(B.act===null&&B.ready.length){B.act=B.ready.shift();if(B.pt[B.act].m.hp<=0){B.pt[B.act].pend=0;B.pt[B.act].atb=0;B.act=null;}else{B.menu={k:'cmd',i:0};sfx('move');}}
@@ -504,7 +504,7 @@ function frame(now){const dt=Math.min(0.05,(now-last)/1000);last=now;T+=dt;
  else if(UI.length){const u=UI[UI.length-1];(XUI[u.k]?XUI[u.k].u:({dlg:updDlg,choice:updChoice,menu:updMenu,shop:updShop})[u.k])(u,dt);}
  else if(scene==='title')updTitle(dt);else if(scene==='intro')updIntro(dt);else if(scene==='map')updField(dt);else if(scene==='battle'){G.time+=dt;updBattle(dt);}
  else if(XSCN[scene]){G.time+=dt;XSCN[scene].u(dt);}
- else if(scene==='ending'){if(P.a){sfx('ok');transition(()=>{scene='title';});}}
+ else if(scene==='ending'){if(P.a){sfx('ok');transition(()=>{scene=G.map==='sky'&&G.sky?'skymap':'map';});}}
  else if(scene==='gameover'){if(P.a&&hasSave()){load();transition(()=>{scene='map';enterMap(G.map,G.x,G.y,G.d);});}else if(P.a||P.b)transition(()=>{scene='title';});}
  if(AC){setMusic(musicFor());tickMusic();}
  setT();if(scene==='title')drawTitle();else if(scene==='intro')drawIntro();else if(scene==='map')drawField();else if(scene==='battle')drawBattle();else if(XSCN[scene])XSCN[scene].d();else if(scene==='ending')drawEnd();else drawOver();

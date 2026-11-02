@@ -109,7 +109,7 @@ function haleAct(){if(G.flags.tyrant){if(!G.flags.halegift){G.flags.halegift=1;G
  G.flags.hale=1;dialog(['Forgemaster Hale: Outsiders? With an airship? ...and a Crown shard. I can feel its warmth from here.','Forgemaster Hale: Thirteen nights ago a second shard fell into the Great Forge.','Forgemaster Hale: The slag woke up. It calls itself the Slag Tyrant now, and it eats anything that glows.','Kael: Then we\'ll put it out.','Forgemaster Hale: Ha! Take my key to the Forge door. Fire-things fear the cold — remember that.','Got the Forge Key!']);}
 function tyrantEvent(){dialog(['Lyra: The shard... it\'s inside that thing!','Slag Tyrant: MORE LIGHT. MORE HEAT. GIVE ME YOUR LITTLE EMBER.','Mira: It\'s burning the shard like coal!','Kael: Not for long. Lyra — make it cold!'],()=>startBattle(['tyrant'],'forge',true));}
 XWIN.tyrant=()=>{G.flags.tyrant=1;save();dialog(['The Slag Tyrant cracks apart and cools into black glass.','Lyra: The second shard! It\'s warm... and it\'s pulling toward the first.','Mira: Two of seven. Forgemaster Hale should hear about this.','— Chapter 3 complete: Ash and Iron —'],
- ()=>choice('Chapter 3 complete. View the ending?',['Ending','Keep playing'],i=>{if(i===0)transition(()=>{scene='ending';});}));};
+ ()=>choice('Chapter 3 complete. View the chapter summary?',['Summary','Keep playing'],i=>{if(i===0)transition(()=>{scene='ending';});}));};
 XSTEP.push(()=>{
  if(G.map==='ashmarch'&&G.x===21&&G.y===1&&!G.flags.hale){G.y=2;G.d='down';dialog(['A heavy iron door, sealed with a forge-mark. Someone in Cinderholt must have the key.']);return true;}
  if(G.map==='forge'&&!G.flags.tyrant&&G.y===3){tyrantEvent();return true;}return false;});
