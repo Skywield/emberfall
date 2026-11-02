@@ -1,0 +1,2070 @@
+{
+ "SK": {
+  "cleave": {
+   "n": "Cleave",
+   "mp": 6,
+   "tgt": "allE",
+   "type": "phys",
+   "pow": 0.8,
+   "fx": "slash",
+   "d": "Strike all foes"
+  },
+  "cry": {
+   "n": "War Cry",
+   "mp": 5,
+   "tgt": "allP",
+   "type": "buff",
+   "fx": "buff",
+   "d": "Party ATK up"
+  },
+  "rising": {
+   "n": "Rising Edge",
+   "mp": 9,
+   "tgt": "E",
+   "type": "phys",
+   "pow": 2.1,
+   "fx": "slash",
+   "lv": 3,
+   "d": "Heavy strike"
+  },
+  "ember": {
+   "n": "Ember",
+   "mp": 4,
+   "tgt": "E",
+   "type": "mag",
+   "pow": 1.25,
+   "el": "fire",
+   "fx": "fire",
+   "d": "Fire, one foe"
+  },
+  "frost": {
+   "n": "Frost Lance",
+   "mp": 6,
+   "tgt": "E",
+   "type": "mag",
+   "pow": 1.45,
+   "el": "ice",
+   "fx": "ice",
+   "d": "Ice, one foe"
+  },
+  "storm": {
+   "n": "Tempest",
+   "mp": 12,
+   "tgt": "allE",
+   "type": "mag",
+   "pow": 1,
+   "el": "bolt",
+   "fx": "bolt",
+   "lv": 3,
+   "d": "Lightning, all"
+  },
+  "mend": {
+   "n": "Mend",
+   "mp": 5,
+   "tgt": "P",
+   "type": "heal",
+   "pow": 1.7,
+   "fx": "heal",
+   "d": "Heal one ally"
+  },
+  "sanct": {
+   "n": "Sanctuary",
+   "mp": 12,
+   "tgt": "allP",
+   "type": "heal",
+   "pow": 1,
+   "fx": "heal",
+   "lv": 3,
+   "d": "Heal party"
+  },
+  "rekindle": {
+   "n": "Rekindle",
+   "mp": 14,
+   "tgt": "Pdead",
+   "type": "revive",
+   "fx": "heal",
+   "lv": 2,
+   "d": "Revive ally"
+  }
+ },
+ "EN": {
+  "slime": {
+   "n": "Mire Slime",
+   "hp": 42,
+   "atk": 10,
+   "def": 3,
+   "mag": 4,
+   "spd": 6,
+   "xp": 9,
+   "g": 6,
+   "weak": "fire"
+  },
+  "bat": {
+   "n": "Dusk Bat",
+   "hp": 34,
+   "atk": 11,
+   "def": 2,
+   "mag": 3,
+   "spd": 14,
+   "xp": 10,
+   "g": 5,
+   "weak": "bolt"
+  },
+  "goblin": {
+   "n": "Thorn Imp",
+   "hp": 62,
+   "atk": 13,
+   "def": 6,
+   "mag": 3,
+   "spd": 9,
+   "xp": 15,
+   "g": 12,
+   "weak": "ice"
+  },
+  "wisp": {
+   "n": "Grave Wisp",
+   "hp": 48,
+   "atk": 6,
+   "def": 4,
+   "mag": 14,
+   "spd": 11,
+   "xp": 18,
+   "g": 10,
+   "weak": "ice",
+   "res": "fire",
+   "caster": 1
+  },
+  "crawler": {
+   "n": "Hollow Crawler",
+   "hp": 115,
+   "atk": 18,
+   "def": 8,
+   "mag": 3,
+   "spd": 7,
+   "xp": 28,
+   "g": 20,
+   "weak": "bolt",
+   "res": "ice"
+  },
+  "skeleton": {
+   "n": "Bone Sentry",
+   "hp": 90,
+   "atk": 17,
+   "def": 9,
+   "mag": 3,
+   "spd": 8,
+   "xp": 22,
+   "g": 16,
+   "weak": "fire"
+  },
+  "boss": {
+   "n": "Gravemaw",
+   "hp": 1100,
+   "atk": 23,
+   "def": 12,
+   "mag": 19,
+   "spd": 10,
+   "xp": 400,
+   "g": 500,
+   "weak": "bolt",
+   "boss": 1
+  },
+  "ashbat": {
+   "n": "Ash Bat",
+   "hp": 110,
+   "atk": 27,
+   "def": 8,
+   "mag": 6,
+   "spd": 16,
+   "xp": 38,
+   "g": 24,
+   "weak": "ice"
+  },
+  "aslime": {
+   "n": "Slag Slime",
+   "hp": 190,
+   "atk": 27,
+   "def": 20,
+   "mag": 8,
+   "spd": 5,
+   "xp": 42,
+   "g": 34,
+   "weak": "bolt",
+   "res": "fire"
+  },
+  "ewisp": {
+   "n": "Ember Wisp",
+   "hp": 130,
+   "atk": 12,
+   "def": 8,
+   "mag": 30,
+   "spd": 13,
+   "xp": 46,
+   "g": 30,
+   "weak": "ice",
+   "res": "fire",
+   "caster": 1
+  },
+  "magma": {
+   "n": "Magma Drake",
+   "hp": 250,
+   "atk": 32,
+   "def": 14,
+   "mag": 6,
+   "spd": 9,
+   "xp": 64,
+   "g": 46,
+   "weak": "ice",
+   "res": "fire"
+  },
+  "csentry": {
+   "n": "Cinder Sentry",
+   "hp": 210,
+   "atk": 33,
+   "def": 17,
+   "mag": 6,
+   "spd": 9,
+   "xp": 58,
+   "g": 42,
+   "weak": "ice",
+   "res": "fire"
+  },
+  "tyrant": {
+   "n": "Slag Tyrant",
+   "hp": 2600,
+   "atk": 42,
+   "def": 18,
+   "mag": 32,
+   "spd": 11,
+   "xp": 1400,
+   "g": 1200,
+   "weak": "ice",
+   "res": "fire",
+   "boss": 1,
+   "ai": "fn"
+  },
+  "sbat": {
+   "n": "Storm Bat",
+   "hp": 170,
+   "atk": 36,
+   "def": 12,
+   "mag": 10,
+   "spd": 18,
+   "xp": 58,
+   "g": 34,
+   "weak": "fire",
+   "res": "bolt"
+  },
+  "rslime": {
+   "n": "Rime Slime",
+   "hp": 290,
+   "atk": 35,
+   "def": 28,
+   "mag": 12,
+   "spd": 6,
+   "xp": 66,
+   "g": 44,
+   "weak": "fire",
+   "res": "ice"
+  },
+  "fwisp": {
+   "n": "Frost Wisp",
+   "hp": 200,
+   "atk": 16,
+   "def": 12,
+   "mag": 40,
+   "spd": 14,
+   "xp": 72,
+   "g": 40,
+   "weak": "fire",
+   "res": "ice",
+   "caster": 1
+  },
+  "yeti": {
+   "n": "Tundra Yeti",
+   "hp": 380,
+   "atk": 44,
+   "def": 20,
+   "mag": 8,
+   "spd": 10,
+   "xp": 96,
+   "g": 62,
+   "weak": "fire",
+   "res": "ice"
+  },
+  "gsentry": {
+   "n": "Glacier Sentry",
+   "hp": 330,
+   "atk": 43,
+   "def": 26,
+   "mag": 8,
+   "spd": 9,
+   "xp": 90,
+   "g": 58,
+   "weak": "fire",
+   "res": "ice"
+  },
+  "wyrm": {
+   "n": "Rime Wyrm",
+   "hp": 4200,
+   "atk": 54,
+   "def": 24,
+   "mag": 42,
+   "spd": 12,
+   "xp": 2600,
+   "g": 2000,
+   "weak": "fire",
+   "res": "ice",
+   "boss": 1,
+   "ai": "fn"
+  },
+  "mmoth": {
+   "n": "Mire Moth",
+   "hp": 260,
+   "atk": 46,
+   "def": 16,
+   "mag": 20,
+   "spd": 19,
+   "xp": 88,
+   "g": 48,
+   "weak": "fire"
+  },
+  "bogslime": {
+   "n": "Bog Slime",
+   "hp": 420,
+   "atk": 45,
+   "def": 34,
+   "mag": 14,
+   "spd": 6,
+   "xp": 96,
+   "g": 60,
+   "weak": "ice",
+   "res": "fire"
+  },
+  "lizard": {
+   "n": "Fen Lizardman",
+   "hp": 520,
+   "atk": 56,
+   "def": 26,
+   "mag": 10,
+   "spd": 12,
+   "xp": 130,
+   "g": 84,
+   "weak": "ice"
+  },
+  "drowned": {
+   "n": "Drowned Knight",
+   "hp": 480,
+   "atk": 55,
+   "def": 34,
+   "mag": 10,
+   "spd": 9,
+   "xp": 124,
+   "g": 80,
+   "weak": "bolt",
+   "res": "ice"
+  },
+  "shade": {
+   "n": "Hollow Shade",
+   "hp": 300,
+   "atk": 20,
+   "def": 16,
+   "mag": 52,
+   "spd": 15,
+   "xp": 118,
+   "g": 70,
+   "weak": "fire",
+   "res": "bolt",
+   "caster": 1
+  },
+  "hydra": {
+   "n": "Mire Hydra",
+   "hp": 6400,
+   "atk": 66,
+   "def": 30,
+   "mag": 52,
+   "spd": 13,
+   "xp": 4200,
+   "g": 3200,
+   "weak": "ice",
+   "res": "fire",
+   "boss": 1,
+   "ai": "fn"
+  },
+  "veilbat": {
+   "n": "Veil Bat",
+   "hp": 340,
+   "atk": 58,
+   "def": 20,
+   "mag": 24,
+   "spd": 21,
+   "xp": 120,
+   "g": 64,
+   "weak": "fire"
+  },
+  "gloomling": {
+   "n": "Gloomling",
+   "hp": 520,
+   "atk": 56,
+   "def": 40,
+   "mag": 20,
+   "spd": 7,
+   "xp": 130,
+   "g": 80,
+   "weak": "fire",
+   "res": "ice"
+  },
+  "stalker": {
+   "n": "Dusk Stalker",
+   "hp": 640,
+   "atk": 70,
+   "def": 32,
+   "mag": 12,
+   "spd": 15,
+   "xp": 170,
+   "g": 110,
+   "weak": "bolt"
+  },
+  "umbral": {
+   "n": "Umbral Knight",
+   "hp": 720,
+   "atk": 68,
+   "def": 44,
+   "mag": 14,
+   "spd": 10,
+   "xp": 180,
+   "g": 120,
+   "weak": "fire",
+   "res": "ice"
+  },
+  "mwraith": {
+   "n": "Mirror Wraith",
+   "hp": 400,
+   "atk": 24,
+   "def": 20,
+   "mag": 64,
+   "spd": 17,
+   "xp": 160,
+   "g": 96,
+   "weak": "bolt",
+   "res": "fire",
+   "caster": 1
+  },
+  "varra": {
+   "n": "Varra Kade",
+   "hp": 3000,
+   "atk": 74,
+   "def": 36,
+   "mag": 30,
+   "spd": 19,
+   "xp": 1500,
+   "g": 800,
+   "weak": "ice",
+   "boss": 1
+  },
+  "warden": {
+   "n": "Eclipse Warden",
+   "hp": 8800,
+   "atk": 80,
+   "def": 38,
+   "mag": 62,
+   "spd": 14,
+   "xp": 6000,
+   "g": 4500,
+   "weak": "fire",
+   "res": "ice",
+   "boss": 1,
+   "ai": "fn"
+  },
+  "crownbat": {
+   "n": "Crown Bat",
+   "hp": 460,
+   "atk": 72,
+   "def": 26,
+   "mag": 30,
+   "spd": 22,
+   "xp": 170,
+   "g": 90,
+   "weak": "ice"
+  },
+  "voidooze": {
+   "n": "Void Ooze",
+   "hp": 700,
+   "atk": 70,
+   "def": 52,
+   "mag": 26,
+   "spd": 7,
+   "xp": 180,
+   "g": 110,
+   "weak": "fire",
+   "res": "bolt"
+  },
+  "hollowhound": {
+   "n": "Hollow Hound",
+   "hp": 820,
+   "atk": 86,
+   "def": 38,
+   "mag": 14,
+   "spd": 17,
+   "xp": 220,
+   "g": 140,
+   "weak": "bolt"
+  },
+  "shardling": {
+   "n": "Shardling",
+   "hp": 520,
+   "atk": 28,
+   "def": 24,
+   "mag": 80,
+   "spd": 18,
+   "xp": 210,
+   "g": 130,
+   "weak": "ice",
+   "res": "fire",
+   "caster": 1
+  },
+  "throneguard": {
+   "n": "Throne Guard",
+   "hp": 980,
+   "atk": 84,
+   "def": 56,
+   "mag": 18,
+   "spd": 11,
+   "xp": 250,
+   "g": 170,
+   "weak": "fire",
+   "res": "ice"
+  },
+  "oathbound": {
+   "n": "Oathbound Keeper",
+   "hp": 900,
+   "atk": 78,
+   "def": 46,
+   "mag": 60,
+   "spd": 13,
+   "xp": 260,
+   "g": 180,
+   "weak": "fire",
+   "res": "ice",
+   "caster": 1
+  },
+  "seneschal": {
+   "n": "Hollow Seneschal",
+   "hp": 12500,
+   "atk": 96,
+   "def": 46,
+   "mag": 76,
+   "spd": 15,
+   "xp": 9000,
+   "g": 6500,
+   "weak": "ice",
+   "res": "fire",
+   "boss": 1,
+   "ai": "fn"
+  },
+  "heartwisp": {
+   "n": "Heartfire Wisp",
+   "hp": 640,
+   "atk": 30,
+   "def": 30,
+   "mag": 92,
+   "spd": 21,
+   "xp": 260,
+   "g": 150,
+   "weak": "ice",
+   "res": "fire",
+   "caster": 1
+  },
+  "crownknight": {
+   "n": "Crown Knight",
+   "hp": 1250,
+   "atk": 104,
+   "def": 64,
+   "mag": 20,
+   "spd": 12,
+   "xp": 320,
+   "g": 210,
+   "weak": "bolt",
+   "res": "ice"
+  },
+  "hollowseraph": {
+   "n": "Hollow Seraph",
+   "hp": 760,
+   "atk": 92,
+   "def": 34,
+   "mag": 70,
+   "spd": 24,
+   "xp": 290,
+   "g": 180,
+   "weak": "ice"
+  },
+  "embermaw": {
+   "n": "Ember Maw",
+   "hp": 1100,
+   "atk": 96,
+   "def": 58,
+   "mag": 40,
+   "spd": 9,
+   "xp": 300,
+   "g": 200,
+   "weak": "ice",
+   "res": "fire"
+  },
+  "kingshade": {
+   "n": "King's Shade",
+   "hp": 980,
+   "atk": 88,
+   "def": 44,
+   "mag": 84,
+   "spd": 17,
+   "xp": 340,
+   "g": 230,
+   "weak": "fire",
+   "res": "dark",
+   "caster": 1
+  },
+  "vorthane": {
+   "n": "Vorthane, the Hollow King",
+   "hp": 16000,
+   "atk": 108,
+   "def": 52,
+   "mag": 88,
+   "spd": 16,
+   "xp": 0,
+   "g": 0,
+   "weak": "ice",
+   "res": "fire",
+   "boss": 1,
+   "ai": "fn"
+  },
+  "vorthane2": {
+   "n": "Vorthane, Heart Unbound",
+   "hp": 22000,
+   "atk": 118,
+   "def": 50,
+   "mag": 100,
+   "spd": 18,
+   "xp": 30000,
+   "g": 20000,
+   "weak": "bolt",
+   "res": "dark",
+   "boss": 1,
+   "ai": "fn"
+  }
+ },
+ "EQ": {
+  "bronze": {
+   "n": "Bronze Sword",
+   "slot": "w",
+   "who": "kael",
+   "atk": 4,
+   "p": 0
+  },
+  "steel": {
+   "n": "Steelfang",
+   "slot": "w",
+   "who": "kael",
+   "atk": 12,
+   "p": 220
+  },
+  "ash": {
+   "n": "Ash Wand",
+   "slot": "w",
+   "who": "lyra",
+   "atk": 1,
+   "mag": 3,
+   "p": 0
+  },
+  "runed": {
+   "n": "Runed Rod",
+   "slot": "w",
+   "who": "lyra",
+   "atk": 2,
+   "mag": 10,
+   "p": 200
+  },
+  "mace": {
+   "n": "Oak Mace",
+   "slot": "w",
+   "who": "mira",
+   "atk": 3,
+   "mag": 2,
+   "p": 0
+  },
+  "silver": {
+   "n": "Silver Mace",
+   "slot": "w",
+   "who": "mira",
+   "atk": 8,
+   "mag": 7,
+   "p": 200
+  },
+  "tunic": {
+   "n": "Cloth Tunic",
+   "slot": "a",
+   "def": 2,
+   "p": 0
+  },
+  "chain": {
+   "n": "Chain Vest",
+   "slot": "a",
+   "def": 7,
+   "p": 150
+  },
+  "ward": {
+   "n": "Warded Cloak",
+   "slot": "a",
+   "def": 5,
+   "mdef": 6,
+   "p": 180
+  },
+  "emberbrand": {
+   "n": "Emberbrand",
+   "slot": "w",
+   "who": "kael",
+   "atk": 22,
+   "p": 620
+  },
+  "magmarod": {
+   "n": "Magma Rod",
+   "slot": "w",
+   "who": "lyra",
+   "atk": 3,
+   "mag": 19,
+   "p": 560
+  },
+  "ashmace": {
+   "n": "Ashen Mace",
+   "slot": "w",
+   "who": "mira",
+   "atk": 14,
+   "mag": 13,
+   "p": 560
+  },
+  "cindermail": {
+   "n": "Cinder Mail",
+   "slot": "a",
+   "def": 13,
+   "p": 420
+  },
+  "ashveil": {
+   "n": "Ashveil Cloak",
+   "slot": "a",
+   "def": 9,
+   "mdef": 14,
+   "p": 0
+  },
+  "tyrantfang": {
+   "n": "Tyrant Fang",
+   "slot": "w",
+   "who": "kael",
+   "atk": 30,
+   "p": 0
+  },
+  "sunbrand": {
+   "n": "Sunforge Blade",
+   "slot": "w",
+   "who": "kael",
+   "atk": 34,
+   "p": 1100
+  },
+  "stormrod": {
+   "n": "Stormcaller Rod",
+   "slot": "w",
+   "who": "lyra",
+   "atk": 4,
+   "mag": 27,
+   "p": 980
+  },
+  "auroramace": {
+   "n": "Aurora Mace",
+   "slot": "w",
+   "who": "mira",
+   "atk": 20,
+   "mag": 20,
+   "p": 980
+  },
+  "rimemail": {
+   "n": "Rimeguard Mail",
+   "slot": "a",
+   "def": 19,
+   "mdef": 6,
+   "p": 760
+  },
+  "frostfur": {
+   "n": "Frostfur Cloak",
+   "slot": "a",
+   "def": 13,
+   "mdef": 20,
+   "p": 0
+  },
+  "wyrmscale": {
+   "n": "Wyrmscale Mail",
+   "slot": "a",
+   "def": 26,
+   "mdef": 18,
+   "p": 0
+  },
+  "tidecleaver": {
+   "n": "Tidecleaver",
+   "slot": "w",
+   "who": "kael",
+   "atk": 44,
+   "p": 1800
+  },
+  "verdantrod": {
+   "n": "Verdant Staff",
+   "slot": "w",
+   "who": "lyra",
+   "atk": 6,
+   "mag": 36,
+   "p": 1650
+  },
+  "coralmace": {
+   "n": "Coral Mace",
+   "slot": "w",
+   "who": "mira",
+   "atk": 27,
+   "mag": 27,
+   "p": 1650
+  },
+  "mossmail": {
+   "n": "Mossweave Mail",
+   "slot": "a",
+   "def": 25,
+   "mdef": 14,
+   "p": 1300
+  },
+  "sanctumveil": {
+   "n": "Sanctum Veil",
+   "slot": "a",
+   "def": 18,
+   "mdef": 28,
+   "p": 0
+  },
+  "hydrascale": {
+   "n": "Hydrascale Armor",
+   "slot": "a",
+   "def": 33,
+   "mdef": 24,
+   "p": 0
+  },
+  "dawnbrand": {
+   "n": "Dawnbrand",
+   "slot": "w",
+   "who": "kael",
+   "atk": 56,
+   "p": 2900
+  },
+  "eclipserod": {
+   "n": "Eclipse Rod",
+   "slot": "w",
+   "who": "lyra",
+   "atk": 8,
+   "mag": 46,
+   "p": 2700
+  },
+  "lunarmace": {
+   "n": "Lunar Mace",
+   "slot": "w",
+   "who": "mira",
+   "atk": 35,
+   "mag": 35,
+   "p": 2700
+  },
+  "gloammail": {
+   "n": "Gloamweave Mail",
+   "slot": "a",
+   "def": 34,
+   "mdef": 24,
+   "p": 2200
+  },
+  "veilcloak": {
+   "n": "Veilwalker Cloak",
+   "slot": "a",
+   "def": 26,
+   "mdef": 38,
+   "p": 0
+  },
+  "wardenplate": {
+   "n": "Warden's Plate",
+   "slot": "a",
+   "def": 44,
+   "mdef": 34,
+   "p": 0
+  },
+  "sunderblade": {
+   "n": "Sunderblade",
+   "slot": "w",
+   "who": "kael",
+   "atk": 68,
+   "p": 3900
+  },
+  "crownrod": {
+   "n": "Rod of Lastlight",
+   "slot": "w",
+   "who": "lyra",
+   "atk": 10,
+   "mag": 58,
+   "p": 3700
+  },
+  "seraphmace": {
+   "n": "Seraph Mace",
+   "slot": "w",
+   "who": "mira",
+   "atk": 44,
+   "mag": 44,
+   "p": 3700
+  },
+  "throneplate": {
+   "n": "Thronesteel Mail",
+   "slot": "a",
+   "def": 42,
+   "mdef": 30,
+   "p": 3000
+  },
+  "lastmantle": {
+   "n": "Lastlight Mantle",
+   "slot": "a",
+   "def": 32,
+   "mdef": 46,
+   "p": 0
+  },
+  "seneschalaegis": {
+   "n": "Seneschal's Aegis",
+   "slot": "a",
+   "def": 54,
+   "mdef": 42,
+   "p": 0
+  },
+  "emberheart": {
+   "n": "Emberheart",
+   "slot": "w",
+   "who": "kael",
+   "atk": 84,
+   "p": 0
+  },
+  "foundersedge": {
+   "n": "Founder's Edge",
+   "slot": "w",
+   "who": "kael",
+   "atk": 76,
+   "p": 5200
+  },
+  "starkindle": {
+   "n": "Starkindle Rod",
+   "slot": "w",
+   "who": "lyra",
+   "atk": 12,
+   "mag": 70,
+   "p": 5000
+  },
+  "keeperscrook": {
+   "n": "Keeper's Crook",
+   "slot": "w",
+   "who": "mira",
+   "atk": 56,
+   "mag": 56,
+   "p": 5000
+  },
+  "hearthmail": {
+   "n": "Hearthguard Mail",
+   "slot": "a",
+   "def": 52,
+   "mdef": 40,
+   "p": 4200
+  },
+  "foundersveil": {
+   "n": "Founders' Raiment",
+   "slot": "a",
+   "def": 60,
+   "mdef": 60,
+   "p": 0
+  },
+  "galecharm": {
+   "n": "Red Gale Coat",
+   "slot": "a",
+   "def": 50,
+   "mdef": 52,
+   "p": 0
+  }
+ },
+ "ITEMS": {
+  "potion": {
+   "n": "Potion",
+   "p": 30,
+   "heal": 70,
+   "tgt": "P",
+   "d": "Restore 70 HP"
+  },
+  "ether": {
+   "n": "Ether",
+   "p": 60,
+   "mpr": 25,
+   "tgt": "P",
+   "d": "Restore 25 MP"
+  },
+  "bloom": {
+   "n": "Lifebloom",
+   "p": 120,
+   "rev": true,
+   "tgt": "Pdead",
+   "d": "Revive at 50% HP"
+  },
+  "tonic": {
+   "n": "Hearth Tonic",
+   "p": 200,
+   "heal": 999,
+   "mpr": 999,
+   "tgt": "P",
+   "d": "Fully restore"
+  },
+  "hipotion": {
+   "n": "Hi-Potion",
+   "p": 90,
+   "heal": 220,
+   "tgt": "P",
+   "d": "Restore 220 HP"
+  },
+  "hiether": {
+   "n": "Turbo Ether",
+   "p": 180,
+   "mpr": 70,
+   "tgt": "P",
+   "d": "Restore 70 MP"
+  },
+  "xpotion": {
+   "n": "X-Potion",
+   "p": 160,
+   "heal": 450,
+   "tgt": "P",
+   "d": "Restore 450 HP"
+  },
+  "firesalt": {
+   "n": "Firesalt",
+   "p": 140,
+   "heal": 120,
+   "mpr": 30,
+   "tgt": "P",
+   "d": "Warm up: 120 HP, 30 MP"
+  },
+  "mdraught": {
+   "n": "Mire Draught",
+   "p": 260,
+   "heal": 300,
+   "mpr": 50,
+   "tgt": "P",
+   "d": "Bitter: 300 HP, 50 MP"
+  },
+  "megaether": {
+   "n": "Mega Ether",
+   "p": 320,
+   "mpr": 120,
+   "tgt": "P",
+   "d": "Restore 120 MP"
+  },
+  "dusktonic": {
+   "n": "Dusk Elixir",
+   "p": 480,
+   "heal": 520,
+   "mpr": 90,
+   "tgt": "P",
+   "d": "520 HP, 90 MP"
+  },
+  "starsalt": {
+   "n": "Starsalt",
+   "p": 600,
+   "mpr": 200,
+   "tgt": "P",
+   "d": "Restore 200 MP"
+  },
+  "crownsalve": {
+   "n": "Crown Salve",
+   "p": 700,
+   "heal": 900,
+   "mpr": 120,
+   "tgt": "P",
+   "d": "900 HP, 120 MP"
+  },
+  "seraphdown": {
+   "n": "Seraph Down",
+   "p": 400,
+   "rev": true,
+   "tgt": "Pdead",
+   "d": "Revive at 50% HP"
+  },
+  "phoenixember": {
+   "n": "Phoenix Ember",
+   "p": 1500,
+   "rev": true,
+   "tgt": "Pdead",
+   "d": "Revive at 50% HP"
+  },
+  "heartdraught": {
+   "n": "Heart Draught",
+   "p": 1200,
+   "heal": 1800,
+   "mpr": 300,
+   "tgt": "P",
+   "d": "1800 HP, 300 MP"
+  }
+ },
+ "HERO_DEF": {
+  "kael": {
+   "name": "Kael",
+   "role": "Vanguard",
+   "sk": [
+    "cleave",
+    "cry",
+    "rising"
+   ],
+   "skn": "Arts",
+   "hp": 130,
+   "mp": 14,
+   "atk": 14,
+   "def": 10,
+   "mag": 4,
+   "spd": 9,
+   "g": {
+    "hp": 20,
+    "mp": 2,
+    "atk": 3,
+    "def": 2,
+    "mag": 1,
+    "spd": 0.4
+   },
+   "w": "bronze"
+  },
+  "lyra": {
+   "name": "Lyra",
+   "role": "Arcanist",
+   "sk": [
+    "ember",
+    "frost",
+    "storm"
+   ],
+   "skn": "Magic",
+   "hp": 74,
+   "mp": 42,
+   "atk": 6,
+   "def": 5,
+   "mag": 16,
+   "spd": 11,
+   "g": {
+    "hp": 9,
+    "mp": 6,
+    "atk": 1,
+    "def": 1,
+    "mag": 3,
+    "spd": 0.5
+   },
+   "w": "ash"
+  },
+  "mira": {
+   "name": "Mira",
+   "role": "Cleric",
+   "sk": [
+    "mend",
+    "rekindle",
+    "sanct"
+   ],
+   "skn": "Prayer",
+   "hp": 90,
+   "mp": 34,
+   "atk": 9,
+   "def": 7,
+   "mag": 12,
+   "spd": 10,
+   "g": {
+    "hp": 13,
+    "mp": 5,
+    "atk": 2,
+    "def": 1.5,
+    "mag": 2,
+    "spd": 0.45
+   },
+   "w": "mace"
+  }
+ },
+ "SKYEN": {
+  "gloomray": {
+   "n": "Gloomray",
+   "hull": 520,
+   "atk": 46,
+   "spd": 7,
+   "weak": "side",
+   "art": "gloomray",
+   "hollow": 1,
+   "w": {
+    "hit": 3,
+    "red": 1.5,
+    "purple": 1.2,
+    "green": 1.5
+   },
+   "g": 120,
+   "xp": 70,
+   "drop": {
+    "ichor": 1
+   },
+   "sc": 0.9
+  },
+  "roc": {
+   "n": "Rotwing Roc",
+   "hull": 820,
+   "atk": 56,
+   "spd": 13,
+   "weak": "back",
+   "art": "roc",
+   "hollow": 1,
+   "w": {
+    "hit": 3,
+    "red": 2,
+    "purple": 1,
+    "green": 1.2
+   },
+   "g": 180,
+   "xp": 110,
+   "drop": {
+    "feather": 2
+   },
+   "sc": 0.85
+  },
+  "skiff": {
+   "n": "Ashclaw Skiff",
+   "hull": 700,
+   "atk": 50,
+   "spd": 10,
+   "weak": "front",
+   "art": "corsair",
+   "pirate": 1,
+   "w": {
+    "hit": 3,
+    "red": 1.5,
+    "purple": 1,
+    "green": 1.5
+   },
+   "g": 220,
+   "xp": 95,
+   "drop": {
+    "iron": 2
+   },
+   "sc": 0.8
+  },
+  "corsair": {
+   "n": "Ashclaw Corsair",
+   "hull": 1700,
+   "atk": 70,
+   "spd": 11,
+   "weak": "front",
+   "art": "corsair",
+   "pirate": 1,
+   "boss": 1,
+   "w": {
+    "hit": 3,
+    "red": 2,
+    "purple": 1.5,
+    "green": 1
+   },
+   "g": 900,
+   "xp": 600,
+   "drop": {
+    "iron": 3,
+    "ichor": 2
+   },
+   "sc": 1.05
+  },
+  "wyvern": {
+   "n": "Storm Wyvern",
+   "hull": 1100,
+   "atk": 66,
+   "spd": 14,
+   "weak": "back",
+   "art": "wyvern",
+   "hollow": 1,
+   "w": {
+    "hit": 3,
+    "red": 2,
+    "purple": 1,
+    "green": 1.2
+   },
+   "g": 260,
+   "xp": 160,
+   "drop": {
+    "feather": 2,
+    "ichor": 1
+   },
+   "sc": 0.95
+  },
+  "stormbreaker": {
+   "n": "Ashclaw Stormbreaker",
+   "hull": 2600,
+   "atk": 82,
+   "spd": 12,
+   "weak": "side",
+   "art": "corsair",
+   "pirate": 1,
+   "boss": 1,
+   "w": {
+    "hit": 3,
+    "red": 2.2,
+    "purple": 1.5,
+    "green": 1
+   },
+   "g": 1400,
+   "xp": 900,
+   "drop": {
+    "iron": 4,
+    "feather": 2
+   },
+   "sc": 1.1
+  },
+  "manta": {
+   "n": "Bog Manta",
+   "hull": 1500,
+   "atk": 78,
+   "spd": 15,
+   "weak": "back",
+   "art": "manta",
+   "hollow": 1,
+   "w": {
+    "hit": 3,
+    "red": 2,
+    "purple": 1.2,
+    "green": 1.2
+   },
+   "g": 340,
+   "xp": 220,
+   "drop": {
+    "feather": 2,
+    "ichor": 2
+   },
+   "sc": 0.95
+  },
+  "tempest": {
+   "n": "Black Tempest",
+   "hull": 3600,
+   "atk": 94,
+   "spd": 13,
+   "weak": "side",
+   "art": "corsair",
+   "pirate": 1,
+   "boss": 1,
+   "w": {
+    "hit": 3,
+    "red": 2.4,
+    "purple": 1.6,
+    "green": 1
+   },
+   "g": 2000,
+   "xp": 1300,
+   "drop": {
+    "iron": 5,
+    "ichor": 3
+   },
+   "sc": 1.2
+  },
+  "leviathan": {
+   "n": "Gloam Leviathan",
+   "hull": 2000,
+   "atk": 88,
+   "spd": 12,
+   "weak": "back",
+   "art": "leviathan",
+   "hollow": 1,
+   "w": {
+    "hit": 3,
+    "red": 2.2,
+    "purple": 1,
+    "green": 1.4
+   },
+   "g": 460,
+   "xp": 300,
+   "drop": {
+    "feather": 2,
+    "ichor": 3
+   },
+   "sc": 0.95
+  },
+  "nightfall": {
+   "n": "Nightfall Dreadnought",
+   "hull": 4600,
+   "atk": 104,
+   "spd": 12,
+   "weak": "front",
+   "art": "corsair",
+   "pirate": 1,
+   "boss": 1,
+   "w": {
+    "hit": 3,
+    "red": 2.6,
+    "purple": 1.4,
+    "green": 1.2
+   },
+   "g": 2800,
+   "xp": 1800,
+   "drop": {
+    "iron": 6,
+    "ichor": 4
+   },
+   "sc": 1.3
+  },
+  "crownwing": {
+   "n": "Crownwing Drake",
+   "hull": 2600,
+   "atk": 98,
+   "spd": 15,
+   "weak": "back",
+   "art": "crownwing",
+   "hollow": 1,
+   "w": {
+    "hit": 3,
+    "red": 2.2,
+    "purple": 1.2,
+    "green": 1.3
+   },
+   "g": 560,
+   "xp": 380,
+   "drop": {
+    "feather": 3,
+    "ichor": 3
+   },
+   "sc": 0.95
+  },
+  "seraph": {
+   "n": "Throne Seraph",
+   "hull": 6200,
+   "atk": 116,
+   "spd": 13,
+   "weak": "side",
+   "art": "seraph",
+   "hollow": 1,
+   "boss": 1,
+   "w": {
+    "hit": 3,
+    "red": 2.6,
+    "purple": 1.5,
+    "green": 1.1
+   },
+   "g": 3600,
+   "xp": 2400,
+   "drop": {
+    "feather": 6,
+    "ichor": 5
+   },
+   "sc": 1.15
+  },
+  "heartwyrm": {
+   "n": "Heartfire Wyrm",
+   "hull": 7400,
+   "atk": 124,
+   "spd": 14,
+   "weak": "side",
+   "art": "heartwyrm",
+   "hollow": 1,
+   "boss": 1,
+   "w": {
+    "hit": 3,
+    "red": 2.6,
+    "purple": 1.5,
+    "green": 1.2
+   },
+   "g": 4200,
+   "xp": 3000,
+   "drop": {
+    "feather": 6,
+    "ichor": 6
+   },
+   "sc": 1.15
+  }
+ },
+ "maps": {
+  "town": {
+   "w": 20,
+   "h": 16,
+   "enc": 0,
+   "pool": []
+  },
+  "world": {
+   "w": 24,
+   "h": 14,
+   "enc": 30,
+   "pool": [
+    [
+     "slime",
+     "slime"
+    ],
+    [
+     "bat"
+    ],
+    [
+     "slime",
+     "bat"
+    ],
+    [
+     "goblin"
+    ],
+    [
+     "bat",
+     "bat"
+    ]
+   ]
+  },
+  "cave": {
+   "w": 24,
+   "h": 16,
+   "enc": 14,
+   "pool": [
+    [
+     "skeleton"
+    ],
+    [
+     "wisp",
+     "bat"
+    ],
+    [
+     "goblin",
+     "wisp"
+    ],
+    [
+     "skeleton",
+     "slime"
+    ],
+    [
+     "wisp",
+     "wisp",
+     "bat"
+    ],
+    [
+     "goblin",
+     "goblin"
+    ],
+    [
+     "crawler"
+    ],
+    [
+     "crawler",
+     "wisp"
+    ]
+   ]
+  },
+  "harbor": {
+   "w": 20,
+   "h": 14,
+   "enc": 0,
+   "pool": []
+  },
+  "ashmarch": {
+   "w": 24,
+   "h": 11,
+   "enc": 22,
+   "pool": [
+    [
+     "ashbat",
+     "ashbat"
+    ],
+    [
+     "aslime"
+    ],
+    [
+     "ewisp",
+     "ashbat"
+    ],
+    [
+     "magma"
+    ],
+    [
+     "aslime",
+     "ewisp"
+    ]
+   ],
+   "bbg": "ash"
+  },
+  "cinderholt": {
+   "w": 20,
+   "h": 13,
+   "enc": 0,
+   "pool": []
+  },
+  "forge": {
+   "w": 24,
+   "h": 15,
+   "enc": 13,
+   "pool": [
+    [
+     "csentry"
+    ],
+    [
+     "magma"
+    ],
+    [
+     "ewisp",
+     "ewisp"
+    ],
+    [
+     "csentry",
+     "ewisp"
+    ],
+    [
+     "aslime",
+     "ashbat"
+    ],
+    [
+     "magma",
+     "ashbat"
+    ],
+    [
+     "csentry",
+     "csentry"
+    ]
+   ],
+   "bbg": "forge"
+  },
+  "tundra": {
+   "w": 24,
+   "h": 11,
+   "enc": 22,
+   "pool": [
+    [
+     "sbat",
+     "sbat"
+    ],
+    [
+     "rslime"
+    ],
+    [
+     "fwisp",
+     "sbat"
+    ],
+    [
+     "yeti"
+    ],
+    [
+     "rslime",
+     "fwisp"
+    ]
+   ],
+   "bbg": "snow"
+  },
+  "hollowfrost": {
+   "w": 20,
+   "h": 12,
+   "enc": 0,
+   "pool": []
+  },
+  "spire": {
+   "w": 24,
+   "h": 15,
+   "enc": 13,
+   "pool": [
+    [
+     "gsentry"
+    ],
+    [
+     "yeti"
+    ],
+    [
+     "fwisp",
+     "fwisp"
+    ],
+    [
+     "gsentry",
+     "fwisp"
+    ],
+    [
+     "rslime",
+     "sbat"
+    ],
+    [
+     "yeti",
+     "sbat"
+    ],
+    [
+     "gsentry",
+     "gsentry"
+    ]
+   ],
+   "bbg": "glacier"
+  },
+  "mirewood": {
+   "w": 24,
+   "h": 11,
+   "enc": 22,
+   "pool": [
+    [
+     "mmoth",
+     "mmoth"
+    ],
+    [
+     "bogslime"
+    ],
+    [
+     "lizard"
+    ],
+    [
+     "bogslime",
+     "mmoth"
+    ],
+    [
+     "lizard",
+     "mmoth"
+    ]
+   ],
+   "bbg": "jungle"
+  },
+  "reedhaven": {
+   "w": 20,
+   "h": 12,
+   "enc": 0,
+   "pool": []
+  },
+  "sanctum": {
+   "w": 24,
+   "h": 15,
+   "enc": 13,
+   "pool": [
+    [
+     "drowned"
+    ],
+    [
+     "lizard"
+    ],
+    [
+     "shade",
+     "shade"
+    ],
+    [
+     "drowned",
+     "shade"
+    ],
+    [
+     "bogslime",
+     "mmoth"
+    ],
+    [
+     "lizard",
+     "shade"
+    ],
+    [
+     "drowned",
+     "drowned"
+    ]
+   ],
+   "bbg": "sunken"
+  },
+  "gloam": {
+   "w": 24,
+   "h": 11,
+   "enc": 22,
+   "pool": [
+    [
+     "veilbat",
+     "veilbat"
+    ],
+    [
+     "gloomling"
+    ],
+    [
+     "stalker"
+    ],
+    [
+     "gloomling",
+     "veilbat"
+    ],
+    [
+     "stalker",
+     "veilbat"
+    ]
+   ],
+   "bbg": "twilight"
+  },
+  "duskhollow": {
+   "w": 20,
+   "h": 12,
+   "enc": 0,
+   "pool": []
+  },
+  "bastion": {
+   "w": 24,
+   "h": 15,
+   "enc": 13,
+   "pool": [
+    [
+     "umbral"
+    ],
+    [
+     "stalker"
+    ],
+    [
+     "mwraith",
+     "mwraith"
+    ],
+    [
+     "umbral",
+     "mwraith"
+    ],
+    [
+     "gloomling",
+     "veilbat"
+    ],
+    [
+     "stalker",
+     "mwraith"
+    ],
+    [
+     "umbral",
+     "umbral"
+    ]
+   ],
+   "bbg": "twilight"
+  },
+  "causeway": {
+   "w": 24,
+   "h": 11,
+   "enc": 22,
+   "pool": [
+    [
+     "crownbat",
+     "crownbat"
+    ],
+    [
+     "voidooze"
+    ],
+    [
+     "hollowhound"
+    ],
+    [
+     "voidooze",
+     "crownbat"
+    ],
+    [
+     "hollowhound",
+     "crownbat"
+    ],
+    [
+     "shardling"
+    ]
+   ],
+   "bbg": "throne"
+  },
+  "lastlight": {
+   "w": 20,
+   "h": 12,
+   "enc": 0,
+   "pool": []
+  },
+  "citadel": {
+   "w": 24,
+   "h": 15,
+   "enc": 13,
+   "pool": [
+    [
+     "throneguard"
+    ],
+    [
+     "oathbound"
+    ],
+    [
+     "shardling",
+     "shardling"
+    ],
+    [
+     "throneguard",
+     "shardling"
+    ],
+    [
+     "hollowhound",
+     "crownbat"
+    ],
+    [
+     "oathbound",
+     "voidooze"
+    ],
+    [
+     "throneguard",
+     "oathbound"
+    ]
+   ],
+   "bbg": "throne"
+  },
+  "stair": {
+   "w": 24,
+   "h": 16,
+   "enc": 20,
+   "pool": [
+    [
+     "heartwisp",
+     "heartwisp"
+    ],
+    [
+     "hollowseraph"
+    ],
+    [
+     "hollowseraph",
+     "heartwisp"
+    ],
+    [
+     "embermaw"
+    ],
+    [
+     "crownknight"
+    ],
+    [
+     "shardling",
+     "heartwisp"
+    ]
+   ],
+   "bbg": "heart"
+  },
+  "hearth": {
+   "w": 20,
+   "h": 12,
+   "enc": 0,
+   "pool": []
+  },
+  "heartspire": {
+   "w": 24,
+   "h": 16,
+   "enc": 14,
+   "pool": [
+    [
+     "crownknight"
+    ],
+    [
+     "kingshade"
+    ],
+    [
+     "kingshade",
+     "heartwisp"
+    ],
+    [
+     "crownknight",
+     "hollowseraph"
+    ],
+    [
+     "embermaw",
+     "kingshade"
+    ],
+    [
+     "crownknight",
+     "kingshade"
+    ],
+    [
+     "hollowseraph",
+     "hollowseraph",
+     "heartwisp"
+    ]
+   ],
+   "bbg": "heart"
+  }
+ },
+ "shops": {
+  "c1": [
+   "potion",
+   "ether",
+   "bloom",
+   "tonic",
+   "steel",
+   "runed",
+   "silver",
+   "chain",
+   "ward"
+  ],
+  "c3": [
+   "potion",
+   "hipotion",
+   "ether",
+   "hiether",
+   "bloom",
+   "emberbrand",
+   "magmarod",
+   "ashmace",
+   "cindermail"
+  ],
+  "c4": [
+   "potion",
+   "hipotion",
+   "xpotion",
+   "ether",
+   "hiether",
+   "firesalt",
+   "bloom",
+   "tonic",
+   "sunbrand",
+   "stormrod",
+   "auroramace",
+   "rimemail",
+   "emberbrand",
+   "magmarod",
+   "ashmace",
+   "cindermail"
+  ],
+  "c5": [
+   "hipotion",
+   "xpotion",
+   "mdraught",
+   "hiether",
+   "megaether",
+   "bloom",
+   "tonic",
+   "tidecleaver",
+   "verdantrod",
+   "coralmace",
+   "mossmail",
+   "sunbrand",
+   "stormrod",
+   "auroramace",
+   "rimemail"
+  ],
+  "c6": [
+   "xpotion",
+   "mdraught",
+   "dusktonic",
+   "megaether",
+   "starsalt",
+   "bloom",
+   "tonic",
+   "dawnbrand",
+   "eclipserod",
+   "lunarmace",
+   "gloammail",
+   "tidecleaver",
+   "verdantrod",
+   "coralmace",
+   "mossmail"
+  ],
+  "c7": [
+   "crownsalve",
+   "seraphdown",
+   "dusktonic",
+   "starsalt",
+   "megaether",
+   "xpotion",
+   "tonic",
+   "sunderblade",
+   "crownrod",
+   "seraphmace",
+   "throneplate",
+   "dawnbrand",
+   "eclipserod",
+   "lunarmace",
+   "gloammail"
+  ],
+  "c8": [
+   "heartdraught",
+   "phoenixember",
+   "crownsalve",
+   "seraphdown",
+   "megaether",
+   "xpotion",
+   "tonic",
+   "foundersedge",
+   "starkindle",
+   "keeperscrook",
+   "hearthmail",
+   "sunderblade",
+   "crownrod",
+   "seraphmace",
+   "throneplate"
+  ]
+ }
+}
