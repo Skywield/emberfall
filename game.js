@@ -193,8 +193,8 @@ const NPCS={town:[
    ['Elder Bran: Kael, Lyra, Mira... you came.','The Ember Crown shattered, and its shards fell into Hollowdeep Cavern.','Something wakes there. Gravemaw, the Hollow Warden, feeds on the shard\'s light.','Rest at the inn, buy what you need from Tessa, then go east through Ashen Vale.']},
  {x:13,y:12,s:'kid',d:'left',wander:1,lines:()=>['Tam: I saw glowing bats by the river!','Tam: Mom says Lyra\'s fire spells work best on slimes.']},
  {x:11,y:14,s:'guard',d:'down',lines:()=>['Guard Hollis: The road east leads to Ashen Vale.','Bone Sentries in the cave hate fire. Wisps hate the cold. Remember that.']},
- {x:16,y:5,s:'merch',d:'down',lines:()=>['Tessa: Shop\'s right behind me. Better blades, better odds!']},
- {x:3,y:5,s:'inn',d:'down',lines:()=>['Marla: Inn\'s open! A warm bed is 20G. Rest restores HP and MP.']},
+ {x:17,y:5,s:'merch',d:'down',act:()=>openShop(),lines:()=>['Tessa: Shop\'s right behind me. Better blades, better odds!']},
+ {x:2,y:5,s:'inn',d:'down',act:()=>openInn(),lines:()=>['Marla: Inn\'s open! A warm bed is 20G. Rest restores HP and MP.']},
  {x:2,y:12,s:'kid',d:'right',lines:()=>['Wren: Press MENU to check your gear. Equip new weapons after you buy them!']}]};
 
 // ---------- game state ----------
