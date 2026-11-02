@@ -1,0 +1,6 @@
+# Grok review (Nov 2, 2026) - top 5 priorities
+1. Character voices and theme: make Kael, Lyra, Mira and Varra distinct, with conflicting wants about the Crown (Lyra wants to study it, Mira to heal with it, Varra to sell it or use it for freedom, Kael torn between duty and the cost of the seventh shard). Give the personal quests and the Varra choice more weight and earlier consequences. The Hollow freezes memories, bonds and creativity, not just warmth.
+2. Ground combat: an ember/heat gauge (builds, overheats, empowers), unique ATB mechanics per character (Lyra reignites allies, Mira stabilizes heat), boss intent telegraphs using the sky colors (red heavy, purple Hollow, green opening), and thematic weaknesses.
+3. Presentation and onboarding: airship tutorial, art consistency (field sprites are procedural), accessibility (text size, colorblind, reduced flash), resolution scaling, achievements, cloud saves or export, named and timestamped slots.
+4. Twists and endings: foreshadow the seventh shard early (Kael reacting to cold, dreams, embers), give the endings concrete town and NPC differences, and add reactive dialogue for earlier choices.
+5. Deepen existing systems: sky battle variety and crew impact; minigames feeding progression and character.

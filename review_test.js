@@ -34,7 +34,7 @@ await ev(()=>{DBG.setScene('map');});
 // Varra joins as guest after trust
 await ev(()=>{DBG.G.flags.varraT=1;DBG.UI.length=0;DBG.startBattle(['umbral','stalker'],'twilight');});await w(1600);
 ok(await ev(()=>DBG.B.pt.length===4&&DBG.B.pt[3].m.id==='varraP'&&!!PAINT.varraP),'trusted Varra fights as a guest');
-const g0=await ev(()=>DBG.G.gold);await run('varraP','gambit','E');ok(await ev(g=>true,g0),'Varra Gambit resolves');
+const g0=await ev(()=>({g:DBG.G.gold,e:DBG.B.en[0].hp,v:DBG.B.pt[3].m.hp}));await run('varraP','gambit','E');ok(await ev(o=>(DBG.G.gold>o.g&&DBG.B.en[0].hp<o.e)||DBG.B.pt[3].m.hp<o.v,g0),'Varra Gambit pays out (hit + plunder) or backfires on her');
 await ev(()=>{const B=DBG.B;B.act=3;B.menu={k:'cmd',i:4};B.pt[3].pend=1;});await w(250);await shot('181_combat_varra_gambit.png');
 await ev(()=>{DBG.setScene('map');DBG.G.flags.varraT=0;});
 
