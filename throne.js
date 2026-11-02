@@ -130,7 +130,7 @@ XWIN.seneschal=()=>{G.flags.seneschal=1;save();dialog(['The Hollow Seneschal fal
  'A stair of red light unfolds from the Citadel roof, up into the floating throne. Five shards orbit an empty crown.','Vorthane: Six and seven, together at last. Come up, heir. Come home. One way or another, I will be whole.',
  G.flags.varraT?'Varra Kade (on the comm-horn): Tempest\'s holding the stair. Whenever you\'re ready, we go up together. All the way.':'Lyra: No ship at our flank this time. Just us.',
  'Kael: The founders broke his heart once. This time, I end it for good.','— Chapter 7 complete: The Hollow Throne —'],
- ()=>choice('Chapter 7 complete. View the ending?',['Ending','Keep playing'],i=>{if(i===0)transition(()=>{scene='ending';});}));};
+ ()=>choice('Chapter 7 complete. Climb the Stair of Light now?',['Climb now','Not yet'],i=>{if(i===0&&window.FINALE)FINALE.enterStair();}));};
 XSTEP.push(()=>{
  if(G.map==='causeway'&&G.x===21&&G.y===1&&!G.flags.aldwin){G.y=2;G.d='down';dialog(['A gate of black iron and gold, stamped with an empty crown. It will not move. Someone in the camp must hold its sigil.']);return true;}
  if(G.map==='citadel'&&!G.flags.seneschal&&G.y===3){seneschalEvent();return true;}return false;});
