@@ -37,5 +37,31 @@ ok(await ev(()=>DBG.B.pt.length===4&&DBG.B.pt[3].m.id==='varraP'&&!!PAINT.varraP
 const g0=await ev(()=>DBG.G.gold);await run('varraP','gambit','E');ok(await ev(g=>true,g0),'Varra Gambit resolves');
 await ev(()=>{const B=DBG.B;B.act=3;B.menu={k:'cmd',i:4};B.pt[3].pend=1;});await w(250);await shot('181_combat_varra_gambit.png');
 await ev(()=>{DBG.setScene('map');DBG.G.flags.varraT=0;});
-module.exports=0;
+
+// ---------------- voices, banter, the Hollow freezing bonds ----------------
+const dlgText=()=>ev(()=>{const d=DBG.UI.find(u=>u.k==='dlg');return d?d.lines.join('\n'):'';});
+await ev(()=>{DBG.UI.length=0;DBG.G.flags={};DBG.enterMap('town',8,8,'up');dialog(['Lyra: One shard... six more to go.','Mira: Then we\'d better head back and tell Elder Bran.']);});await w(600);
+let t=await dlgText();ok(/A YEAR/.test(t)&&/midsummer/.test(t)&&/numb around his sword/.test(t),'rewritten voices + banter + Kael chill after Gravemaw');
+await ev(()=>{DBG.UI[0].i=2;DBG.UI[0].ch=999;});await w(400);await shot('182_banter_shard_one.png');
+await ev(()=>{DBG.UI.length=0;DBG.G.flags.hydra=1;DBG.G.flags.warden=0;DBG.enterMap('duskhollow',8,8,'up');varraAct();});await w(300);
+t=await dlgText();ok(/worth a fleet/.test(t)&&/primary source/.test(t)&&/It's medicine/.test(t)&&/Nobody's selling it/.test(t),'Varra pitches selling the Crown; Lyra/Mira/Kael disagree');
+await ev(()=>{const d=DBG.UI[0];d.i=d.lines.findIndex(l=>/worth a fleet/.test(l));d.ch=999;});await w(400);await shot('183_banter_varra_pitch.png');
+await ev(()=>{DBG.UI.length=0;});
+await ev(()=>{DBG.G.flags.wyrm=0;DBG.enterMap('hollowfrost',8,8,'down');});await w(1400);
+ok(await ev(()=>{const n=F.npcs.find(n=>n.frz);return n&&n.s==='frz_yrsa'&&/can't remember/.test(n.lines().join(' '));}),'frozen townsperson in Hollowfrost has forgotten her sister');
+await ev(()=>{const n=F.npcs.find(n=>n.frz);DBG.G.x=n.x;DBG.G.y=n.y+1;DBG.G.d='up';});await w(900);await shot('184_hollow_frozen_ylva.png');
+await ev(()=>{const n=F.npcs.find(n=>n.frz);dialog(n.lines());});await w(500);await shot('185_hollow_frozen_dialogue.png');await ev(()=>{DBG.UI.length=0;DBG.G.flags.wyrm=1;DBG.enterMap('hollowfrost',8,8,'down');});await w(900);
+ok(await ev(()=>{const n=F.npcs.find(n=>n.frz);return n.s==='yrsa'&&/I remember YOU/.test(n.lines().join(' '));}),'she thaws (and remembers) once the shard is won');
+ok(await ev(()=>['town','cinderholt','hollowfrost','reedhaven','duskhollow'].every(m=>NPCS[m].some(n=>n.frz))),'frozen townsfolk in five towns');
+// ---------------- seventh-shard foreshadowing ----------------
+await ev(()=>{DBG.G.flags={boss:1,tyrant:1};DBG.UI.length=0;dialog(['Your party feels refreshed! (HP/MP restored, game saved.)']);});await w(300);
+t=await dlgText();ok(/seventh/.test(t),'inn dream foreshadows the seventh shard');await ev(()=>{DBG.UI[0].i=1;DBG.UI[0].ch=999;});await w(400);await shot('186_kael_dream.png');await ev(()=>{DBG.UI.length=0;});
+await ev(()=>{DBG.enterMap('town',10,9,'down');});ok(await until(()=>{const f=(T%6);return f<0.5;},null,90),'ember flicker window');await w(250);await shot('187_kael_ember_flicker.png');
+// ---------------- endings ----------------
+for(const [e,n] of [['keeper','188_ending_keeper_thornwick.png'],['free','189_ending_free_thornwick.png']]){
+ await ev(e=>{DBG.UI.length=0;DBG.G.flags={clear:1,ending:e,boss:1,tyrant:1,wyrm:1,hydra:1,warden:1,seneschal:1,vorthane:1};DBG.enterMap('town',8,8,'up');},e);await w(1500);
+ const L=await ev(()=>F.npcs.find(n=>n.s==='elder').lines().join(' '));ok(e==='keeper'?/fountain/.test(L):/lit itself/.test(L),'Thornwick reflects the '+e+' ending: '+L.slice(0,50));
+ await ev(()=>{dialog(F.npcs.find(n=>n.s==='elder').lines());});await w(2200);await shot(n);await ev(()=>{DBG.UI.length=0;});}
+ok(await ev(()=>{DBG.G.flags.ending='keeper';const a=JSON.stringify(epi());DBG.G.flags.ending='free';return a!==JSON.stringify(epi());}),'epilogues differ by ending for every hero');
+
 console.log(errs.length?'ERRORS '+errs.join(' | '):'ALL OK');await b.close();process.exit(errs.length?1:0);})();
