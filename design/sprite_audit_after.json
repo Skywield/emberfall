@@ -1,0 +1,818 @@
+[
+ {
+  "sec": "Battle enemies",
+  "k": "slime",
+  "n": "Mire Slime",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "bat",
+  "n": "Dusk Bat",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "goblin",
+  "n": "Thorn Imp",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "wisp",
+  "n": "Grave Wisp",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "crawler",
+  "n": "Hollow Crawler",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "skeleton",
+  "n": "Bone Sentry",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "boss",
+  "n": "Gravemaw",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "ashbat",
+  "n": "Ash Bat",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "aslime",
+  "n": "Slag Slime",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "ewisp",
+  "n": "Ember Wisp",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "magma",
+  "n": "Magma Drake",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "csentry",
+  "n": "Cinder Sentry",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "tyrant",
+  "n": "Slag Tyrant",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "sbat",
+  "n": "Storm Bat",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "rslime",
+  "n": "Rime Slime",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "fwisp",
+  "n": "Frost Wisp",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "yeti",
+  "n": "Tundra Yeti",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "gsentry",
+  "n": "Glacier Sentry",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "wyrm",
+  "n": "Rime Wyrm",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "mmoth",
+  "n": "Mire Moth",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "bogslime",
+  "n": "Bog Slime",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "lizard",
+  "n": "Fen Lizardman",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "drowned",
+  "n": "Drowned Knight",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "shade",
+  "n": "Hollow Shade",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "hydra",
+  "n": "Mire Hydra",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "veilbat",
+  "n": "Veil Bat",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "gloomling",
+  "n": "Gloomling",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "stalker",
+  "n": "Dusk Stalker",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "umbral",
+  "n": "Umbral Knight",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "mwraith",
+  "n": "Mirror Wraith",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "varra",
+  "n": "Varra Kade",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "warden",
+  "n": "Eclipse Warden",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "crownbat",
+  "n": "Crown Bat",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "voidooze",
+  "n": "Void Ooze",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "hollowhound",
+  "n": "Hollow Hound",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "shardling",
+  "n": "Shardling",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "throneguard",
+  "n": "Throne Guard",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "oathbound",
+  "n": "Oathbound Keeper",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "seneschal",
+  "n": "Hollow Seneschal",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "heartwisp",
+  "n": "Heartfire Wisp",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "crownknight",
+  "n": "Crown Knight",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "hollowseraph",
+  "n": "Hollow Seraph",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "embermaw",
+  "n": "Ember Maw",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "kingshade",
+  "n": "King's Shade",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "vorthane",
+  "n": "Vorthane, the Hollow King",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "vorthane2",
+  "n": "Vorthane, Heart Unbound",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "cindral",
+  "n": "Buried Sun Cindral",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "omen",
+  "n": "The Seventh Shade",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "reefcrab",
+  "n": "Reef Crab",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "tidewisp",
+  "n": "Tide Wisp",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "brineslime",
+  "n": "Brine Slime",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "cogbat",
+  "n": "Cog Bat",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "gearknight",
+  "n": "Gear Knight",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "sparkling",
+  "n": "Sparkling",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "lampghost",
+  "n": "Lamp Ghost",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "boneknight",
+  "n": "Ossuary Knight",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "gravemoth",
+  "n": "Grave Moth",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "starmoth",
+  "n": "Star Moth",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "voidling",
+  "n": "Voidling",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "astral",
+  "n": "Astral Eye",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "colossus",
+  "n": "Brine Colossus",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "sentinel",
+  "n": "Brass Sentinel",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "lqueen",
+  "n": "The Lantern Queen",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "seer",
+  "n": "The Starfall Seer",
+  "src": "painted"
+ },
+ {
+  "sec": "Battle enemies",
+  "k": "vasska",
+  "n": "Grand Champion Vasska",
+  "src": "painted"
+ },
+ {
+  "sec": "Sky enemies",
+  "k": "gloomray",
+  "n": "Gloomray",
+  "src": "painted"
+ },
+ {
+  "sec": "Sky enemies",
+  "k": "roc",
+  "n": "Rotwing Roc",
+  "src": "painted"
+ },
+ {
+  "sec": "Sky enemies",
+  "k": "skiff",
+  "n": "Ashclaw Skiff",
+  "src": "painted"
+ },
+ {
+  "sec": "Sky enemies",
+  "k": "corsair",
+  "n": "Ashclaw Corsair",
+  "src": "painted"
+ },
+ {
+  "sec": "Sky enemies",
+  "k": "wyvern",
+  "n": "Storm Wyvern",
+  "src": "painted"
+ },
+ {
+  "sec": "Sky enemies",
+  "k": "stormbreaker",
+  "n": "Ashclaw Stormbreaker",
+  "src": "painted"
+ },
+ {
+  "sec": "Sky enemies",
+  "k": "manta",
+  "n": "Bog Manta",
+  "src": "painted"
+ },
+ {
+  "sec": "Sky enemies",
+  "k": "tempest",
+  "n": "Black Tempest",
+  "src": "painted"
+ },
+ {
+  "sec": "Sky enemies",
+  "k": "leviathan",
+  "n": "Gloam Leviathan",
+  "src": "painted"
+ },
+ {
+  "sec": "Sky enemies",
+  "k": "nightfall",
+  "n": "Nightfall Dreadnought",
+  "src": "painted"
+ },
+ {
+  "sec": "Sky enemies",
+  "k": "crownwing",
+  "n": "Crownwing Drake",
+  "src": "painted"
+ },
+ {
+  "sec": "Sky enemies",
+  "k": "seraph",
+  "n": "Throne Seraph",
+  "src": "painted"
+ },
+ {
+  "sec": "Sky enemies",
+  "k": "heartwyrm",
+  "n": "Heartfire Wyrm",
+  "src": "painted"
+ },
+ {
+  "sec": "Sky enemies",
+  "k": "sovereign",
+  "n": "Tempest Sovereign",
+  "src": "painted"
+ },
+ {
+  "sec": "Party (battle)",
+  "k": "kael",
+  "n": "kael",
+  "src": "painted"
+ },
+ {
+  "sec": "Party (battle)",
+  "k": "lyra",
+  "n": "lyra",
+  "src": "painted"
+ },
+ {
+  "sec": "Party (battle)",
+  "k": "mira",
+  "n": "mira",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "kael",
+  "n": "kael",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "lyra",
+  "n": "lyra",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "mira",
+  "n": "mira",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "elder",
+  "n": "elder",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "kid",
+  "n": "kid",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "guard",
+  "n": "guard",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "merch",
+  "n": "merch",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "inn",
+  "n": "inn",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "orrin",
+  "n": "orrin",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "saffa",
+  "n": "saffa",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "dagny",
+  "n": "dagny",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "hale",
+  "n": "hale",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "sola",
+  "n": "sola",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "brann",
+  "n": "brann",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "rook",
+  "n": "rook",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "isolde",
+  "n": "isolde",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "torvald",
+  "n": "torvald",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "yrsa",
+  "n": "yrsa",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "nils",
+  "n": "nils",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "sefa",
+  "n": "sefa",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "brannoc",
+  "n": "brannoc",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "wren",
+  "n": "wren",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "odo",
+  "n": "odo",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "seren",
+  "n": "seren",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "varra",
+  "n": "varra",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "hask",
+  "n": "hask",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "lune",
+  "n": "lune",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "tib",
+  "n": "tib",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "aldwin",
+  "n": "aldwin",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "marrow",
+  "n": "marrow",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "wick",
+  "n": "wick",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "posy",
+  "n": "posy",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "elowen",
+  "n": "elowen",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "bess",
+  "n": "bess",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "cael",
+  "n": "cael",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "gorrim",
+  "n": "gorrim",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "fen",
+  "n": "fen",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "dill",
+  "n": "dill",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "bly",
+  "n": "bly",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "senna",
+  "n": "senna",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "sable",
+  "n": "sable",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "nell",
+  "n": "nell",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "tobin",
+  "n": "tobin",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "quill",
+  "n": "quill",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "mara",
+  "n": "mara",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "dov",
+  "n": "dov",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "herald",
+  "n": "herald",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "rusk",
+  "n": "rusk",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "ada",
+  "n": "ada",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "oriel",
+  "n": "oriel",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "pell",
+  "n": "pell",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "marg",
+  "n": "marg",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "ivo",
+  "n": "ivo",
+  "src": "painted"
+ },
+ {
+  "sec": "Field / NPC sprites",
+  "k": "shade",
+  "n": "shade",
+  "src": "painted"
+ }
+]

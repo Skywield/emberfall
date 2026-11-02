@@ -16,6 +16,11 @@ ok(await ev(()=>typeof FPAINT==='undefined'||Object.keys(SPR).every(k=>!!FPAINT[
 await k('a');await w(800);await k('a',12);await w(800);await k('a',8);await w(300);
 const bat=async(list,cave,n)=>{await ev(([l,c])=>{DBG.UI.length=0;DBG.startBattle(l,c);},[list,cave]);await w(1300);await shot(n);ok(await ev(()=>DBG.scene==='battle'),'battle '+list.join('+'));await ev(()=>{DBG.setScene&&DBG.setScene('map');});await w(300);};
 await ev(()=>{DBG.UI.length=0;DBG.enterMap('town',8,8,'up')});await w(1500);
+ok(await ev(()=>SPR.kael.down[1]!==SPR.kael.down[0]&&SPR.kael.right[1]!==SPR.kael.right[0]&&SPR.kael.down[0].width===48),'painted walk cycle frames for the field hero');
+await shot('173_field_town_painted.png');
+for(let i=0;i<3;i++){await ev(()=>DBG.press('down'));await w(110);}await shot('174_field_walk_painted.png');await ev(()=>DBG.rel('down'));await w(200);
+await ev(()=>{DBG.UI.length=0;DBG.enterMap('harbor',8,8,'down')}).catch(()=>{});await w(1500);await shot('175_field_harbor_painted.png');
+await ev(()=>{DBG.UI.length=0;DBG.enterMap('town',8,8,'up')});await w(800);
 await bat(['slime','bat','goblin'],'',  '161_battle_painted_ch1.png');
 await bat(['ashbat','aslime','ewisp'],'ash','162_battle_painted_ash.png');
 await bat(['yeti','gsentry','fwisp'],'cave','163_battle_painted_frost.png');

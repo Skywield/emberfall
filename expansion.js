@@ -436,7 +436,7 @@ XUI.fish={u:(u,dt)=>{u.t+=dt;
   const g=X.createLinearGradient(0,20,0,150);g.addColorStop(0,sea?'#8ac0f0':'#101830');g.addColorStop(0.35,sea?'#cfe6ff':'#202848');g.addColorStop(0.36,sea?'#2a5ab8':'#0a2a2a');g.addColorStop(1,sea?'#102a5a':'#041414');
   X.fillStyle=g;X.fillRect(14,20,W-28,130);txt(sea?'FISHING — Saltmere pier':'FISHING — the lantern pond',20,24,'#ffd860',7);
   for(let i=0;i<8;i++){X.fillStyle=sea?'#6aa0f0':'#2a6a5a';X.fillRect(20+((i*37+T*12)%(W-50)),70+i*9,10,1);}
-  X.fillStyle='#8a5a2a';X.fillRect(14,60,40,6);X.drawImage(SPR.kael.right[0],30,44);X.strokeStyle='#d0c0a0';X.beginPath();X.moveTo(42,46);
+  X.fillStyle='#8a5a2a';X.fillRect(14,60,40,6);fspr(SPR.kael.right[0],30,44);X.strokeStyle='#d0c0a0';X.beginPath();X.moveTo(42,46);
   const bx=60+(u.st==='aim'?u.pw:(u.pw||0.5))*150,by=72;X.lineTo(bx,by-12);X.lineTo(bx,by);X.stroke();
   if(u.st!=='aim'){X.fillStyle='#e03030';X.fillRect(bx-2,by-2+(u.st==='bite'?Math.sin(T*30)*2:Math.sin(T*3)),4,3);X.fillStyle='#fff';X.fillRect(bx-2,by-2,4,1);}
   if(u.st==='bite'){txt('!',bx,by-24,'#ffe060',12,'center');}

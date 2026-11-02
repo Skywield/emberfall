@@ -87,6 +87,8 @@ const NPCPAL={elder:{H:'#d8d8d8',h:'#ffffff',s:'#e0b890',O:'#6b4a2a',A:'#c8a050'
  guard:{H:'#8a94a8',h:'#d0d8e8',s:'#e0b890',O:'#707a90',A:'#c0392b',L:'#40485a',b:'#2a2a2a'},
  merch:{H:'#2a1a3a',h:'#5a3a7a',s:'#f0c8a0',O:'#2e8a8a',A:'#f0d060',L:'#5a3a2a',b:'#2a1a0a'},
  inn:{H:'#e08040',h:'#ffb070',s:'#f4c9a0',O:'#a83850',A:'#ffffff',L:'#5a2a3a',b:'#3a1a1a'}};
+// fspr: draws a field frame at its old 12x16 anchor; painted 48x64 frames (field.js) draw 16x21 bottom-aligned
+function fspr(c,x,y){if(c.width===48)X.drawImage(c,x-2,y+16-64/3,16,64/3);else X.drawImage(c,x,y);}
 const SPR={};for(const k in HEROPAL)SPR[k]=charSet(HEROPAL[k]);for(const k in NPCPAL)SPR[k]=charSet(NPCPAL[k]);
 
 const EN_ART={
@@ -329,8 +331,8 @@ function camera(){const M=MAPS[G.map];const t=F.mv>0?F.mv:0;const ppx=(G.x-(G.x-
  let cx=ppx+8-W/2,cy=ppy+8-H/2;cx=M.w*16<W?(M.w*16-W)/2:Math.max(0,Math.min(M.w*16-W,cx));cy=M.h*16<H?(M.h*16-H)/2:Math.max(0,Math.min(M.h*16-H,cy));return [Math.round(cx),Math.round(cy),ppx,ppy];}
 function drawField(){const M=MAPS[G.map],[cx,cy,ppx,ppy]=camera();X.fillStyle='#000';X.fillRect(0,0,W,H);
  const x0=Math.floor(cx/16),y0=Math.floor(cy/16);for(let y=y0;y<=y0+15;y++)for(let x=x0;x<=x0+17;x++){if(x<0||y<0||x>=M.w||y>=M.h)continue;const t=M.rows[y][x],tl=TILES[t]||TILES['.'];X.drawImage(tl[Math.floor(T*2)%tl.length],x*16-cx,y*16-cy);}
- const ents=F.npcs.map(n=>({y:n.y*16,dr:()=>X.drawImage(SPR[n.s][n.d][0],n.x*16-cx+2,n.y*16-cy-2)}));
- const fr=F.mv>0?(1+(Math.floor(F.anim*8)%2)):0;ents.push({y:ppy,dr:()=>X.drawImage(SPR.kael[G.d][fr],ppx-cx+2,ppy-cy-2)});
+ const ents=F.npcs.map(n=>({y:n.y*16,dr:()=>fspr(SPR[n.s][n.d][0],n.x*16-cx+2,n.y*16-cy-2)}));
+ const fr=F.mv>0?(1+(Math.floor(F.anim*8)%2)):0;ents.push({y:ppy,dr:()=>fspr(SPR.kael[G.d][fr],ppx-cx+2,ppy-cy-2)});
  if(G.map==='cave'&&!G.flags.boss){const b=EN_ART.boss.c,bob=Math.sin(T*2)*1.5;ents.push({y:32,dr:()=>{if(!drawPaint('boss',12*16-cx,3*16-cy+10+bob,{sc:0.55,alpha:0.95})){X.globalAlpha=0.9;X.drawImage(b,12*16-cx-b.width/2,1*16-cy-4+bob);X.globalAlpha=1;}}});}
  XFENTS.forEach(f=>f(ents,cx,cy));
  ents.sort((a,b)=>a.y-b.y).forEach(e=>e.dr());if(window.XFIELD)XFIELD(cx,cy);
