@@ -14,6 +14,10 @@ const CH=[{c:1,maps:['world','cave'],boss:['boss'],shop:shops.c1,sky:[]},
  {c:6,maps:['gloam','bastion'],boss:['warden'],shop:shops.c6,sky:['leviathan','leviathan','leviathan','nightfall'],free:['hydrascale','sanctumveil']},
  {c:7,maps:['causeway','citadel'],boss:['seneschal'],shop:shops.c7,sky:['crownwing','crownwing','crownwing','seraph'],free:['wardenplate','veilcloak']},
  {c:8,maps:['stair','heartspire'],boss:['vorthane','vorthane2'],shop:shops.c8,sky:['heartwyrm'],free:['seneschalaegis','lastmantle','foundersveil','emberheart']}];
+// Ember / unique-command / boss-telegraph model (combat.js). Constants are read from combat.js so the sim never drifts.
+// --classic runs the old rules for comparison.
+const EMB=(()=>{const src=require('fs').readFileSync(__dirname+'/../combat.js','utf8');return Function('return '+src.match(/const EMBER=(\{[\s\S]*?\}\});/)[1])();})();
+const EM=!process.argv.includes('--classic');
 const xpNext=lv=>Math.floor(18*Math.pow(lv,1.6));
 const R=()=>Math.random();
 function mk(id){const d=HERO_DEF[id];return {id,lv:1,xp:0,b:{hp:d.hp,mp:d.mp,atk:d.atk,def:d.def,mag:d.mag,spd:d.spd},w:d.w,a:'tunic'};}
@@ -30,14 +34,14 @@ function shop(S,stock,free){(free||[]).forEach(k=>{if(!EQ[k])return;const e=EQ[k
  if(heal){const n=Math.min(6,Math.floor(S.gold*0.5/ITEMS[heal].p));S.nheal=n;S.gold-=n*ITEMS[heal].p;}}
 // one ATB battle; returns {win,t,hpLeft}
 function fight(P,keys,opt={}){const pt=P.map(m=>{const s=st(m);return {m,s,hp:opt.hp?opt.hp[m.id]:s.hp,mp:s.mp,atb:R()*40,buf:1};});
- let en=keys.map(k=>({...EN[k],k,mhp:EN[k].hp,atb:R()*50}));let items=opt.items||0;const heal=opt.heal?ITEMS[opt.heal].heal:0;let t=0;
+ let en=keys.map(k=>{const b=EM&&EN[k].boss?EMB.bossHP:1;return {...EN[k],k,hp:Math.round(EN[k].hp*b),mhp:Math.round(EN[k].hp*b),atb:R()*50,nb:0};});let ember=EM?(opt.boss?EMB.bossStory+12:0):0;const heat=v=>{ember=Math.min(EMB.cap,ember+v);if(ember>=EMB.cap){ember=60;pt.forEach(p=>{if(p.hp>0)p.hp=Math.max(1,p.hp-Math.floor(p.s.hp*EMB.blowDmg));});}};let items=opt.items||0;const heal=opt.heal?ITEMS[opt.heal].heal:0;let t=0;
  const al=a=>a.filter(u=>u.hp>0);
- while(t<900){t+=0.05;for(const u of [...al(pt),...al(en)]){u.atb+=((u.s?u.s.spd:u.spd)+8)*0.05*3.2;if(u.atb<100)continue;u.atb=0;
-   if(u.s){const E=al(en);if(!E.length)break;act(u,pt,E);}else{const T=al(pt);if(!T.length)break;eact(u,T);}}
+ while(t<900){t+=0.05;for(const u of [...al(pt),...al(en)]){u.atb+=((u.s?(u.chill?u.s.spd*0.4-3:u.s.spd):u.spd)+8)*0.05*3.2;if(u.atb<100)continue;u.atb=0;
+   if(u.s){const E=al(en);if(!E.length)break;if(u.chill)u.chill--;if(EM&&ember>EMB.overT&&R()<EMB.overRisk)u.hp=Math.max(1,u.hp-Math.floor(u.s.hp*EMB.overBurn));if(!(EM&&emAct(u,pt,E)))act(u,pt,E);}else{const T=al(pt);if(!T.length)break;eact(u,T);}}
   if(!al(en).length)return {win:1,t,hp:Object.fromEntries(pt.map(u=>[u.m.id,u.hp])),frac:avg(pt.map(u=>u.hp/u.s.hp))};
   if(!al(pt).length)return {win:0,t,frac:0};}
  return {win:0,t,frac:0};
- function dmgP(u,e,pow,mag,el){let d=mag?(u.s.mag*2.3-e.def*0.8)*pow:(u.s.atk*u.buf*2-e.def)*pow;if(!mag&&R()<0.08)d*=1.6;if(el){if(e.weak===el)d*=1.75;else if(e.res===el)d*=0.5;}return Math.max(1,Math.floor(d*(0.9+R()*0.2)));}
+ function dmgP(u,e,pow,mag,el){if(EM&&el==='fire'&&e)heat(EMB.fireHit+(e.weak==='fire'?EMB.weakHit:0));if(EM&&e&&e.open)e=Object.assign({},e,{def:e.def*EMB.openDef});let d=mag?(u.s.mag*2.3-e.def*0.8)*pow:(u.s.atk*u.buf*2-e.def)*pow;if(!mag&&R()<0.08)d*=1.6;if(el){if(e.weak===el)d*=1.75;else if(e.res===el)d*=0.5;}return Math.max(1,Math.floor(d*(0.9+R()*0.2)));}
  function act(u,pt,E){const id=u.m.id,lv=u.m.lv,tgt=E.reduce((a,b)=>a.hp<b.hp?a:b),dead=pt.filter(p=>p.hp<=0),low=pt.filter(p=>p.hp>0&&p.hp<p.s.hp*0.5);
   const has=k=>!(SK[k].lv>lv)&&u.mp>=SK[k].mp;
   if(id==='mira'){if(dead.length&&has('rekindle')){u.mp-=14;dead[0].hp=Math.floor(dead[0].s.hp*0.4);dead[0].atb=0;return;}
@@ -51,9 +55,16 @@ function fight(P,keys,opt={}){const pt=P.map(m=>{const s=st(m);return {m,s,hp:op
    const opts=['ember','frost','storm'].filter(has).map(k=>({k,v:SK[k].pow*(tgt.weak===SK[k].el?1.75:tgt.res===SK[k].el?0.5:1)})).sort((a,b)=>b.v-a.v);
    if(opts.length&&(opt.boss||E.length===1)){const k=opts[0].k;u.mp-=SK[k].mp;tgt.hp-=dmgP(u,tgt,SK[k].pow,1,SK[k].el);return;}}
   tgt.hp-=dmgP(u,tgt,1);}
- function eact(e,T){const t=T[R()*T.length|0];const ph=e.boss&&e.hp<e.mhp*0.5;if(ph&&!e.howl){e.howl=1;e.atk=Math.round(e.atk*1.25);e.mag=Math.round(e.mag*1.15);return;}
+ function emAct(u,pt,E){const id=u.m.id,tgt=E.reduce((a,b)=>a.hp<b.hp?a:b),dead=pt.filter(p=>p.hp<=0),low=pt.filter(p=>p.hp>0&&p.hp<p.s.hp*0.5);
+  if(ember>=EMB.max){if(id==='mira'&&(dead.length||low.length>=2)){ember-=EMB.max;pt.forEach(p=>{if(p.hp<=0){p.hp=Math.floor(p.s.hp*0.3);p.atb=0;}else p.hp=Math.min(p.s.hp,p.hp+Math.floor(p.s.hp*EMB.art.miraHeal));p.chill=0;});return 1;}
+   if(id==='kael'){ember-=EMB.max;tgt.hp-=dmgP(u,tgt,EMB.art.kael,0,'fire');return 1;}if(id==='lyra'){ember-=EMB.max;E.forEach(e=>e.hp-=dmgP(u,e,EMB.art.lyra,1,'fire'));return 1;}}
+  if(id==='mira'&&ember>EMB.overT-10){const v=Math.min(EMB.ventMax,ember);ember-=v;pt.forEach(p=>{if(p.hp>0){p.chill=0;p.hp=Math.min(p.s.hp,p.hp+Math.floor(p.s.hp*EMB.ventHeal*v/EMB.ventMax));}});return 1;}
+  if(id==='lyra'&&dead.length&&ember>=EMB.reignCost&&!pt.some(p=>p.m.id==='mira'&&p.hp>0&&p.mp>=14)){ember-=EMB.reignCost;dead[0].hp=Math.floor(dead[0].s.hp*0.3);dead[0].atb=50;return 1;}
+  if(id==='kael'&&opt.boss&&u.hp>u.s.hp*0.6&&R()<0.5){u.hp-=Math.floor(u.s.hp*EMB.surgeHP);u.chill=1;tgt.hp-=dmgP(u,tgt,EMB.surgePow,0,'fire');heat(EMB.surgeHeat-EMB.fireHit);return 1;}
+  return 0;}
+ function eact(e,T){if(EM&&e.open){e.open=0;}if(EM&&e.boss){e.nb++;if(e.nb%EMB.openEvery===0){e.open=1;return;}}const t=T[R()*T.length|0];const ph=e.boss&&e.hp<e.mhp*0.5;if(ph&&!e.howl){e.howl=1;e.atk=Math.round(e.atk*1.25);e.mag=Math.round(e.mag*1.15);return;}
   const hit=(p,pow,mag)=>{let d=mag?(e.mag*2.3-p.s.mdef*0.8)*pow:(e.atk*2-p.s.def)*pow;p.hp=Math.max(0,p.hp-Math.max(1,Math.floor(d*(0.9+R()*0.2))));};
-  if(e.boss){const r=R();if(r<(ph?0.35:0.3))T.forEach(p=>hit(p,ph?1.2:0.95,1));else if(r<0.7)hit(t,1.6);else hit(t,1);return;}
+  if(e.boss){const r=R();if(EM)heat(EMB.bossHurt);if(r<(ph?0.35:0.3)){T.forEach(p=>{hit(p,ph?1.2:0.95,1);if(EM&&R()<EMB.chillP)p.chill=2;});}else if(r<0.7){hit(t,EM&&R()<0.3?0.8:1.6);}else hit(t,1);if(EM)T.forEach(p=>{if(p.hp<=0&&!p.koed){p.koed=1;heat(EMB.koGain);}});return;}
   if(e.caster&&R()<0.6)hit(t,1.1,1);else hit(t,1);}}
 function run(label){const S={P:['kael','lyra','mira'].map(mk),gold:120};const out=[];
  for(const ch of CH){let nb=0,xp=0,g=0,hpCost=[],deaths=0;
