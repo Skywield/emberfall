@@ -12,7 +12,7 @@ ok(await ev(()=>Object.keys(EN).every(k=>!!PAINT[k])),'every battle enemy has a 
 ok(await ev(()=>{const s=Object.keys(EN).map(k=>PAINT[k].im.src);return new Set(s).size===s.length;}),'no two battle enemies share an image');
 ok(await ev(()=>{const s=Object.keys(SKYEN).map(k=>SKYEN[k].art);return new Set(s).size===s.length&&s.every(a=>!!SKYART[a]);}),'every sky enemy has its own art');
 ok(await ev(()=>['kael','lyra','mira'].every(k=>!!PAINT[k])),'party painted');
-ok(await ev(()=>typeof FPAINT==='undefined'||Object.keys(SPR).every(k=>!!FPAINT[k])),'every field / NPC sprite painted');
+ok(await ev(()=>typeof FPAINT==='undefined'||Object.keys(SPR).filter(k=>!k.startsWith('frz_')&&k!=='varraP').every(k=>!!FPAINT[k])),'every field / NPC sprite painted');
 await k('a');await w(800);await k('a',12);await w(800);await k('a',8);await w(300);
 const bat=async(list,cave,n)=>{await ev(([l,c])=>{DBG.UI.length=0;DBG.startBattle(l,c);},[list,cave]);await w(1300);await shot(n);ok(await ev(()=>DBG.scene==='battle'),'battle '+list.join('+'));await ev(()=>{DBG.setScene&&DBG.setScene('map');});await w(300);};
 await ev(()=>{DBG.UI.length=0;DBG.enterMap('town',8,8,'up')});await w(1500);

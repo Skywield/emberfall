@@ -43,7 +43,9 @@ const _enemyAI=enemyAI;
 function bossIntent(u){u.nb=(u.nb||0)+1;if(u.nb%EMBER.openEvery===0)return {u,kind:'falter',open:1,name:u.n+' falters',tg:[u]};return _enemyAI(u);}
 enemyAI=function(u){if(u.boss){if(u.tel){const a=u.tel;u.tel=null;return a;}return bossIntent(u);}return _enemyAI(u);};
 const _updBattle=updBattle;
-updBattle=function(dt){_updBattle(dt);if(!B||B.end)return;B.en.forEach(e=>{if(e.boss&&e.hp>0&&!e.pend&&!e.tel&&e.atb>=45){e.tel=bossIntent(e);e.telK=classify(e.tel);}if(e.pend||e.hp<=0){}});};
+// a big hit (10% of max HP) since the telegraph staggers the boss into re-reading the fight (phase changes stay on time)
+updBattle=function(dt){_updBattle(dt);if(!B||B.end)return;B.en.forEach(e=>{if(!e.boss||e.hp<=0)return;if(e.tel&&!e.pend&&e.hp<e.telHP-e.mhp*0.1){e.tel=null;e.telK=null;e.nb--;}
+ if(!e.pend&&!e.tel&&e.atb>=45){e.telHP=e.hp;e.tel=bossIntent(e);e.telK=classify(e.tel);}});};
 const _apply=apply;
 apply=function(a){const u=a.u;
  if(u.side==='E'&&u.open&&a.kind!=='falter'){u.def=u.def0;u.open=0;}
