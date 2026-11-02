@@ -678,6 +678,218 @@
    "res": "dark",
    "boss": 1,
    "ai": "fn"
+  },
+  "reefcrab": {
+   "n": "Reef Crab",
+   "hp": 430,
+   "atk": 48,
+   "def": 28,
+   "mag": 8,
+   "spd": 9,
+   "xp": 112,
+   "g": 70,
+   "weak": "bolt",
+   "res": "ice"
+  },
+  "tidewisp": {
+   "n": "Tide Wisp",
+   "hp": 300,
+   "atk": 20,
+   "def": 16,
+   "mag": 46,
+   "spd": 13,
+   "xp": 106,
+   "g": 64,
+   "weak": "bolt",
+   "res": "fire",
+   "caster": 1
+  },
+  "brineslime": {
+   "n": "Brine Slime",
+   "hp": 470,
+   "atk": 44,
+   "def": 30,
+   "mag": 12,
+   "spd": 6,
+   "xp": 102,
+   "g": 60,
+   "weak": "bolt"
+  },
+  "cogbat": {
+   "n": "Cog Bat",
+   "hp": 430,
+   "atk": 60,
+   "def": 22,
+   "mag": 20,
+   "spd": 20,
+   "xp": 158,
+   "g": 90,
+   "weak": "bolt"
+  },
+  "gearknight": {
+   "n": "Gear Knight",
+   "hp": 760,
+   "atk": 68,
+   "def": 42,
+   "mag": 12,
+   "spd": 9,
+   "xp": 182,
+   "g": 104,
+   "weak": "bolt",
+   "res": "fire"
+  },
+  "sparkling": {
+   "n": "Sparkling",
+   "hp": 440,
+   "atk": 24,
+   "def": 20,
+   "mag": 64,
+   "spd": 15,
+   "xp": 170,
+   "g": 96,
+   "weak": "ice",
+   "res": "bolt",
+   "caster": 1
+  },
+  "lampghost": {
+   "n": "Lamp Ghost",
+   "hp": 680,
+   "atk": 30,
+   "def": 26,
+   "mag": 78,
+   "spd": 16,
+   "xp": 236,
+   "g": 122,
+   "weak": "fire",
+   "res": "ice",
+   "caster": 1
+  },
+  "boneknight": {
+   "n": "Ossuary Knight",
+   "hp": 1040,
+   "atk": 84,
+   "def": 50,
+   "mag": 14,
+   "spd": 10,
+   "xp": 256,
+   "g": 132,
+   "weak": "fire"
+  },
+  "gravemoth": {
+   "n": "Grave Moth",
+   "hp": 700,
+   "atk": 78,
+   "def": 30,
+   "mag": 40,
+   "spd": 21,
+   "xp": 228,
+   "g": 118,
+   "weak": "fire"
+  },
+  "starmoth": {
+   "n": "Star Moth",
+   "hp": 940,
+   "atk": 94,
+   "def": 40,
+   "mag": 60,
+   "spd": 22,
+   "xp": 336,
+   "g": 152,
+   "weak": "ice"
+  },
+  "voidling": {
+   "n": "Voidling",
+   "hp": 1340,
+   "atk": 90,
+   "def": 58,
+   "mag": 30,
+   "spd": 8,
+   "xp": 344,
+   "g": 160,
+   "weak": "bolt"
+  },
+  "astral": {
+   "n": "Astral Eye",
+   "hp": 920,
+   "atk": 40,
+   "def": 40,
+   "mag": 98,
+   "spd": 18,
+   "xp": 362,
+   "g": 170,
+   "weak": "fire",
+   "res": "bolt",
+   "caster": 1
+  },
+  "colossus": {
+   "n": "Brine Colossus",
+   "hp": 8400,
+   "atk": 70,
+   "def": 26,
+   "mag": 56,
+   "spd": 11,
+   "xp": 2400,
+   "g": 1800,
+   "weak": "bolt",
+   "res": "ice",
+   "boss": 1,
+   "ai": "fn"
+  },
+  "sentinel": {
+   "n": "Brass Sentinel",
+   "hp": 13400,
+   "atk": 88,
+   "def": 34,
+   "mag": 68,
+   "spd": 13,
+   "xp": 4600,
+   "g": 3400,
+   "weak": "bolt",
+   "res": "fire",
+   "boss": 1,
+   "ai": "fn"
+  },
+  "lqueen": {
+   "n": "The Lantern Queen",
+   "hp": 20500,
+   "atk": 108,
+   "def": 36,
+   "mag": 100,
+   "spd": 15,
+   "xp": 6800,
+   "g": 4800,
+   "weak": "fire",
+   "res": "ice",
+   "boss": 1,
+   "ai": "fn"
+  },
+  "seer": {
+   "n": "The Starfall Seer",
+   "hp": 31000,
+   "atk": 136,
+   "def": 50,
+   "mag": 116,
+   "spd": 16,
+   "xp": 11000,
+   "g": 8000,
+   "weak": "ice",
+   "res": "bolt",
+   "boss": 1,
+   "ai": "fn"
+  },
+  "vasska": {
+   "n": "Grand Champion Vasska",
+   "hp": 25000,
+   "atk": 130,
+   "def": 48,
+   "mag": 84,
+   "spd": 17,
+   "xp": 9000,
+   "g": 0,
+   "weak": "ice",
+   "res": "fire",
+   "boss": 1,
+   "ai": "fn"
   }
  },
  "EQ": {
@@ -1103,6 +1315,206 @@
    "def": 70,
    "mdef": 72,
    "p": 0
+  },
+  "pearlrod": {
+   "n": "Pearl Rod",
+   "slot": "w",
+   "who": "lyra",
+   "atk": 4,
+   "mag": 30,
+   "p": 0
+  },
+  "brinecleaver": {
+   "n": "Brinecleaver",
+   "slot": "w",
+   "who": "kael",
+   "atk": 40,
+   "p": 0
+  },
+  "shellmail": {
+   "n": "Shellplate",
+   "slot": "a",
+   "def": 24,
+   "mdef": 18,
+   "p": 0
+  },
+  "cogmace": {
+   "n": "Cogwork Mace",
+   "slot": "w",
+   "who": "mira",
+   "atk": 32,
+   "mag": 32,
+   "p": 0
+  },
+  "clockblade": {
+   "n": "Clockspring Blade",
+   "slot": "w",
+   "who": "kael",
+   "atk": 52,
+   "p": 0
+  },
+  "brassplate": {
+   "n": "Brass Aegis",
+   "slot": "a",
+   "def": 32,
+   "mdef": 26,
+   "p": 0
+  },
+  "lanternrod": {
+   "n": "Lantern Staff",
+   "slot": "w",
+   "who": "lyra",
+   "atk": 9,
+   "mag": 52,
+   "p": 0
+  },
+  "gravelight": {
+   "n": "Gravelight Censer",
+   "slot": "w",
+   "who": "mira",
+   "atk": 46,
+   "mag": 48,
+   "p": 0
+  },
+  "wraithshroud": {
+   "n": "Wraith Shroud",
+   "slot": "a",
+   "def": 36,
+   "mdef": 44,
+   "p": 0
+  },
+  "astrolabe": {
+   "n": "Astrolabe Rod",
+   "slot": "w",
+   "who": "lyra",
+   "atk": 13,
+   "mag": 68,
+   "p": 0
+  },
+  "starfallblade": {
+   "n": "Starfall Blade",
+   "slot": "w",
+   "who": "kael",
+   "atk": 82,
+   "p": 0
+  },
+  "cosmosmail": {
+   "n": "Cosmos Mail",
+   "slot": "a",
+   "def": 58,
+   "mdef": 56,
+   "p": 0
+  },
+  "anglercharm": {
+   "n": "Angler's Charm",
+   "slot": "a",
+   "def": 18,
+   "mdef": 18,
+   "p": 0
+  },
+  "tiderod": {
+   "n": "Leviathan Rod",
+   "slot": "w",
+   "who": "lyra",
+   "atk": 12,
+   "mag": 62,
+   "p": 0
+  },
+  "lionmail": {
+   "n": "Lionhide Vest",
+   "slot": "a",
+   "def": 22,
+   "mdef": 14,
+   "p": 0
+  },
+  "gladius": {
+   "n": "Valor Gladius",
+   "slot": "w",
+   "who": "kael",
+   "atk": 50,
+   "p": 0
+  },
+  "victorrod": {
+   "n": "Victor's Rod",
+   "slot": "w",
+   "who": "lyra",
+   "atk": 9,
+   "mag": 56,
+   "p": 0
+  },
+  "victormace": {
+   "n": "Victor's Mace",
+   "slot": "w",
+   "who": "mira",
+   "atk": 46,
+   "mag": 46,
+   "p": 0
+  },
+  "vasskapride": {
+   "n": "Vasska's Pride",
+   "slot": "w",
+   "who": "kael",
+   "atk": 88,
+   "p": 0
+  },
+  "lionheart": {
+   "n": "Lionheart Mail",
+   "slot": "a",
+   "def": 62,
+   "mdef": 58,
+   "p": 0
+  },
+  "gildedmail": {
+   "n": "Gilded Ember Coat",
+   "slot": "a",
+   "def": 40,
+   "mdef": 40,
+   "p": 0
+  },
+  "jokercrook": {
+   "n": "Joker's Crook",
+   "slot": "w",
+   "who": "mira",
+   "atk": 54,
+   "mag": 58,
+   "p": 0
+  },
+  "saltcutlass": {
+   "n": "Salt Cutlass",
+   "slot": "w",
+   "who": "kael",
+   "atk": 36,
+   "p": 1250
+  },
+  "coralwand": {
+   "n": "Coral Wand",
+   "slot": "w",
+   "who": "lyra",
+   "atk": 4,
+   "mag": 29,
+   "p": 1120
+  },
+  "brasscrook": {
+   "n": "Brass Crook",
+   "slot": "w",
+   "who": "mira",
+   "atk": 29,
+   "mag": 29,
+   "p": 1760
+  },
+  "arenamail": {
+   "n": "Arena Mail",
+   "slot": "a",
+   "def": 28,
+   "mdef": 18,
+   "p": 1500
+  },
+  "lampcoat": {
+   "n": "Lamplit Coat",
+   "slot": "a",
+   "def": 30,
+   "mdef": 32,
+   "p": 2900
   }
  },
  "ITEMS": {
@@ -1231,6 +1643,22 @@
    "mpr": 400,
    "tgt": "P",
    "d": "2500 HP, 400 MP"
+  },
+  "seasalt": {
+   "n": "Sea-Salt Tonic",
+   "p": 140,
+   "heal": 220,
+   "mpr": 30,
+   "tgt": "P",
+   "d": "220 HP, 30 MP"
+  },
+  "lanternoil": {
+   "n": "Lantern Oil",
+   "p": 420,
+   "heal": 600,
+   "mpr": 80,
+   "tgt": "P",
+   "d": "600 HP, 80 MP"
   }
  },
  "HERO_DEF": {
@@ -2138,6 +2566,145 @@
    "h": 9,
    "enc": 0,
    "pool": [],
+   "bbg": "heart"
+  },
+  "ex_saltmere": {
+   "w": 20,
+   "h": 16,
+   "enc": 0,
+   "pool": []
+  },
+  "ex_valor": {
+   "w": 20,
+   "h": 16,
+   "enc": 0,
+   "pool": []
+  },
+  "ex_lantern": {
+   "w": 20,
+   "h": 16,
+   "enc": 0,
+   "pool": []
+  },
+  "ex_grotto": {
+   "w": 24,
+   "h": 14,
+   "enc": 15,
+   "pool": [
+    [
+     "reefcrab"
+    ],
+    [
+     "tidewisp",
+     "tidewisp"
+    ],
+    [
+     "brineslime",
+     "reefcrab"
+    ],
+    [
+     "brineslime",
+     "tidewisp"
+    ],
+    [
+     "reefcrab",
+     "reefcrab"
+    ],
+    [
+     "yeti"
+    ]
+   ],
+   "bbg": "sunken"
+  },
+  "ex_vault": {
+   "w": 24,
+   "h": 14,
+   "enc": 14,
+   "pool": [
+    [
+     "cogbat",
+     "cogbat"
+    ],
+    [
+     "gearknight"
+    ],
+    [
+     "sparkling",
+     "cogbat"
+    ],
+    [
+     "gearknight",
+     "sparkling"
+    ],
+    [
+     "lizard",
+     "cogbat"
+    ],
+    [
+     "drowned",
+     "sparkling"
+    ]
+   ],
+   "bbg": "forge"
+  },
+  "ex_crypt": {
+   "w": 24,
+   "h": 14,
+   "enc": 14,
+   "pool": [
+    [
+     "lampghost"
+    ],
+    [
+     "boneknight"
+    ],
+    [
+     "gravemoth",
+     "gravemoth"
+    ],
+    [
+     "lampghost",
+     "gravemoth"
+    ],
+    [
+     "boneknight",
+     "lampghost"
+    ],
+    [
+     "umbral",
+     "gravemoth"
+    ]
+   ],
+   "bbg": "twilight"
+  },
+  "ex_obs": {
+   "w": 24,
+   "h": 14,
+   "enc": 14,
+   "pool": [
+    [
+     "starmoth",
+     "starmoth"
+    ],
+    [
+     "voidling"
+    ],
+    [
+     "astral",
+     "starmoth"
+    ],
+    [
+     "voidling",
+     "astral"
+    ],
+    [
+     "crownknight"
+    ],
+    [
+     "kingshade",
+     "starmoth"
+    ]
+   ],
    "bbg": "heart"
   }
  },

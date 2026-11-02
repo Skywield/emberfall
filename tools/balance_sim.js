@@ -79,3 +79,12 @@ if(process.argv.includes('--super')&&EN.cindral){
  const gP={kael:['dawnthorn','shadeveil'],lyra:['sunrod','foundersveil'],mira:['stormcrown','sunmail']};
  for(const lv of [34,40,46])console.log('Cindral  lv',lv,tries(lvUp(lv,g8),'cindral','crownsalve'));
  for(const lv of [45,52,60])console.log('Omen     lv',lv,tries(lvUp(lv,{kael:['emberheart','foundersveil'],lyra:['sunrod','sunmail'],mira:['stormcrown','seneschalaegis']}),'omen','heartdraught'));}
+// optional-content check (expansion.js): node tools/balance_sim.js --optional
+// Each optional boss at the level/gear the party naturally has when its dungeon (or cup) unlocks, and a couple above.
+if(process.argv.includes('--optional')&&EN.colossus){
+ const lvUp=(lv,gear)=>{const P=['kael','lyra','mira'].map(mk);P.forEach(m=>{while(m.lv<lv){gain([m],xpNext(m.lv)-m.xp);}m.w=gear[m.id][0];m.a=gear[m.id][1];});return P;};
+ const tries=(P,k,heal)=>{let w=0,t=0;for(let i=0;i<300;i++){const r=fight(P,[k],{boss:1,items:6,heal});w+=r.win;t+=r.t;}return (w/3).toFixed(0)+'% ('+(t/300).toFixed(0)+'s)';};
+ const G4={kael:['sunbrand','rimemail'],lyra:['stormrod','frostfur'],mira:['auroramace','rimemail']},G5={kael:['tidecleaver','hydrascale'],lyra:['verdantrod','sanctumveil'],mira:['coralmace','mossmail']},
+  G6={kael:['dawnbrand','wardenplate'],lyra:['eclipserod','veilcloak'],mira:['lunarmace','gloammail']},G7={kael:['sunderblade','seneschalaegis'],lyra:['crownrod','lastmantle'],mira:['seraphmace','throneplate']};
+ for(const[k,g,h,lvs]of[['colossus',G4,'xpotion',[16,17,19]],['sentinel',G5,'mdraught',[22,23,25]],['lqueen',G6,'dusktonic',[27,29,31]],['vasska',G7,'crownsalve',[31,33,35]],['seer',G7,'crownsalve',[35,37,39]]])
+  console.log(k.padEnd(9),lvs.map(lv=>'lv'+lv+' '+tries(lvUp(lv,g),k,h)).join('   '));}
