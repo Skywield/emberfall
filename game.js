@@ -316,7 +316,9 @@ const DIRS={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]};
 function updField(dt){G.time+=dt;F.anim+=dt;
  F.npcs.forEach(n=>{if(!n.wander)return;n.t-=dt;if(n.t<0){n.t=2+Math.random()*3;const ds=Object.keys(DIRS),d=ds[Math.random()*4|0],[a,b]=DIRS[d];n.d=d;const nx=n.x+a,ny=n.y+b;
   if(Math.abs(nx-n.ox)<3&&Math.abs(ny-n.oy)<3&&!SOLID.has(tileAt(G.map,nx,ny))&&!(nx===G.x&&ny===G.y)&&!npcAt(nx,ny)&&!MAPS[G.map].doors?.[nx+','+ny]&&!MAPS[G.map].doors?.[nx+','+(ny-1)]){n.x=nx;n.y=ny;}}});
- if(F.mv>0){F.mv-=dt*7;if(F.mv<=0){F.mv=0;arrived();}return;}
+ if(F.mv>0){F.mv-=dt*(window.FSPD||7);if(F.mv<=0){const over=Math.min(0.5,-F.mv);F.mv=0;const m0=G.map;arrived();
+  // keep walking without a dead frame between tiles while a direction is held (snappier touch / keyboard movement)
+  if(window.FSPD&&scene==='map'&&!UI.length&&!fadeDir&&G.map===m0&&!P.a&&!P.menu)for(const d of ['up','down','left','right'])if(K[d]){G.d=d;const[a,b]=DIRS[d];if(!blocked(G.x+a,G.y+b)){F.fx=G.x;F.fy=G.y;G.x+=a;G.y+=b;F.mv=1-over;}break;}}return;}
  if(P.menu){openMenu();return;}
  if(P.a){const[a,b]=DIRS[G.d],tx=G.x+a,ty=G.y+b,n=npcAt(tx,ty);if(n){n.d={up:'down',down:'up',left:'right',right:'left'}[G.d];sfx('ok');n.act?n.act():dialog(n.lines());return;}
   const t=tileAt(G.map,tx,ty);if(t==='c'){const ch=MAPS[G.map].chests[tx+','+ty];setTile(G.map,tx,ty,'o');G.flags['c'+G.map+tx+','+ty]=1;if(EQ[ch])G.eq[ch]=(G.eq[ch]||0)+1;else G.items[ch]=(G.items[ch]||0)+1;sfx('coin');toast('Found '+nameOf(ch)+'!');return;}}
