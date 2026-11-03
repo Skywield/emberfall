@@ -99,3 +99,30 @@ const _enterMap_d=enterMap;enterMap=function(...a){_enterMap_d(...a);if(!G||!G.s
 const _skyD=XSCN.skymap.d;XSCN.skymap.d=function(...a){_skyD.apply(this,a);const[cx,cy]=skyCam();
  for(const p of EXPOI){if(EXS().seen[p.id])continue;const open=p.req(),x=p.x*16+8-cx,y=p.y*16-cy-18+Math.sin(T*4+p.x)*2;if(x<-10||y<-10||x>W+10||y>H+10)continue;
   X.fillStyle='#000a';X.beginPath();X.arc(x,y,6,0,7);X.fill();txt(open?'!':'?',x,y-4,open?'#ffd040':'#9aa',9,'center');}};
+
+// ---------- (3) consequences: personal quests + the Varra choice ----------
+// Finishing a hero's personal quest now (a) changes how they fight - each gets a named perk shown at the next battle,
+// (b) triggers a short party scene the next time you rest at an inn or walk into a town, and (c) adds a line to their
+// epilogue. Trusting Varra (or not) is remembered at campfires and in town talk.
+const PQ={kael:{perk:'Senna\'s oath: Shard Surge costs less HP',f:()=>{EMBER.surgeHP=0.12;}},lyra:{perk:'Orrel\'s Codex: Reignite costs 20 Ember',f:()=>{EMBER.reignCost=20;}},
+ mira:{perk:'The Shrine censer: Vent Heat heals more',f:()=>{EMBER.ventHeal=0.7;}},varra:{perk:'Black Tempest colours: Varra\'s Gambit lands more often',f:()=>{EMBER.gambitWin=0.62;}}};
+const PQ0={surgeHP:EMBER.surgeHP,reignCost:EMBER.reignCost,ventHeal:EMBER.ventHeal,gambitWin:EMBER.gambitWin};
+function pqDone(id){return qst(id).s===2;}
+const _startBattle_e=startBattle;startBattle=function(...a){Object.assign(EMBER,PQ0);const on=Object.keys(PQ).filter(pqDone);on.forEach(id=>PQ[id].f());_startBattle_e(...a);
+ if(B&&on.length){const nw=on.filter(id=>!G.flags['perk_'+id]);if(nw.length){nw.forEach(id=>G.flags['perk_'+id]=1);tip('perk_'+nw.join('_'),nw.map(id=>PQ[id].perk));}}};
+const REACT={
+ kael:['Mira: You looked lighter walking out of Lastlight, Kael.','Kael: Senna said the founders chose to burn. Nobody made them. ...I can choose too.','Lyra: Good. Then choose to eat something.'],
+ lyra:['Kael: You\'ve read Orrel\'s notes four times tonight.','Lyra: "Stop apologising for your fire." He wrote it in the margin of every spell I ever ruined.','Mira: Then stop. We like your fire.'],
+ mira:['Lyra: You\'re humming the shrine hymn again.','Mira: The sisters hummed it at the end. I promised I\'d keep it going.','Kael: Then we\'ll all learn it. Badly.'],
+ varra:['Varra Kade: Bly still won\'t say he missed me. The old gossip.','Varra Kade: You flew into the Bastion for a rag on a pole, Thornwick. Nobody\'s ever done that for my crew.','Varra Kade: Don\'t make it weird. ...Thank you.']};
+const VREACT={trust:['Lyra: Varra\'s ship has been shadowing us since Duskhollow.','Kael: She said she\'d have our flank. I believe her.'],
+ alone:['Mira: Do you think Varra\'s all right, out there on her own?','Kael: She chose her road. ...I keep a lantern lit anyway.']};
+function nextReact(){for(const id in REACT)if(pqDone(id)&&!G.flags['react_'+id]){G.flags['react_'+id]=1;return REACT[id];}
+ if(G.flags.varraT&&!G.flags.react_vt){G.flags.react_vt=1;return VREACT.trust;}if(G.flags.varraalone&&!G.flags.react_va){G.flags.react_va=1;return VREACT.alone;}return null;}
+window.innTalk=function(){const r=nextReact();if(r)dialog(['(Around the fire that night...)',...r]);};
+const TOWNS=['town','harbor','cinderholt','hollowfrost','reedhaven','duskhollow','lastlight','hearth','ex_saltmere','ex_valor','ex_lantern'];
+const _enterMap_e=enterMap;enterMap=function(...a){_enterMap_e(...a);if(!G||!TOWNS.includes(G.map)||scene!=='map')return;if(Object.keys(REACT).some(id=>pqDone(id)&&!G.flags['react_'+id]))setTimeout(()=>{if(scene==='map'&&!UI.length)innTalk();},900);};
+const PEPI={kael:'He kept Senna\'s oath, too: every founder\'s name is cut into the Thornwick hearthstone.',lyra:'Orrel\'s Codex sits on her desk, every margin note answered.',
+ mira:'She still hums the shrine hymn when she lights them. Children in six towns know the words.',varra:'Bly flies with her again, complaining the whole way, under the old red-on-black colours.'};
+const _epi_e=epi;epi=function(){const S=_epi_e();S.forEach(s=>{const id=s.s==='varra'?'varra':s.s;if(PEPI[id]&&pqDone(id))s.L=[...s.L,PEPI[id]];});return S;};
+window.PQUEST={PQ,REACT,nextReact,pqDone};

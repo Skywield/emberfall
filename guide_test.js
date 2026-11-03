@@ -56,5 +56,12 @@ ok(await ev(()=>{G.sky=newSky();G.flags.tyrant=1;G.flags['rum_ex_salt']=0;TOAST=
 await ev(()=>{DBG.UI.length=0;G.sky.x=6*16;G.sky.y=19*16;DBG.setScene('skymap');});await w(400);await shot('260_skymap_markers.png');
 ok(await ev(()=>{const g0=G.gold;const e=EX.EXPOI[0];skyInteract(e);return EX.EXPOI[0]&&G.gold===g0+150;}),'first landing at a far town pays the Wayfarer bonus');
 ok(await ev(()=>{const s=EXS().seen;s.ex_salt=s.ex_valor=s.ex_lant=1;return SQ.qReady(SQ.QUESTS.find(q=>q.id==='wayfarer'));}),'quest completes after all three far towns');
+// ---------- (3) consequences ----------
+ok(await ev(()=>{DBG.newGame();G.flags.tutFight=1;G.sq=G.sq||{};G.sq.lyra={s:2,n:0};DBG.setScene('map');DBG.UI.length=0;startBattle(['slime'],0);return EMBER.reignCost===20&&DBG.B.tips.some(t=>/Codex/.test(JSON.stringify(t.lines)));}),'finishing Lyra\'s quest changes how she fights (Reignite 20) and says so');
+ok(await ev(()=>{DBG.newGame();startBattle(['slime'],0);return EMBER.reignCost===25;}),'perks only apply when the quest is done');
+await ev(()=>{DBG.newGame();G.flags.tutFight=1;G.sq={mira:{s:2,n:0}};G.flags.varraT=1;DBG.setScene('map');DBG.UI.length=0;DBG.enterMap('town',10,9,'down');innTalk();});await w(300);
+ok(await ev(()=>JSON.stringify(DBG.UI).includes('shrine hymn')),'resting after Mira\'s quest: the party reacts');await shot('261_party_reacts.png');
+ok(await ev(()=>{DBG.UI.length=0;innTalk();return JSON.stringify(DBG.UI).includes('shadowing us');}),'trusting Varra is remembered around the fire');
+ok(await ev(()=>{G.flags.ending='free';const a=epi().find(s=>s.s==='mira').L.join(' ');G.sq={};const b2=epi().find(s=>s.s==='mira').L.join(' ');return a.includes('hums the shrine hymn')&&!b2.includes('hums');}),'personal quests add to that hero\'s epilogue');
 // @@END
 ok(errs.length===0,'no page errors ('+errs.slice(0,3).join(' | ')+')');console.log(errs.length?'ERRORS '+errs.join(' | '):'ALL OK');await b.close();process.exit(errs.length?1:0);})();

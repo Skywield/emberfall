@@ -302,7 +302,7 @@ function drawShop(u){const STOCK=SHOP.stock;X.fillStyle='#0006';X.fillRect(0,0,W
  const k=STOCK[u.i],e=EQ[k];let d=ITEMS[k]?ITEMS[k].d:([e.atk&&'ATK+'+e.atk,e.mag&&'MAG+'+e.mag,e.def&&'DEF+'+e.def,e.mdef&&'MDEF+'+e.mdef].filter(Boolean).join(' ')+'  ('+(e.who?HERO_DEF[e.who].name:'Anyone')+')');
  win(4,160,W-8,24);txt(d,12,167,'#cde',7);txt('A: Buy   B: Leave',12,192,'#fff',7);}
 function openInn(){choice('Marla: A warm bed and a hot meal for 20G. Stay the night?',['Stay','Leave'],i=>{if(i)return dialog(['Marla: Safe travels, then!']);
- if(G.gold<20)return dialog(['Marla: Oh dear, you\'re a bit short.']);G.gold-=20;transition(()=>{G.party.forEach(m=>{const s=st(m);m.hp=s.hp;m.mp=s.mp;});sfx('heal');save();dialog(['Your party feels refreshed! (HP/MP restored, game saved.)']);});});}
+ if(G.gold<20)return dialog(['Marla: Oh dear, you\'re a bit short.']);G.gold-=20;transition(()=>{G.party.forEach(m=>{const s=st(m);m.hp=s.hp;m.mp=s.mp;});sfx('heal');save();dialog(['Your party feels refreshed! (HP/MP restored, game saved.)'],()=>window.innTalk&&innTalk());});});}
 
 // ---------- field ----------
 let F={mv:0,fx:0,fy:0,banner:0,npcs:[],anim:0};
