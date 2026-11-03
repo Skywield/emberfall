@@ -91,8 +91,13 @@ const _fspr=fspr;fspr=function(c,x,y){_fspr(c,x,y);if(scene!=='map'||!G||!early(
  const ph=(T%nextFl);if(ph<0.6){const a=Math.sin(ph/0.6*Math.PI);X.globalAlpha=a*0.8;X.fillStyle=ph<0.3?'#ffb040':'#a0e0ff';X.beginPath();X.arc(x+6,y+4,3+a*2,0,7);X.fill();
   for(let i=0;i<4;i++){X.fillRect(x+4+Math.sin(T*9+i)*5,y+6-i*3-ph*10,1,1);}X.globalAlpha=1;
   if(!TOAST||TOAST.t<=0){TOAST={s:CHILLS[Math.floor(T/nextFl)%CHILLS.length],t:2.4};}}};
-const _dfS=drawField;drawField=function(){_dfS();if(TOAST&&TOAST.t>0&&!UI.length){TOAST.t-=1/60;X.globalAlpha=Math.min(1,TOAST.t);X.fillStyle='#000a';X.fillRect(0,H-26,W,12);txt(TOAST.s,W/2,H-24,'#bfe6ff',6,'center');X.globalAlpha=1;}
+const _dfS=drawField;drawField=function(){_dfS();if(TOAST&&TOAST.t>0&&!UI.length){TOAST.t-=1/60;X.globalAlpha=Math.min(1,TOAST.t);drawToastBar(TOAST);X.globalAlpha=1;}
  if(G&&G.flags.clear&&G.map==='town')drawEndingTown();};
+// walking-flavour toast: rendered once into a device-resolution canvas, then blitted in screen space at whole device
+// pixels with the transform reset, so it can't shimmer while the camera pans (no sub-pixel text / shadow offsets).
+function drawToastBar(t){if(!t.c||t.cs!==t.s){const c=document.createElement('canvas');c.width=W*SC;c.height=12*SC;const g=c.getContext('2d');g.fillStyle='#000a';g.fillRect(0,0,c.width,c.height);
+  g.font=`bold ${6*SC}px "Courier New",monospace`;g.textAlign='center';g.textBaseline='top';const x=Math.round(c.width/2);g.fillStyle='#000';g.fillText(t.s,x+2,2*SC+2);g.fillStyle='#bfe6ff';g.fillText(t.s,x,2*SC);t.c=c;t.cs=t.s;}
+ X.save();X.setTransform(1,0,0,1,0,0);X.imageSmoothingEnabled=false;X.drawImage(t.c,0,Math.round((H-26)*SC));X.restore();}
 // --- endings: concrete differences in the towns after the credits ---
 function drawEndingTown(){const cx=Math.max(0,Math.min(G.x*16+8-W/2,MAPS.town.w*16-W)),cy=Math.max(0,Math.min(G.y*16+8-H/2,MAPS.town.h*16-H));const keep=G.flags.ending==='keeper';
  if(keep){for(let i=0;i<10;i++){const x=10*16-cx+((i*7)%32),y=6*16-cy+28-((T*20+i*9)%30);X.globalAlpha=0.6;X.fillStyle=i%2?'#ffb040':'#ff6020';X.fillRect(x,y,2,3);}X.globalAlpha=1;}

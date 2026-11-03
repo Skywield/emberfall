@@ -35,6 +35,14 @@ for(const cv of ['field','cave','forge','glacier','sunken','twilight','throne','
 ok(await ev(()=>DBG.scene==='battle'&&BDRAW(DBG.B.cave)===true),'battle draws the painted backdrop');
 await pair('skymap',()=>{DBG.newGame();G.sky=newSky();G.sky.x=22*16;G.sky.y=24*16;DBG.UI.length=0;DBG.setScene('skymap');});
 ok(await ev(()=>SKYSEA(0,0,0)===true),'sky map draws the painted cloud sea');
+n=244;
+// follow-up: soft ground edges, readable dark dungeons, repainted heart backdrop
+ok(await ev(()=>{DBG.setStage('town');EDGE_C.clear();drawField();return EDGE_C.size>0&&typeof DARKFX==='function';}),'soft blended edges drawn between different ground types');
+ok(await ev(()=>{DBG.setStage('town');const r=MAPS.town.rows;let g=null;for(let y=0;y<r.length&&!g;y++)for(let x=0;x<r[y].length;x++)if(r[y][x]===','&&!npcAt(x,y)){g=[x,y];break;}return blocked(0,0)===true&&g&&!blocked(g[0],g[1]);}),'edges are visual only: collision unchanged');
+for(const[nm,m,x,y]of [['town','town',10,9],['world','world',6,4],['saltmere','ex_saltmere',10,8],['cave','cave',11,12],['citadel','citadel',12,8],['heartspire','heartspire',12,10],['obs','ex_obs',12,7]]){await ev(eval(map(m,x,y)));await w(350);await p.screenshot({path:`shots/${n++}_v2_${nm}.png`});}
+await ev(()=>{DBG.newGame();DBG.startBattle(['slime'],'heart',0);DBG.B.intro=0;DBG.B.swirl=0;});await w(400);await p.screenshot({path:`shots/${n++}_v2_battle_heart.png`});
+ok(await ev(()=>{DBG.setStage('town');DBG.UI.length=0;const t={s:"Kael's breath frosts — just his.",t:2};drawToastBar(t);const c1=t.c;G.x+=1;drawToastBar(t);return c1===t.c&&c1.width===W*SC;}),'walking toast is cached at device resolution and blitted in screen space (no shimmer)');
+await ev(()=>{DBG.setStage('town');DBG.UI.length=0;TOAST={s:"Kael's breath frosts — just his.",t:2.4};});await w(300);await p.screenshot({path:`shots/${n++}_v2_toast_phone.png`});
 // performance: 300 field frames with the painted atlas
 const ms=await ev(()=>{DBG.setStage('town');const t0=performance.now();for(let i=0;i<300;i++)drawField();return (performance.now()-t0)/300;});
 ok(ms<8,'painted field frame cost '+ms.toFixed(2)+'ms (<8ms)');

@@ -337,7 +337,7 @@ function drawField(){const M=MAPS[G.map],[cx,cy,ppx,ppy]=camera();X.fillStyle='#
  XFENTS.forEach(f=>f(ents,cx,cy));
  ents.sort((a,b)=>a.y-b.y).forEach(e=>e.dr());if(window.XFIELD)XFIELD(cx,cy);
  if(G.map==='town'){const fx=10*16-cx,fy=6*16-cy;for(let i=0;i<4;i++){const p=(T*1.5+i/4)%1;X.fillStyle='#bfe0ff';X.fillRect(fx+14+Math.sin(i*2)*6*p,fy+12-Math.sin(p*Math.PI)*10,2,2);}}
- if(M.dark){const g=X.createRadialGradient(ppx-cx+8,ppy-cy+8,24,ppx-cx+8,ppy-cy+8,140);g.addColorStop(0,'rgba(0,0,10,0)');g.addColorStop(1,'rgba(0,0,10,0.85)');X.fillStyle=g;X.fillRect(0,0,W,H);}
+ if(M.dark){if(window.DARKFX)DARKFX(ppx-cx+8,ppy-cy+8);else{const g=X.createRadialGradient(ppx-cx+8,ppy-cy+8,24,ppx-cx+8,ppy-cy+8,140);g.addColorStop(0,'rgba(0,0,10,0)');g.addColorStop(1,'rgba(0,0,10,0.85)');X.fillStyle=g;X.fillRect(0,0,W,H);}}
  if(F.banner>0){F.banner-=1/60;X.globalAlpha=Math.min(1,F.banner);win(W/2-70,8,140,20);txt(M.name,W/2,14,'#fff',8,'center');X.globalAlpha=1;}
  if(isTouch&&!UI.length){txt('MENU: party',W-4,H-10,'#fff8',6,'right');}}
 
