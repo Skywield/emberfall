@@ -1,0 +1,1004 @@
+{
+ "tiles": [
+  {
+   "k": "0",
+   "src": "procedural",
+   "maps": [
+    "ex_crypt"
+   ]
+  },
+  {
+   "k": "1",
+   "src": "procedural",
+   "maps": [
+    "ex_grotto"
+   ]
+  },
+  {
+   "k": "2",
+   "src": "procedural",
+   "maps": [
+    "ex_grotto"
+   ]
+  },
+  {
+   "k": "3",
+   "src": "procedural",
+   "maps": [
+    "ex_grotto"
+   ]
+  },
+  {
+   "k": "4",
+   "src": "procedural",
+   "maps": []
+  },
+  {
+   "k": "5",
+   "src": "procedural",
+   "maps": [
+    "ex_grotto",
+    "ex_vault",
+    "ex_crypt",
+    "ex_obs"
+   ]
+  },
+  {
+   "k": "6",
+   "src": "procedural",
+   "maps": [
+    "ex_vault"
+   ]
+  },
+  {
+   "k": "7",
+   "src": "procedural",
+   "maps": []
+  },
+  {
+   "k": "8",
+   "src": "procedural",
+   "maps": [
+    "ex_vault"
+   ]
+  },
+  {
+   "k": "9",
+   "src": "procedural",
+   "maps": [
+    "ex_vault"
+   ]
+  },
+  {
+   "k": ".",
+   "src": "procedural",
+   "maps": [
+    "town",
+    "world",
+    "harbor",
+    "ex_valor",
+    "ex_lantern"
+   ]
+  },
+  {
+   "k": "f",
+   "src": "procedural",
+   "maps": [
+    "town",
+    "world",
+    "harbor",
+    "ex_valor",
+    "ex_lantern"
+   ]
+  },
+  {
+   "k": ",",
+   "src": "procedural",
+   "maps": [
+    "town",
+    "world",
+    "harbor",
+    "ashmarch",
+    "cinderholt",
+    "ex_saltmere",
+    "ex_valor",
+    "ex_lantern"
+   ]
+  },
+  {
+   "k": "T",
+   "src": "procedural",
+   "maps": [
+    "town",
+    "world",
+    "harbor",
+    "ex_saltmere",
+    "ex_valor",
+    "ex_lantern"
+   ]
+  },
+  {
+   "k": "~",
+   "src": "procedural",
+   "maps": [
+    "town",
+    "world",
+    "ex_saltmere",
+    "ex_lantern"
+   ]
+  },
+  {
+   "k": "B",
+   "src": "procedural",
+   "maps": [
+    "world",
+    "harbor"
+   ]
+  },
+  {
+   "k": "m",
+   "src": "procedural",
+   "maps": [
+    "world"
+   ]
+  },
+  {
+   "k": "R",
+   "src": "procedural",
+   "maps": [
+    "town",
+    "harbor",
+    "cinderholt",
+    "lastlight",
+    "hearth",
+    "ex_saltmere",
+    "ex_valor",
+    "ex_lantern"
+   ]
+  },
+  {
+   "k": "W",
+   "src": "procedural",
+   "maps": [
+    "town",
+    "harbor",
+    "cinderholt",
+    "hollowfrost",
+    "reedhaven",
+    "duskhollow",
+    "lastlight",
+    "hearth",
+    "ex_saltmere",
+    "ex_valor",
+    "ex_lantern"
+   ]
+  },
+  {
+   "k": "D",
+   "src": "procedural",
+   "maps": [
+    "town",
+    "harbor",
+    "cinderholt",
+    "hollowfrost",
+    "reedhaven",
+    "duskhollow",
+    "lastlight",
+    "hearth",
+    "ex_saltmere",
+    "ex_valor",
+    "ex_lantern"
+   ]
+  },
+  {
+   "k": "F",
+   "src": "procedural",
+   "maps": [
+    "town"
+   ]
+  },
+  {
+   "k": "V",
+   "src": "procedural",
+   "maps": [
+    "world",
+    "ashmarch",
+    "tundra",
+    "mirewood",
+    "gloam",
+    "causeway"
+   ]
+  },
+  {
+   "k": "O",
+   "src": "procedural",
+   "maps": [
+    "world",
+    "cave",
+    "ashmarch",
+    "forge",
+    "tundra",
+    "spire",
+    "mirewood",
+    "sanctum",
+    "gloam",
+    "bastion",
+    "causeway",
+    "citadel",
+    "heartspire",
+    "sq_grotto",
+    "sq_rift",
+    "ex_saltmere",
+    "ex_valor",
+    "ex_lantern",
+    "ex_grotto",
+    "ex_vault",
+    "ex_crypt",
+    "ex_obs"
+   ]
+  },
+  {
+   "k": ":",
+   "src": "procedural",
+   "maps": [
+    "cave"
+   ]
+  },
+  {
+   "k": "X",
+   "src": "procedural",
+   "maps": [
+    "cave"
+   ]
+  },
+  {
+   "k": "c",
+   "src": "procedural",
+   "maps": [
+    "cave",
+    "forge",
+    "spire",
+    "sanctum",
+    "bastion",
+    "citadel",
+    "stair",
+    "heartspire",
+    "sq_grotto",
+    "ex_grotto",
+    "ex_vault",
+    "ex_crypt",
+    "ex_obs"
+   ]
+  },
+  {
+   "k": "o",
+   "src": "procedural",
+   "maps": []
+  },
+  {
+   "k": "S",
+   "src": "procedural",
+   "maps": [
+    "ex_valor"
+   ]
+  },
+  {
+   "k": "q",
+   "src": "procedural",
+   "maps": [
+    "harbor"
+   ]
+  },
+  {
+   "k": "k",
+   "src": "procedural",
+   "maps": [
+    "harbor",
+    "gloam",
+    "bastion"
+   ]
+  },
+  {
+   "k": "H",
+   "src": "procedural",
+   "maps": [
+    "ashmarch",
+    "tundra",
+    "mirewood",
+    "gloam",
+    "causeway"
+   ]
+  },
+  {
+   "k": "a",
+   "src": "procedural",
+   "maps": [
+    "ashmarch",
+    "cinderholt"
+   ]
+  },
+  {
+   "k": "r",
+   "src": "procedural",
+   "maps": [
+    "ashmarch",
+    "cinderholt"
+   ]
+  },
+  {
+   "k": "g",
+   "src": "procedural",
+   "maps": [
+    "ashmarch",
+    "cinderholt"
+   ]
+  },
+  {
+   "k": "L",
+   "src": "procedural",
+   "maps": [
+    "ashmarch",
+    "cinderholt",
+    "forge"
+   ]
+  },
+  {
+   "k": "b",
+   "src": "procedural",
+   "maps": [
+    "ashmarch",
+    "forge"
+   ]
+  },
+  {
+   "k": "Z",
+   "src": "procedural",
+   "maps": [
+    "forge",
+    "sq_grotto"
+   ]
+  },
+  {
+   "k": ";",
+   "src": "procedural",
+   "maps": [
+    "forge",
+    "sq_grotto"
+   ]
+  },
+  {
+   "k": "s",
+   "src": "procedural",
+   "maps": [
+    "tundra",
+    "hollowfrost"
+   ]
+  },
+  {
+   "k": "j",
+   "src": "procedural",
+   "maps": [
+    "tundra",
+    "hollowfrost"
+   ]
+  },
+  {
+   "k": "P",
+   "src": "procedural",
+   "maps": [
+    "tundra",
+    "hollowfrost"
+   ]
+  },
+  {
+   "k": "I",
+   "src": "procedural",
+   "maps": [
+    "tundra"
+   ]
+  },
+  {
+   "k": "K",
+   "src": "procedural",
+   "maps": [
+    "tundra",
+    "spire"
+   ]
+  },
+  {
+   "k": "n",
+   "src": "procedural",
+   "maps": [
+    "tundra",
+    "spire"
+   ]
+  },
+  {
+   "k": "U",
+   "src": "procedural",
+   "maps": [
+    "hollowfrost"
+   ]
+  },
+  {
+   "k": "Y",
+   "src": "procedural",
+   "maps": [
+    "spire"
+   ]
+  },
+  {
+   "k": "e",
+   "src": "procedural",
+   "maps": [
+    "spire"
+   ]
+  },
+  {
+   "k": "h",
+   "src": "procedural",
+   "maps": [
+    "mirewood",
+    "reedhaven"
+   ]
+  },
+  {
+   "k": "p",
+   "src": "procedural",
+   "maps": [
+    "mirewood",
+    "reedhaven"
+   ]
+  },
+  {
+   "k": "t",
+   "src": "procedural",
+   "maps": [
+    "mirewood",
+    "reedhaven"
+   ]
+  },
+  {
+   "k": "i",
+   "src": "procedural",
+   "maps": [
+    "mirewood"
+   ]
+  },
+  {
+   "k": "l",
+   "src": "procedural",
+   "maps": [
+    "mirewood",
+    "sanctum"
+   ]
+  },
+  {
+   "k": "y",
+   "src": "procedural",
+   "maps": [
+    "mirewood",
+    "sanctum"
+   ]
+  },
+  {
+   "k": "u",
+   "src": "procedural",
+   "maps": [
+    "reedhaven"
+   ]
+  },
+  {
+   "k": "z",
+   "src": "procedural",
+   "maps": [
+    "sanctum"
+   ]
+  },
+  {
+   "k": "x",
+   "src": "procedural",
+   "maps": [
+    "sanctum"
+   ]
+  },
+  {
+   "k": "d",
+   "src": "procedural",
+   "maps": [
+    "gloam",
+    "duskhollow"
+   ]
+  },
+  {
+   "k": "w",
+   "src": "procedural",
+   "maps": [
+    "gloam",
+    "duskhollow"
+   ]
+  },
+  {
+   "k": "A",
+   "src": "procedural",
+   "maps": [
+    "gloam",
+    "duskhollow"
+   ]
+  },
+  {
+   "k": "G",
+   "src": "procedural",
+   "maps": [
+    "gloam"
+   ]
+  },
+  {
+   "k": "v",
+   "src": "procedural",
+   "maps": [
+    "gloam",
+    "bastion"
+   ]
+  },
+  {
+   "k": "C",
+   "src": "procedural",
+   "maps": [
+    "duskhollow"
+   ]
+  },
+  {
+   "k": "E",
+   "src": "procedural",
+   "maps": [
+    "bastion"
+   ]
+  },
+  {
+   "k": "J",
+   "src": "procedural",
+   "maps": [
+    "bastion"
+   ]
+  },
+  {
+   "k": "M",
+   "src": "procedural",
+   "maps": [
+    "causeway",
+    "lastlight",
+    "hearth"
+   ]
+  },
+  {
+   "k": "N",
+   "src": "procedural",
+   "maps": [
+    "causeway",
+    "lastlight",
+    "hearth"
+   ]
+  },
+  {
+   "k": "Q",
+   "src": "procedural",
+   "maps": [
+    "causeway",
+    "lastlight",
+    "hearth"
+   ]
+  },
+  {
+   "k": "#",
+   "src": "procedural",
+   "maps": [
+    "causeway",
+    "citadel",
+    "stair",
+    "heartspire"
+   ]
+  },
+  {
+   "k": "=",
+   "src": "procedural",
+   "maps": [
+    "causeway",
+    "citadel",
+    "heartspire"
+   ]
+  },
+  {
+   "k": "%",
+   "src": "procedural",
+   "maps": [
+    "citadel",
+    "heartspire",
+    "sq_rift"
+   ]
+  },
+  {
+   "k": "+",
+   "src": "procedural",
+   "maps": [
+    "citadel",
+    "heartspire",
+    "sq_rift"
+   ]
+  },
+  {
+   "k": "^",
+   "src": "procedural",
+   "maps": [
+    "stair"
+   ]
+  },
+  {
+   "k": "*",
+   "src": "procedural",
+   "maps": [
+    "stair",
+    "hearth",
+    "heartspire"
+   ]
+  },
+  {
+   "k": "<",
+   "src": "procedural",
+   "maps": [
+    "ex_saltmere"
+   ]
+  },
+  {
+   "k": ">",
+   "src": "procedural",
+   "maps": [
+    "ex_saltmere"
+   ]
+  },
+  {
+   "k": "(",
+   "src": "procedural",
+   "maps": [
+    "ex_valor"
+   ]
+  },
+  {
+   "k": "!",
+   "src": "procedural",
+   "maps": [
+    "ex_crypt"
+   ]
+  },
+  {
+   "k": "$",
+   "src": "procedural",
+   "maps": [
+    "ex_crypt"
+   ]
+  },
+  {
+   "k": "&",
+   "src": "procedural",
+   "maps": []
+  },
+  {
+   "k": "?",
+   "src": "procedural",
+   "maps": [
+    "ex_obs"
+   ]
+  },
+  {
+   "k": "|",
+   "src": "procedural",
+   "maps": [
+    "ex_obs"
+   ]
+  },
+  {
+   "k": "@",
+   "src": "procedural",
+   "maps": [
+    "ex_obs"
+   ]
+  }
+ ],
+ "maps": [
+  {
+   "k": "town",
+   "name": "Thornwick Village",
+   "w": 20,
+   "h": 16,
+   "painted": 0,
+   "total": 9
+  },
+  {
+   "k": "world",
+   "name": "Ashen Vale",
+   "w": 24,
+   "h": 14,
+   "painted": 0,
+   "total": 9
+  },
+  {
+   "k": "cave",
+   "name": "Hollowdeep Cavern",
+   "w": 24,
+   "h": 16,
+   "painted": 0,
+   "total": 4
+  },
+  {
+   "k": "harbor",
+   "name": "Galewright Point",
+   "w": 20,
+   "h": 14,
+   "painted": 0,
+   "total": 10
+  },
+  {
+   "k": "ashmarch",
+   "name": "Ashmarch Wastes",
+   "w": 24,
+   "h": 11,
+   "painted": 0,
+   "total": 9
+  },
+  {
+   "k": "cinderholt",
+   "name": "Cinderholt",
+   "w": 20,
+   "h": 13,
+   "painted": 0,
+   "total": 8
+  },
+  {
+   "k": "forge",
+   "name": "The Ember Forge",
+   "w": 24,
+   "h": 15,
+   "painted": 0,
+   "total": 6
+  },
+  {
+   "k": "tundra",
+   "name": "Galeshear Tundra",
+   "w": 24,
+   "h": 11,
+   "painted": 0,
+   "total": 9
+  },
+  {
+   "k": "hollowfrost",
+   "name": "Hollowfrost",
+   "w": 20,
+   "h": 12,
+   "painted": 0,
+   "total": 6
+  },
+  {
+   "k": "spire",
+   "name": "Stormglass Spire",
+   "w": 24,
+   "h": 15,
+   "painted": 0,
+   "total": 6
+  },
+  {
+   "k": "mirewood",
+   "name": "The Mirewood",
+   "w": 24,
+   "h": 11,
+   "painted": 0,
+   "total": 9
+  },
+  {
+   "k": "reedhaven",
+   "name": "Reedhaven",
+   "w": 20,
+   "h": 12,
+   "painted": 0,
+   "total": 6
+  },
+  {
+   "k": "sanctum",
+   "name": "The Drowned Sanctum",
+   "w": 24,
+   "h": 15,
+   "painted": 0,
+   "total": 6
+  },
+  {
+   "k": "gloam",
+   "name": "The Ashen Gloam",
+   "w": 24,
+   "h": 11,
+   "painted": 0,
+   "total": 9
+  },
+  {
+   "k": "duskhollow",
+   "name": "Duskhollow",
+   "w": 20,
+   "h": 12,
+   "painted": 0,
+   "total": 6
+  },
+  {
+   "k": "bastion",
+   "name": "The Eclipse Bastion",
+   "w": 24,
+   "h": 15,
+   "painted": 0,
+   "total": 6
+  },
+  {
+   "k": "causeway",
+   "name": "The Shattered Causeway",
+   "w": 24,
+   "h": 11,
+   "painted": 0,
+   "total": 8
+  },
+  {
+   "k": "lastlight",
+   "name": "Lastlight Camp",
+   "w": 20,
+   "h": 12,
+   "painted": 0,
+   "total": 6
+  },
+  {
+   "k": "citadel",
+   "name": "The Hollow Citadel",
+   "w": 24,
+   "h": 15,
+   "painted": 0,
+   "total": 6
+  },
+  {
+   "k": "stair",
+   "name": "The Stair of Light",
+   "w": 24,
+   "h": 16,
+   "painted": 0,
+   "total": 4
+  },
+  {
+   "k": "hearth",
+   "name": "The Founders' Hearth",
+   "w": 20,
+   "h": 12,
+   "painted": 0,
+   "total": 7
+  },
+  {
+   "k": "heartspire",
+   "name": "The Heart Spire",
+   "w": 24,
+   "h": 16,
+   "painted": 0,
+   "total": 7
+  },
+  {
+   "k": "sq_grotto",
+   "name": "Emberdeep Grotto",
+   "w": 24,
+   "h": 14,
+   "painted": 0,
+   "total": 4
+  },
+  {
+   "k": "sq_rift",
+   "name": "The Hollow Rift",
+   "w": 20,
+   "h": 9,
+   "painted": 0,
+   "total": 3
+  },
+  {
+   "k": "ex_saltmere",
+   "name": "Saltmere",
+   "w": 20,
+   "h": 16,
+   "painted": 0,
+   "total": 9
+  },
+  {
+   "k": "ex_valor",
+   "name": "Valorgate",
+   "w": 20,
+   "h": 16,
+   "painted": 0,
+   "total": 10
+  },
+  {
+   "k": "ex_lantern",
+   "name": "Lanternhaven",
+   "w": 20,
+   "h": 16,
+   "painted": 0,
+   "total": 9
+  },
+  {
+   "k": "ex_grotto",
+   "name": "Tidewater Grotto",
+   "w": 24,
+   "h": 14,
+   "painted": 0,
+   "total": 6
+  },
+  {
+   "k": "ex_vault",
+   "name": "Clockwork Vault",
+   "w": 24,
+   "h": 14,
+   "painted": 0,
+   "total": 6
+  },
+  {
+   "k": "ex_crypt",
+   "name": "Lantern Catacombs",
+   "w": 24,
+   "h": 14,
+   "painted": 0,
+   "total": 6
+  },
+  {
+   "k": "ex_obs",
+   "name": "Starfall Observatory",
+   "w": 24,
+   "h": 14,
+   "painted": 0,
+   "total": 6
+  }
+ ],
+ "backdrops": [
+  {
+   "k": "field",
+   "src": "procedural"
+  },
+  {
+   "k": "1",
+   "src": "procedural"
+  },
+  {
+   "k": "ash",
+   "src": "procedural"
+  },
+  {
+   "k": "forge",
+   "src": "procedural"
+  },
+  {
+   "k": "snow",
+   "src": "procedural"
+  },
+  {
+   "k": "glacier",
+   "src": "procedural"
+  },
+  {
+   "k": "jungle",
+   "src": "procedural"
+  },
+  {
+   "k": "sunken",
+   "src": "procedural"
+  },
+  {
+   "k": "twilight",
+   "src": "procedural"
+  },
+  {
+   "k": "throne",
+   "src": "procedural"
+  },
+  {
+   "k": "heart",
+   "src": "procedural"
+  }
+ ],
+ "sky": true
+}
