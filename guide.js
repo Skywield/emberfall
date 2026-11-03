@@ -59,7 +59,7 @@ drawBattle=function(){_drawB_tel();if(!B||B.swirl>0)return;B.en.forEach(u=>{if(!
 
 // ---------- (4) QoL: autosave + crash recovery, flavour-text throttle ----------
 // Autosave to its own key on every map change / battle win (>=15s apart) and when the tab is hidden or closed. Saves are
-// verified by reading them back. Continue / Load fall back to the autosave when it is newer than every slot.
+// verified by reading them back. Continue falls back to the autosave when there is no readable slot save (crash recovery).
 const AKEY='emberfall_autosave';let lastAuto=-99,lastAutoMap=null;
 function autosave(force){if(!G||!G.party||scene==='title'||scene==='battle'&&!force)return false;if(!force&&T-lastAuto<15&&G.map===lastAutoMap)return false;lastAuto=T;lastAutoMap=G.map;
  try{G._meta=typeof metaOf==='function'?metaOf(G):G._meta;G._ts=Date.now();const s=JSON.stringify(G);localStorage.setItem(AKEY,s);const ok=localStorage.getItem(AKEY)===s;if(ok)WART.autoT=2;return ok;}catch(e){return false;}}
@@ -68,7 +68,7 @@ const _enterMap_a=enterMap;enterMap=function(...a){_enterMap_a(...a);autosave();
 const _finishWin_a=finishWin;finishWin=function(){_finishWin_a();lastAuto=-99;setTimeout(()=>autosave(),0);};
 addEventListener('visibilitychange',()=>{if(document.hidden)autosave(true);});addEventListener('pagehide',()=>autosave(true));
 function autoNewer(){try{const a=JSON.parse(localStorage.getItem(AKEY)||'null');if(!a)return null;let best=0;for(let i=1;i<=3;i++){const s=JSON.parse(localStorage.getItem('emberfall_save_'+i)||'null');if(s&&s._ts)best=Math.max(best,s._ts);}return a._ts>best?a:null;}catch(e){return null;}}
-const _load_a=load;load=function(i){const r=_load_a(i);if(!i){const a=autoNewer();if(a&&(!G||!G._ts||a._ts>G._ts))G=a;}return r;};
+const _load_a=load;load=function(i){let r;try{r=_load_a(i);}catch(e){G=null;}if(!i&&(!G||!G.party)){try{const a=JSON.parse(localStorage.getItem(AKEY)||'null');if(a&&a.party)G=a;}catch(e){}}return r;};
 const _drawField_a=drawField;drawField=function(){_drawField_a();if(WART.autoT>0){WART.autoT-=1/60;X.globalAlpha=Math.min(1,WART.autoT);txt('✓ autosaved',W-6,H-12,'#9f9',6,'right');X.globalAlpha=1;}};
 // Ambient flavour lines (Kael's chills etc.): at most one per map visit and never within 90s of the last one.
 let flavLast=-999,flavMap=null;
@@ -81,11 +81,11 @@ window.AUTOSAVE={autosave,autoNewer,AKEY};
 // the Colosseum) and gives a short quest: set foot in the three far towns (each landing pays 150 G while it's active),
 // then come back for a Wayfarer's purse. As each far town becomes reachable a rumour appears in the flavour bar, and the
 // sky map marks unvisited open destinations with a gold "!" (and still-locked ones with a grey "?").
-QUESTS.push({id:'wayfarer',n:'Wayfarer\'s Rumours',town:'Thornwick',type:'Explore',giver:'Wayfarer Pell',
+const WQ=({id:'wayfarer',n:'Wayfarer\'s Rumours',town:'Thornwick',type:'Explore',giver:'Wayfarer Pell',
  d:'Pell wants proof the far towns exist: land at Saltmere, Valorgate and Lanternhaven by airship.',reward:'800 G, 2 Hearth Tonics',
  ready:()=>['ex_salt','ex_valor','ex_lant'].every(i=>EXS().seen[i]),prog:()=>{const s=EXS().seen;return 'Far towns: '+['ex_salt','ex_valor','ex_lant'].filter(i=>s[i]).length+'/3';},
  give:()=>{G.gold+=800;G.items.tonic=(G.items.tonic||0)+2;}});
-QBY.wayfarer=QUESTS[QUESTS.length-1];
+QBY.wayfarer=WQ;const _qKnown=qKnown;qKnown=function(){const L=_qKnown();return qst('wayfarer').s>0?[...L,WQ]:L;};
 QL.wayfarer={intro:['Wayfarer Pell: Mapmaker, at your service. The vale\'s small. The sky isn\'t.','Wayfarer Pell: Saltmere — fishing village, west. Old Tobin\'ll teach you to fish off the pier.','Wayfarer Pell: Valorgate — the Colosseum city. Four ranks, a champion called Vasska.','Wayfarer Pell: Lanternhaven — lanterns, ghosts, and the best Ember Triad players alive. Win their cards.','Wayfarer Pell: Under each of them sleeps an old dungeon — and a fourth, a glass dome among the stars.','Wayfarer Pell: You\'ll need a ship first. Prove those towns are real and I\'ll pay you for the trouble.'],
  turn:['Wayfarer Pell: All three! My map\'s not a liar after all.','Wayfarer Pell: Here — a wayfarer\'s purse. Spend it somewhere I haven\'t drawn yet.'],after:['Wayfarer Pell: Still looking for the edge of the sky. Tell me if you find it.']};
 const PELL={x:12,y:8,s:'pell',d:'down',act:()=>sqTalk('wayfarer')};

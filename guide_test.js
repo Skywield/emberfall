@@ -44,7 +44,7 @@ ok(await ev(()=>DBG.B.tips.some(t=>t.id==='stagger')),'first stagger explains it
 await ev(()=>{localStorage.removeItem(AUTOSAVE.AKEY);DBG.newGame();G.flags.tutFight=1;DBG.setScene('map');DBG.UI.length=0;enterMap('town',10,9,'down');});await w(200);
 ok(await ev(()=>{const a=JSON.parse(localStorage.getItem(AUTOSAVE.AKEY)||'null');return a&&a.map==='town'&&a._ts>0;}),'entering a map autosaves (verified read-back)');
 await w(100);await shot('258_autosave_phone.png');
-ok(await ev(()=>{G.gold=4321;AUTOSAVE.autosave(true);const keep=G;G=null;DBG.load();const r=G&&G.gold===4321;G=keep;return r;}),'Continue recovers the autosave when it is newer than every slot (crash recovery)');
+ok(await ev(()=>{G.gold=4321;AUTOSAVE.autosave(true);const keep=G,bk={};for(const k of ['emberfall_save','emberfall_save_1','emberfall_save_2','emberfall_save_3']){bk[k]=localStorage.getItem(k);localStorage.setItem(k,'{broken');}G=null;DBG.load();const r=G&&G.gold===4321;for(const k in bk)bk[k]===null?localStorage.removeItem(k):localStorage.setItem(k,bk[k]);G=keep;return r;}),'Continue recovers the autosave when the slot save is unreadable (crash recovery)');
 ok(await ev(()=>{const a=flavorOK(),b2=flavorOK();return b2===false;}),'ambient flavour text: at most one line per map visit / 90s');
 // ---------- (2) discoverability ----------
 ok(await ev(()=>{DBG.newGame();DBG.setStage('town');return NPCS.town.some(n=>n.s==='pell'&&n.x===12&&n.y===8)&&!SOLID.has(MAPS.town.rows[8][12])&&!(MAPS.town.doors||{})['12,8']&&!(MAPS.town.doors||{})['12,7'];}),'Wayfarer Pell stands in Thornwick on open ground (not a door/doorstep)');
@@ -55,7 +55,7 @@ ok(await ev(()=>SQ.qst('wayfarer').s===1),'Wayfarer\'s Rumours quest accepted (s
 ok(await ev(()=>{G.sky=newSky();G.flags.tyrant=1;G.flags['rum_ex_salt']=0;TOAST=null;enterMap('harbor',10,8,'down');return TOAST&&/Saltmere/.test(TOAST.s);}),'a rumour appears when Saltmere becomes reachable');
 await ev(()=>{DBG.UI.length=0;G.sky.x=6*16;G.sky.y=19*16;DBG.setScene('skymap');});await w(400);await shot('260_skymap_markers.png');
 ok(await ev(()=>{const g0=G.gold;const e=EX.EXPOI[0];skyInteract(e);return EX.EXPOI[0]&&G.gold===g0+150;}),'first landing at a far town pays the Wayfarer bonus');
-ok(await ev(()=>{const s=EXS().seen;s.ex_salt=s.ex_valor=s.ex_lant=1;return SQ.qReady(SQ.QUESTS.find(q=>q.id==='wayfarer'));}),'quest completes after all three far towns');
+ok(await ev(()=>{const s=EXS().seen;s.ex_salt=s.ex_valor=s.ex_lant=1;return SQ.qReady(QBY.wayfarer)&&qKnown().some(q=>q.id==='wayfarer');}),'quest completes after all three far towns');
 // ---------- (3) consequences ----------
 ok(await ev(()=>{DBG.newGame();G.flags.tutFight=1;G.sq=G.sq||{};G.sq.lyra={s:2,n:0};DBG.setScene('map');DBG.UI.length=0;startBattle(['slime'],0);return EMBER.reignCost===20&&DBG.B.tips.some(t=>/Codex/.test(JSON.stringify(t.lines)));}),'finishing Lyra\'s quest changes how she fights (Reignite 20) and says so');
 ok(await ev(()=>{DBG.newGame();startBattle(['slime'],0);return EMBER.reignCost===25;}),'perks only apply when the quest is done');
