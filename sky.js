@@ -181,10 +181,10 @@ function drawIsle(x,y,rx,ry,kind){X.fillStyle='#6a4a30';X.beginPath();X.moveTo(x
 function drawSkyMap(){const S=G.sky,a=S.altT,[cx,cy]=skyCam();
  const g=X.createLinearGradient(0,0,0,H);g.addColorStop(0,a>0.5?'#2856b0':'#4a88d8');g.addColorStop(1,a>0.5?'#90bcec':'#c4e0fa');X.fillStyle=g;X.fillRect(0,0,W,H);
  // drifting cloud sea far below (parallax)
- for(let i=0;i<26;i++){const wx=(i*131+T*6)%(SKYW*16),wy=(i*97)%(SKYH*16);const x=((wx-cx*0.6)%(W+80)+W+80)%(W+80)-40,y=((wy-cy*0.6)%(H+60)+H+60)%(H+60)-30;blob(x,y,10+i%4*4,'#ffffff',0.22);}
+ if(!(window.SKYSEA&&SKYSEA(cx,cy,a)))for(let i=0;i<26;i++){const wx=(i*131+T*6)%(SKYW*16),wy=(i*97)%(SKYH*16);const x=((wx-cx*0.6)%(W+80)+W+80)%(W+80)-40,y=((wy-cy*0.6)%(H+60)+H+60)%(H+60)-30;blob(x,y,10+i%4*4,'#ffffff',0.22);}
  const x0=Math.floor(cx/16),y0=Math.floor(cy/16);
  for(let y=y0-1;y<=y0+15;y++)for(let x=x0-1;x<=x0+17;x++){if(x<0||y<0||x>=SKYW||y>=SKYH)continue;const t=SKYT[y][x];if(t===' ')continue;const h=hsh(x,y),px_=x*16-cx+8+(h%7)-3,py_=y*16-cy+8+((h>>3)%7)-3;
-  if(t==='S'||t==='E'){blob(px_,py_,13+(h%5),t==='E'?'#1c1a2e':'#3a2c50',0.95);blob(px_-4,py_-4,7,'#5a4a78',0.6);if(Math.sin(T*2.3+h)>0.985){X.strokeStyle='#fff6a0';X.lineWidth=1.2;X.beginPath();X.moveTo(px_,py_-10);X.lineTo(px_+4,py_);X.lineTo(px_-2,py_+3);X.lineTo(px_+3,py_+12);X.stroke();}}
+  if(window.SKYCLOUD&&SKYCLOUD(t,px_,py_,h)){}else if(t==='S'||t==='E'){blob(px_,py_,13+(h%5),t==='E'?'#1c1a2e':'#3a2c50',0.95);blob(px_-4,py_-4,7,'#5a4a78',0.6);if(Math.sin(T*2.3+h)>0.985){X.strokeStyle='#fff6a0';X.lineWidth=1.2;X.beginPath();X.moveTo(px_,py_-10);X.lineTo(px_+4,py_);X.lineTo(px_-2,py_+3);X.lineTo(px_+3,py_+12);X.stroke();}}
   else if(t==='V'){blob(px_,py_,14+(h%4),'#f4f8ff',0.92);blob(px_+5,py_-5,8,'#ffffff',1);}}
  ISLES.forEach(([x,y,r])=>drawIsle(x*16-cx,y*16-cy,r,r*0.4));POI.forEach(p=>drawIsle(p.x*16+8-cx,p.y*16+8-cy,p.rx,p.ry,p.k));
  const np=nearPOI();if(np){const bx=np.x*16+8-cx,by=np.y*16-cy-26+Math.sin(T*5)*2;txt('▼',bx,by,'#ffe060',8,'center');}
