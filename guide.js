@@ -25,7 +25,7 @@ updBattle=function(dt){if(B&&B.tips&&B.tips.length){const t=B.tips[0];if(t.block
  if(B.ember>EMBER.overT)tip('over',['HEAT! Past the red line every action may burn the user.','Spend it on an Ember Art, or have Mira VENT HEAT to cool it into healing.']);
  if(B.pt.some(p=>p.chill))tip('chill',['CHILLED: the Hollow froze this hero\'s ATB (shown by ❄).','Lyra\'s Reignite or Mira\'s Vent Heat thaws them.']);};
 const _drawB_tip=drawBattle;
-drawBattle=function(){_drawB_tip();if(!B||!B.tips||!B.tips.length||B.swirl>0)return;const t=B.tips[0],h=14+t.lines.length*10,y=22;
+drawBattle=function(){_drawB_tip();if(!B||!B.tips||!B.tips.length||B.swirl>0)return;const t=B.tips[0],h=14+t.lines.length*10,y=t.block?22:136-h;
  X.globalAlpha=t.block?1:Math.min(1,t.t);win(8,y,W-16,h);t.lines.forEach((l,i)=>txt(l.s,14,y+5+i*10,l.h?'#ffd860':'#fff',6));if(t.block)txt('A ▶',W-14,y+h-10,'#9cf',6,'right');X.globalAlpha=1;};
 // ---------- early tutorial fight ----------
 // A few steps into Ashen Vale the party always meets two Mire Slimes (weak to fire). The gauge starts warm so one or two
@@ -36,3 +36,23 @@ function startTutorial(){startBattle(['slime','slime'],0);B.tut=1;B.ember=60;
  tip('ember',['EMBER GAUGE (bottom left) — the party\'s shared heat.','Fire hits and WEAKNESS hits make it climb. At 100, a ★ Ember Art unlocks.'],true);
  tip('weak',['Mire Slimes are WEAK to FIRE.','Choose Lyra > Magic > Ember. Weakness hits build Ember fastest.'],true);}
 window.GUIDE={tip,startTutorial};
+
+// ---------- (1) combat clarity: readable stagger ----------
+// While a boss winds up (intent badge), a BREAK bar under the badge fills with damage; 10% of its max HP breaks the wind-up.
+// Breaking it is now a moment: STAGGER! popup, shake, sparks, a message saying why, Ember +8, and the boss is left OPEN
+// (defence down until its next action) - so good play shortens long boss fights instead of just cancelling one attack.
+const TEL_HINT={heavy:'GUARD or BREAK',hollow:'VENT or BREAK',power:'BREAK IT',strike:'BREAK IT',open:'ATTACK NOW!'};
+function onStagger(e){addNum(e,'STAGGER!','#ffe060');B.shake=8;burst(e,['#ffe060','#ffffff','#ff8040'],26,60,1);sfx('lvl');
+ B.msg='STAGGER! Big hits broke '+e.n+'\'s wind-up.';B.lastStag=B.msg;e.atb=Math.min(e.atb||0,5);B.msgT=2.2;e.stagT=1.2;B.stagN=(B.stagN||0)+1;COMBAT.heat(8);
+ if(!e.open){e.open=1;e.def0=e.def;e.def=Math.round(e.def*EMBER.openDef);}
+ tip('stagger',['STAGGER: you dealt 10% of the boss\'s HP during its wind-up.','Its attack is cancelled and it is OPEN (defence down) until it acts again.']);}
+window.onStagger=onStagger;
+const _updB_tel=updBattle;
+updBattle=function(dt){_updB_tel(dt);if(!B||B.end)return;B.en.forEach(e=>{if(e.stagT)e.stagT=Math.max(0,e.stagT-dt);
+ if(e.boss&&e.tel&&e.telK&&e.telK!=='open')tip('telegraph',['WIND-UP! The coloured badge shows the boss\'s next move (red HEAVY, purple HOLLOW).','Deal 10% of its HP before it acts to STAGGER it - watch the BREAK bar.']);});};
+const _drawB_tel=drawBattle;
+drawBattle=function(){_drawB_tel();if(!B||B.swirl>0)return;B.en.forEach(u=>{if(!u.boss||u.hp<=0)return;const[x,y]=upos(u),px=x+30,py=y-24+Math.sin(T*4)*1.5,w=46;
+ const k=u.telK||(u.open?'open':null);if(!k)return;
+ if(u.tel&&k!=='open'){const f=Math.max(0,Math.min(1,(u.telHP-u.hp)/(u.mhp*0.1)));X.fillStyle='#000c';X.fillRect(px-1,py+11,w+2,5);X.fillStyle='#3a3020';X.fillRect(px,py+12,w,3);X.fillStyle=f>0.75?'#fff070':'#ffd040';X.fillRect(px,py+12,w*f,3);}
+ txt(TEL_HINT[k]||'',px+w/2,py+(u.tel&&k!=='open'?17:12),k==='open'?'#80ffa0':'#ffe8b0',6,'center');
+ if(u.stagT>0){X.globalAlpha=Math.min(1,u.stagT);txt('STAGGER!',x+52,y+10-(1.2-u.stagT)*10,'#ffe060',10,'center');X.globalAlpha=1;}});};

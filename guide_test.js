@@ -31,5 +31,14 @@ ok(await ev(()=>DBG.B.tips&&DBG.B.tips.length===2&&DBG.B.tips[0].block),'Ember t
 await w(1500);await shot('253_tutorial_ember_tip.png');const atb0=await ev(()=>DBG.B.pt[0].atb);await w(500);ok(await ev(a=>DBG.B.pt[0].atb===a,atb0),'battle pauses while a tutorial tip is up');
 await k('a');await w(200);await shot('254_tutorial_weak_tip.png');await k('a');await w(200);ok(await ev(()=>!DBG.B.tips.length),'tips dismissed with A');
 await ev(()=>COMBAT.heat(45));await w(200);ok(await ev(()=>DBG.B.tips.length&&DBG.B.tips[0].id==='full'),'Ember full -> tip explains the ★ Ember Art');await shot('255_tutorial_full_tip.png');await k('a');
+// ---------- (1) combat clarity ----------
+await ev(()=>{DBG.newGame();G.flags.tutFight=1;DBG.setScene('map');DBG.UI.length=0;DBG.startBattle(['boss'],true,true);DBG.B.intro=0;DBG.B.swirl=0;});await w(400);
+await ev(()=>{const e=DBG.B.en[0];e.atb=60;});await w(300);
+ok(await ev(()=>{const e=DBG.B.en[0];return !!e.tel&&!!e.telK;}),'boss winds up (intent badge + BREAK bar)');
+await ev(()=>{const t=DBG.B.tips||[];t.length=0;});const e0=await ev(()=>{const e=DBG.B.en[0];e.hp-=Math.ceil(e.mhp*0.06);return e.hp;});await w(200);
+await shot('256_boss_break_bar.png');
+await ev(()=>{const e=DBG.B.en[0];e.hp-=Math.ceil(e.mhp*0.06);});await w(250);
+ok(await ev(()=>{const B=DBG.B,e=B.en[0];return B.stagN===1&&e.open&&e.stagT>0&&/STAGGER/.test(B.lastStag)&&e.atb<45;}),'10% during the wind-up = STAGGER!: wind-up cancelled, ATB knocked back, boss OPEN, message says why');
+ok(await ev(()=>DBG.B.tips.some(t=>t.id==='stagger')),'first stagger explains itself');await w(150);await shot('257_boss_stagger.png');
 // @@END
 ok(errs.length===0,'no page errors ('+errs.slice(0,3).join(' | ')+')');console.log(errs.length?'ERRORS '+errs.join(' | '):'ALL OK');await b.close();process.exit(errs.length?1:0);})();
