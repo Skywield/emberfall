@@ -56,3 +56,22 @@ drawBattle=function(){_drawB_tel();if(!B||B.swirl>0)return;B.en.forEach(u=>{if(!
  if(u.tel&&k!=='open'){const f=Math.max(0,Math.min(1,(u.telHP-u.hp)/(u.mhp*0.1)));X.fillStyle='#000c';X.fillRect(px-1,py+11,w+2,5);X.fillStyle='#3a3020';X.fillRect(px,py+12,w,3);X.fillStyle=f>0.75?'#fff070':'#ffd040';X.fillRect(px,py+12,w*f,3);}
  txt(TEL_HINT[k]||'',px+w/2,py+(u.tel&&k!=='open'?17:12),k==='open'?'#80ffa0':'#ffe8b0',6,'center');
  if(u.stagT>0){X.globalAlpha=Math.min(1,u.stagT);txt('STAGGER!',x+52,y+10-(1.2-u.stagT)*10,'#ffe060',10,'center');X.globalAlpha=1;}});};
+
+// ---------- (4) QoL: autosave + crash recovery, flavour-text throttle ----------
+// Autosave to its own key on every map change / battle win (>=15s apart) and when the tab is hidden or closed. Saves are
+// verified by reading them back. Continue / Load fall back to the autosave when it is newer than every slot.
+const AKEY='emberfall_autosave';let lastAuto=-99,lastAutoMap=null;
+function autosave(force){if(!G||!G.party||scene==='title'||scene==='battle'&&!force)return false;if(!force&&T-lastAuto<15&&G.map===lastAutoMap)return false;lastAuto=T;lastAutoMap=G.map;
+ try{G._meta=typeof metaOf==='function'?metaOf(G):G._meta;G._ts=Date.now();const s=JSON.stringify(G);localStorage.setItem(AKEY,s);const ok=localStorage.getItem(AKEY)===s;if(ok)WART.autoT=2;return ok;}catch(e){return false;}}
+const _save_a=save;save=function(...a){if(G)G._ts=Date.now();return _save_a(...a);};
+const _enterMap_a=enterMap;enterMap=function(...a){_enterMap_a(...a);autosave();};
+const _finishWin_a=finishWin;finishWin=function(){_finishWin_a();lastAuto=-99;setTimeout(()=>autosave(),0);};
+addEventListener('visibilitychange',()=>{if(document.hidden)autosave(true);});addEventListener('pagehide',()=>autosave(true));
+function autoNewer(){try{const a=JSON.parse(localStorage.getItem(AKEY)||'null');if(!a)return null;let best=0;for(let i=1;i<=3;i++){const s=JSON.parse(localStorage.getItem('emberfall_save_'+i)||'null');if(s&&s._ts)best=Math.max(best,s._ts);}return a._ts>best?a:null;}catch(e){return null;}}
+const _load_a=load;load=function(i){const r=_load_a(i);if(!i){const a=autoNewer();if(a&&(!G||!G._ts||a._ts>G._ts))G=a;}return r;};
+const _drawField_a=drawField;drawField=function(){_drawField_a();if(WART.autoT>0){WART.autoT-=1/60;X.globalAlpha=Math.min(1,WART.autoT);txt('✓ autosaved',W-6,H-12,'#9f9',6,'right');X.globalAlpha=1;}};
+// Ambient flavour lines (Kael's chills etc.): at most one per map visit and never within 90s of the last one.
+let flavLast=-999,flavMap=null;
+window.flavorOK=function(){if(!G)return false;if(flavMap===G.map+'|'+(G._visit||0))return false;if(T-flavLast<90)return false;flavLast=T;flavMap=G.map+'|'+(G._visit||0);return true;};
+const _enterMap_f=enterMap;enterMap=function(...a){_enterMap_f(...a);if(G)G._visit=(G._visit||0)+1;};
+window.AUTOSAVE={autosave,autoNewer,AKEY};

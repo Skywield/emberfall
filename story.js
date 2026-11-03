@@ -90,7 +90,7 @@ let TOAST=null,nextFl=6;const CHILLS=['Kael shivers. It isn\'t the weather.','A 
 const _fspr=fspr;fspr=function(c,x,y){_fspr(c,x,y);if(scene!=='map'||!G||!early()||!SPR.kael)return;const s=SPR.kael;if(![s.down,s.up,s.right,s.left].some(a=>a&&a.includes(c)))return;
  const ph=(T%nextFl);if(ph<0.6){const a=Math.sin(ph/0.6*Math.PI);X.globalAlpha=a*0.8;X.fillStyle=ph<0.3?'#ffb040':'#a0e0ff';X.beginPath();X.arc(x+6,y+4,3+a*2,0,7);X.fill();
   for(let i=0;i<4;i++){X.fillRect(x+4+Math.sin(T*9+i)*5,y+6-i*3-ph*10,1,1);}X.globalAlpha=1;
-  if(!TOAST||TOAST.t<=0){TOAST={s:CHILLS[Math.floor(T/nextFl)%CHILLS.length],t:2.4};}}};
+  if((!TOAST||TOAST.t<=0)&&(!window.flavorOK||flavorOK())){TOAST={s:CHILLS[Math.floor(T/nextFl)%CHILLS.length],t:2.4};}}};
 const _dfS=drawField;drawField=function(){_dfS();if(TOAST&&TOAST.t>0&&!UI.length){TOAST.t-=1/60;X.globalAlpha=Math.min(1,TOAST.t);drawToastBar(TOAST);X.globalAlpha=1;}
  if(G&&G.flags.clear&&G.map==='town')drawEndingTown();};
 // walking-flavour toast: rendered once into a device-resolution canvas, then blitted in screen space at whole device
