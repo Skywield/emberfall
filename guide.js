@@ -75,3 +75,27 @@ let flavLast=-999,flavMap=null;
 window.flavorOK=function(){if(!G)return false;if(flavMap===G.map+'|'+(G._visit||0))return false;if(T-flavLast<90)return false;flavLast=T;flavMap=G.map+'|'+(G._visit||0);return true;};
 const _enterMap_f=enterMap;enterMap=function(...a){_enterMap_f(...a);if(G)G._visit=(G._visit||0)+1;};
 window.AUTOSAVE={autosave,autoNewer,AKEY};
+
+// ---------- (2) discoverability: Wayfarer Pell, rumours, sky-map markers ----------
+// Thornwick gets a travelling cartographer who points at everything optional (3 towns, 4 dungeons, fishing, Ember Triad,
+// the Colosseum) and gives a short quest: set foot in the three far towns (each landing pays 150 G while it's active),
+// then come back for a Wayfarer's purse. As each far town becomes reachable a rumour appears in the flavour bar, and the
+// sky map marks unvisited open destinations with a gold "!" (and still-locked ones with a grey "?").
+QUESTS.push({id:'wayfarer',n:'Wayfarer\'s Rumours',town:'Thornwick',type:'Explore',giver:'Wayfarer Pell',
+ d:'Pell wants proof the far towns exist: land at Saltmere, Valorgate and Lanternhaven by airship.',reward:'800 G, 2 Hearth Tonics',
+ ready:()=>['ex_salt','ex_valor','ex_lant'].every(i=>EXS().seen[i]),prog:()=>{const s=EXS().seen;return 'Far towns: '+['ex_salt','ex_valor','ex_lant'].filter(i=>s[i]).length+'/3';},
+ give:()=>{G.gold+=800;G.items.tonic=(G.items.tonic||0)+2;}});
+QBY.wayfarer=QUESTS[QUESTS.length-1];
+QL.wayfarer={intro:['Wayfarer Pell: Mapmaker, at your service. The vale\'s small. The sky isn\'t.','Wayfarer Pell: Saltmere — fishing village, west. Old Tobin\'ll teach you to fish off the pier.','Wayfarer Pell: Valorgate — the Colosseum city. Four ranks, a champion called Vasska.','Wayfarer Pell: Lanternhaven — lanterns, ghosts, and the best Ember Triad players alive. Win their cards.','Wayfarer Pell: Under each of them sleeps an old dungeon — and a fourth, a glass dome among the stars.','Wayfarer Pell: You\'ll need a ship first. Prove those towns are real and I\'ll pay you for the trouble.'],
+ turn:['Wayfarer Pell: All three! My map\'s not a liar after all.','Wayfarer Pell: Here — a wayfarer\'s purse. Spend it somewhere I haven\'t drawn yet.'],after:['Wayfarer Pell: Still looking for the edge of the sky. Tell me if you find it.']};
+const PELL={x:12,y:8,s:'pell',d:'down',act:()=>sqTalk('wayfarer')};
+(function(){const ds=Object.getOwnPropertyDescriptor(NPCS,'town');const base=ds?(ds.get||(()=>ds.value)):(()=>[]);
+ Object.defineProperty(NPCS,'town',{get:()=>{const L=base()||[];return L.some(n=>n.x===PELL.x&&n.y===PELL.y)?L:[...L,PELL];},enumerable:true,configurable:true});})();
+const _skyInt_d=skyInteract;skyInteract=function(p){const was=EXS().seen[p.id];const r=_skyInt_d(p);
+ if(!was&&EXS().seen[p.id]&&qst('wayfarer').s===1&&['ex_salt','ex_valor','ex_lant'].includes(p.id)){G.gold+=150;TOAST={s:'Pell\'s contact here pays you 150 G for the visit. (Wayfarer\'s Rumours)',t:4};}return r;};
+const RUMOUR={ex_salt:'Rumour: the squall over Saltmere has cleared. Fishing village, far west by airship.',ex_valor:'Rumour: Valorgate\'s harbour guns are down. The Colosseum is open!',
+ ex_lant:'Rumour: the lantern-smoke over Lanternhaven has lifted. Card sharps await.',ex_obs:'Rumour: a star-gate high in the dark has opened — the Starfall Observatory.'};
+const _enterMap_d=enterMap;enterMap=function(...a){_enterMap_d(...a);if(!G||!G.sky)return;for(const p of EXPOI)if(p.req()&&!EXS().seen[p.id]&&!G.flags['rum_'+p.id]){G.flags['rum_'+p.id]=1;TOAST={s:RUMOUR[p.id]||('Rumour: '+p.n+' is reachable.'),t:5};break;}};
+const _skyD=XSCN.skymap.d;XSCN.skymap.d=function(...a){_skyD.apply(this,a);const[cx,cy]=skyCam();
+ for(const p of EXPOI){if(EXS().seen[p.id])continue;const open=p.req(),x=p.x*16+8-cx,y=p.y*16-cy-18+Math.sin(T*4+p.x)*2;if(x<-10||y<-10||x>W+10||y>H+10)continue;
+  X.fillStyle='#000a';X.beginPath();X.arc(x,y,6,0,7);X.fill();txt(open?'!':'?',x,y-4,open?'#ffd040':'#9aa',9,'center');}};

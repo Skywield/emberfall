@@ -46,5 +46,15 @@ ok(await ev(()=>{const a=JSON.parse(localStorage.getItem(AUTOSAVE.AKEY)||'null')
 await w(100);await shot('258_autosave_phone.png');
 ok(await ev(()=>{G.gold=4321;AUTOSAVE.autosave(true);const keep=G;G=null;DBG.load();const r=G&&G.gold===4321;G=keep;return r;}),'Continue recovers the autosave when it is newer than every slot (crash recovery)');
 ok(await ev(()=>{const a=flavorOK(),b2=flavorOK();return b2===false;}),'ambient flavour text: at most one line per map visit / 90s');
+// ---------- (2) discoverability ----------
+ok(await ev(()=>{DBG.newGame();DBG.setStage('town');return NPCS.town.some(n=>n.s==='pell'&&n.x===12&&n.y===8)&&!SOLID.has(MAPS.town.rows[8][12])&&!(MAPS.town.doors||{})['12,8']&&!(MAPS.town.doors||{})['12,7'];}),'Wayfarer Pell stands in Thornwick on open ground (not a door/doorstep)');
+await ev(()=>{DBG.newGame();G.flags.tutFight=1;DBG.setScene('map');DBG.UI.length=0;DBG.enterMap('town',12,9,'up');});await w(300);await k('a');await w(300);
+ok(await ev(()=>DBG.UI.length&&JSON.stringify(DBG.UI[DBG.UI.length-1]).includes('Pell')),'talking to Pell lists the optional content');await shot('259_pell_hints.png');
+for(let i=0;i<10&&(await ev(()=>!DBG.UI.some(u=>u.k==='choice')));i++){await k('a');await w(120);}await k('a');await w(200);for(let i=0;i<4;i++){await k('a');await w(120);}
+ok(await ev(()=>SQ.qst('wayfarer').s===1),'Wayfarer\'s Rumours quest accepted (shows in the quest log)');
+ok(await ev(()=>{G.sky=newSky();G.flags.tyrant=1;G.flags['rum_ex_salt']=0;TOAST=null;enterMap('harbor',10,8,'down');return TOAST&&/Saltmere/.test(TOAST.s);}),'a rumour appears when Saltmere becomes reachable');
+await ev(()=>{DBG.UI.length=0;G.sky.x=6*16;G.sky.y=19*16;DBG.setScene('skymap');});await w(400);await shot('260_skymap_markers.png');
+ok(await ev(()=>{const g0=G.gold;const e=EX.EXPOI[0];skyInteract(e);return EX.EXPOI[0]&&G.gold===g0+150;}),'first landing at a far town pays the Wayfarer bonus');
+ok(await ev(()=>{const s=EXS().seen;s.ex_salt=s.ex_valor=s.ex_lant=1;return SQ.qReady(SQ.QUESTS.find(q=>q.id==='wayfarer'));}),'quest completes after all three far towns');
 // @@END
 ok(errs.length===0,'no page errors ('+errs.slice(0,3).join(' | ')+')');console.log(errs.length?'ERRORS '+errs.join(' | '):'ALL OK');await b.close();process.exit(errs.length?1:0);})();
