@@ -142,7 +142,8 @@ if __name__=='__main__':
     # sky map
     ISL={'isle_plain':('isles_a',0,0),'isle_trees':('isles_a',1,0),'isle_dock':('isles_a',2,0),'isle_wreck':('isles_a',0,1),'isle_ruin':('isles_a',1,1),'isle_hide':('isles_a',2,1),
          'isle_ash':('isles_a',0,2),'isle_frost':('isles_a',1,2),'isle_mire':('isles_a',2,2),'isle_veil':('isles_b',0,0),'isle_throne':('isles_b',1,0),'isle_storm':('isles_b',2,0),
-         'cloud_white':('isles_b',0,1),'cloud_storm':('isles_b',1,1),'cloud_wisp':('isles_b',2,1),'isle_rock':('isles_b',0,2),'isle_tree':('isles_b',1,2),'isle_light':('isles_b',2,2)}
+         'cloud_white':('isles_b',0,1),'cloud_storm':('isles_b',1,1),'cloud_wisp':('isles_b',2,1),'isle_rock':('isles_b',0,2),'isle_tree':('isles_b',1,2),'isle_light':('isles_b',2,2),
+         'isle_ex_salt':('isles_c',0,0),'isle_ex_valor':('isles_c',1,0),'isle_ex_lant':('isles_c',2,0),'isle_ex_obs':('isles_c',0,1)}
     for n,(s,c,r) in ISL.items():
         o=obj(s,c,r);s_=min(150/o.width,150/o.height);o=o.resize((round(o.width*s_),round(o.height*s_)),Image.LANCZOS).filter(ImageFilter.UnsharpMask(1,60,2));o.save(f'{O}/{n}.png',optimize=True)
     sea=src('sky_sea').resize((384,384),Image.LANCZOS);Image.fromarray(seamless(sea).clip(0,255).astype('uint8')).save(f'{O}/sky_sea.jpg',quality=86)

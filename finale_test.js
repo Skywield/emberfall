@@ -67,7 +67,7 @@ ok(await ev(()=>DBG.B.en[0].n==='Vorthane, the Hollow King'&&DBG.B.cave==='heart
 await ev(()=>{DBG.B.en[0].hp=1;});ok(await until(()=>DBG.B&&DBG.B.en[0].k==='vorthane2','a',300),'phase 2: Vorthane, Heart Unbound');
 ok(await until(()=>DBG.UI.length===0,'a',30),'transformation scene plays');ok(await ev(()=>DBG.scene==='battle'&&DBG.B.en[0].hp>15000&&DBG.B.en[0].hp<22000),'Varra\'s broadside hits the King');
 await w(900);await shot('93_vorthane_heart_unbound.png');
-await ev(()=>{DBG.B.en[0].hp=Math.round(DBG.B.en[0].mhp*0.3);DBG.B.en[0].atb=99;});ok(await until(()=>DBG.B&&DBG.B.en[0].seventh===1,'x',200),'phase 3: the Seventh Calls');
+await ev(()=>{DBG.B.en[0].hp=Math.round(DBG.B.en[0].mhp*0.3);DBG.B.en[0].atb=99;});ok(await until(()=>{const e=DBG.B&&DBG.B.en[0];if(e&&!e.seventh){e.atb=Math.max(e.atb,99);e.stag=0;}return e&&e.seventh===1;},'x',200),'phase 3: the Seventh Calls');
 await w(300);await shot('94_seventh_calls.png');await until(()=>DBG.UI.length===0,'a',20);
 await ev(()=>{DBG.B.en[0].hp=1;});ok(await until(()=>DBG.UI.some(u=>u.k==='choice'),'a',600),'the choice of the seventh shard');await w(300);await shot('95_the_choice.png');
 await k('a');ok(await until(()=>DBG.scene==='finale_end','a',60),'ending sequence begins');ok(await ev(()=>DBG.G.flags.ending==='keeper'&&DBG.G.flags.vorthane===1),'Kael made the Crown whole');

@@ -345,10 +345,10 @@ XDOOR.ex_vshop=()=>openShop({stock:EXSHOP.valor,n:'Valorgate Armoury',who:'Brann
 XDOOR.ex_lshop=()=>openShop({stock:EXSHOP.lantern,n:'Lamplight Goods',who:'Sibbe'});
 
 // ---------- airship POIs ----------
-const EXPOI=[{id:'ex_salt',k:'ex_salt',n:'Saltmere',x:3,y:17,rx:22,ry:8,map:'ex_saltmere',req:()=>!!G.flags.tyrant,no:'Gulls circle a fishing village far below, but a squall keeps you off. (Come back later in your journey.)'},
- {id:'ex_valor',k:'ex_valor',n:'Valorgate',x:22,y:13,rx:24,ry:9,map:'ex_valor',req:()=>!!G.flags.wyrm,no:'A walled city with a great ring of stone. Its harbour guns wave you off: "No unknown ships!" (Come back later.)'},
- {id:'ex_lant',k:'ex_lant',n:'Lanternhaven',x:13,y:29,rx:22,ry:8,map:'ex_lantern',req:()=>!!G.flags.hydra,no:'Hundreds of lanterns float over a dark island. A thick lantern-smoke turns you back. (Come back later.)'},
- {id:'ex_obs',k:'ex_obs',n:'Starfall Observatory',x:44,y:25,rx:18,ry:7,map:'ex_obs',req:()=>!!G.flags.seneschal,no:'A glass dome floats in the high dark. Its star-gate is shut tight. (It may open once the Throne has fallen.)'}];
+const EXPOI=[{id:'ex_salt',k:'ex_salt',n:'Saltmere',x:3,y:17,rx:22,ry:8,map:'ex_saltmere',req:()=>!!G.flags.tyrant,no:'Gulls circle a fishing village far below, but a squall keeps you off. (Opens after you defeat the Slag Tyrant in the Ashmarch — the second shard.)'},
+ {id:'ex_valor',k:'ex_valor',n:'Valorgate',x:22,y:13,rx:24,ry:9,map:'ex_valor',req:()=>!!G.flags.wyrm,no:'A walled city with a great ring of stone. Its harbour guns wave you off: "No unknown ships!" (Opens after you defeat the Rime Wyrm at Hollowfrost — the third shard.)'},
+ {id:'ex_lant',k:'ex_lant',n:'Lanternhaven',x:13,y:29,rx:22,ry:8,map:'ex_lantern',req:()=>!!G.flags.hydra,no:'Hundreds of lanterns float over a dark island. A thick lantern-smoke turns you back. (Opens after you defeat the Mire Hydra near Reedhaven — the fourth shard.)'},
+ {id:'ex_obs',k:'ex_obs',n:'Starfall Observatory',x:44,y:25,rx:18,ry:7,map:'ex_obs',req:()=>!!G.flags.seneschal,no:'A glass dome floats in the high dark. Its star-gate is shut tight. (Opens after you defeat the Hollow Seneschal at the Throne — the sixth shard.)'}];
 EXPOI.forEach(p=>POI.push(p));
 const _skyIntEX=skyInteract;skyInteract=function(p){const e=EXPOI.find(q=>q.id===p.id);if(!e)return _skyIntEX(p);
  if(!e.req()){sfx('no');return toast(e.no);}sfx('ok');const first=!EXS().seen[e.id];EXS().seen[e.id]=1;

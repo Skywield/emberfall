@@ -82,18 +82,18 @@ window.AUTOSAVE={autosave,autoNewer,AKEY};
 // then come back for a Wayfarer's purse. As each far town becomes reachable a rumour appears in the flavour bar, and the
 // sky map marks unvisited open destinations with a gold "!" (and still-locked ones with a grey "?").
 const WQ=({id:'wayfarer',n:'Wayfarer\'s Rumours',town:'Thornwick',type:'Explore',giver:'Wayfarer Pell',
- d:'Pell wants proof the far towns exist: land at Saltmere, Valorgate and Lanternhaven by airship.',reward:'800 G, 2 Hearth Tonics',
+ d:'Pell wants proof the far towns exist: Saltmere and Valorgate on the Emberlands, Lanternhaven by airship.',reward:'800 G, 2 Hearth Tonics',
  ready:()=>['ex_salt','ex_valor','ex_lant'].every(i=>EXS().seen[i]),prog:()=>{const s=EXS().seen;return 'Far towns: '+['ex_salt','ex_valor','ex_lant'].filter(i=>s[i]).length+'/3';},
  give:()=>{G.gold+=800;G.items.tonic=(G.items.tonic||0)+2;}});
 QBY.wayfarer=WQ;const _qKnown=qKnown;qKnown=function(){const L=_qKnown();return qst('wayfarer').s>0?[...L,WQ]:L;};
-QL.wayfarer={intro:['Wayfarer Pell: Mapmaker, at your service. The vale\'s small. The sky isn\'t.','Wayfarer Pell: Saltmere — fishing village, west. Old Tobin\'ll teach you to fish off the pier.','Wayfarer Pell: Valorgate — the Colosseum city. Four ranks, a champion called Vasska.','Wayfarer Pell: Lanternhaven — lanterns, ghosts, and the best Ember Triad players alive. Win their cards.','Wayfarer Pell: Under each of them sleeps an old dungeon — and a fourth, a glass dome among the stars.','Wayfarer Pell: You\'ll need a ship first. Prove those towns are real and I\'ll pay you for the trouble.'],
+QL.wayfarer={intro:['Wayfarer Pell: Mapmaker, at your service. The vale\'s small. The Emberlands aren\'t.','Wayfarer Pell: Saltmere — fishing village on the east coast, once the squall dies. Old Tobin\'ll teach you to fish off the pier.','Wayfarer Pell: Valorgate — the Colosseum city, behind the guarded pass. Four ranks, a champion called Vasska.','Wayfarer Pell: Lanternhaven stays in the sky — lanterns, ghosts, and the best Ember Triad players alive.','Wayfarer Pell: Under each of them sleeps an old dungeon — and a fourth, a glass dome among the stars.','Wayfarer Pell: You\'ll need a ship first. Prove those towns are real and I\'ll pay you for the trouble.'],
  turn:['Wayfarer Pell: All three! My map\'s not a liar after all.','Wayfarer Pell: Here — a wayfarer\'s purse. Spend it somewhere I haven\'t drawn yet.'],after:['Wayfarer Pell: Still looking for the edge of the sky. Tell me if you find it.']};
 const PELL={x:12,y:8,s:'pell',d:'down',act:()=>sqTalk('wayfarer')};
 (function(){const ds=Object.getOwnPropertyDescriptor(NPCS,'town');const base=ds?(ds.get||(()=>ds.value)):(()=>[]);
  Object.defineProperty(NPCS,'town',{get:()=>{const L=base()||[];return L.some(n=>n.x===PELL.x&&n.y===PELL.y)?L:[...L,PELL];},enumerable:true,configurable:true});})();
 const _skyInt_d=skyInteract;skyInteract=function(p){const was=EXS().seen[p.id];const r=_skyInt_d(p);
  if(!was&&EXS().seen[p.id]&&qst('wayfarer').s===1&&['ex_salt','ex_valor','ex_lant'].includes(p.id)){G.gold+=150;TOAST={s:'Pell\'s contact here pays you 150 G for the visit. (Wayfarer\'s Rumours)',t:4};}return r;};
-const RUMOUR={ex_salt:'Rumour: the squall over Saltmere has cleared. Fishing village, far west by airship.',ex_valor:'Rumour: Valorgate\'s harbour guns are down. The Colosseum is open!',
+const RUMOUR={ex_salt:'Rumour: the squall over Saltmere has cleared. The east coast road is open.',ex_valor:'Rumour: the guarded pass to Valorgate is open. The Colosseum is waiting!',
  ex_lant:'Rumour: the lantern-smoke over Lanternhaven has lifted. Card sharps await.',ex_obs:'Rumour: a star-gate high in the dark has opened — the Starfall Observatory.'};
 const _enterMap_d=enterMap;enterMap=function(...a){_enterMap_d(...a);if(!G||!G.sky)return;for(const p of EXPOI)if(p.req()&&!EXS().seen[p.id]&&!G.flags['rum_'+p.id]){G.flags['rum_'+p.id]=1;TOAST={s:RUMOUR[p.id]||('Rumour: '+p.n+' is reachable.'),t:5};break;}};
 const _skyD=XSCN.skymap.d;XSCN.skymap.d=function(...a){_skyD.apply(this,a);const[cx,cy]=skyCam();

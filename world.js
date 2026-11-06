@@ -7,7 +7,7 @@ const PTILE=new Map();const WART={atlas:null,bd:{},isle:{},cloud:{},sea:null};
 (function(){const M=window.PTILE_MAN;if(!M)return;const im=new Image();im.onload=()=>{WART.atlas=im;for(const c in M)PTILE.set(c,M[c]);};im.src='art/game/world/tiles.jpg';
  const L=(o,k,f)=>{const i=new Image();i.onload=()=>{o[k]=i;};i.src='art/game/world/'+f;};
  ['field','cave','ash','forge','snow','glacier','jungle','sunken','twilight','throne','heart'].forEach(b=>L(WART.bd,b,'bd_'+b+'.jpg'));
- ['plain','trees','dock','wreck','ruin','hide','ash','frost','mire','veil','throne','storm','rock','tree','light'].forEach(k=>L(WART.isle,k,'isle_'+k+'.png'));
+ ['plain','trees','dock','wreck','ruin','hide','ash','frost','mire','veil','throne','storm','rock','tree','light','ex_salt','ex_valor','ex_lant','ex_obs'].forEach(k=>L(WART.isle,k,'isle_'+k+'.png'));
  ['white','storm','wisp'].forEach(k=>L(WART.cloud,k,'cloud_'+k+'.png'));L(WART,'sea','sky_sea.jpg');})();
 function drawPT(t,x,y,dx,dy){const p=PTILE.get(t);if(!p)return false;const v=(y%3)*3+(x%3),f=p.frames>1?Math.floor(T*2)%p.frames:0;
  X.drawImage(WART.atlas,v*48,(p.row+f)*48,48,48,dx,dy,16,16);return true;}
