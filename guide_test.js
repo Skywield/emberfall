@@ -63,5 +63,9 @@ await ev(()=>{DBG.newGame();G.flags.tutFight=1;G.sq={mira:{s:2,n:0}};G.flags.var
 ok(await ev(()=>JSON.stringify(DBG.UI).includes('shrine hymn')),'resting after Mira\'s quest: the party reacts');await shot('261_party_reacts.png');
 ok(await ev(()=>{DBG.UI.length=0;innTalk();return JSON.stringify(DBG.UI).includes('shadowing us');}),'trusting Varra is remembered around the fire');
 ok(await ev(()=>{G.flags.ending='free';const a=epi().find(s=>s.s==='mira').L.join(' ');G.sq={};const b2=epi().find(s=>s.s==='mira').L.join(' ');return a.includes('hums the shrine hymn')&&!b2.includes('hums');}),'personal quests add to that hero\'s epilogue');
+// ---------- expansion islands painted + clear gate hints ----------
+ok(await ev(()=>['ex_salt','ex_valor','ex_lant','ex_obs'].every(k=>WART.isle[k]&&WART.isle[k].complete&&WART.isle[k].naturalWidth>0)),'Saltmere/Valorgate/Lanternhaven/Observatory islands use painted art');
+ok(await ev(()=>EX.EXPOI.every(e=>/Opens after you defeat/.test(e.no))),'every sealed island says what opens it');
+await ev(()=>{DBG.UI.length=0;G.sky=G.sky||newSky();G.flags.hydra=0;const e=EX.EXPOI[2];SKY.startSkyMap(e);skyInteract(e);});await w(3000);await shot('271_lantern_gate_hint.png');await ev(()=>{DBG.UI.length=0;});
 // @@END
 ok(errs.length===0,'no page errors ('+errs.slice(0,3).join(' | ')+')');console.log(errs.length?'ERRORS '+errs.join(' | '):'ALL OK');await b.close();process.exit(errs.length?1:0);})();

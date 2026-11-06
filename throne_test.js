@@ -35,7 +35,8 @@ ok(await ev(()=>SKY.SB.en.n==='Crownwing Drake'&&!SKY.SB.varra),'Crownwing Drake
 await ev(()=>{SKY.SB.en.hp=30;SKY.autoPlan();SKY.startExec();});ok(await until(()=>SKY.SB&&SKY.SB.phase==='end','x',80),'drake battle ends');await until(()=>DBG.scene==='skymap'&&DBG.UI.length===0,'a',60);
 ok(await ev(()=>{DBG.G.sky.x=8*16;DBG.G.sky.y=6*16;const c={};for(let i=0;i<200;i++){const r=rollSkyEnemy();c[r]=1;}return c.crownwing;}),'crownwing drakes roam the Reach');
 // --- land: chapter card
-await toPOI('reach');await k('a');ok(await until(()=>DBG.scene==='map'&&DBG.G.map==='causeway'&&DBG.UI.length>0,'x',30),'landed on the Shattered Causeway with chapter card');
+await toPOI('reach');await w(250);
+ok(await until(()=>DBG.scene==='map'&&DBG.G.map==='causeway'&&DBG.UI.length>0,'a',40),'landed on the Shattered Causeway with chapter card');
 await w(700);await shot('72_throne_chapter_card.png');await until(()=>DBG.UI.length===0);
 await ev(()=>{DBG.enterMap('causeway',10,5,'up');});await w(2700);await shot('73_shattered_causeway.png');
 await ev(()=>{DBG.enterMap('causeway',21,2,'up');});await stepUp('up');await w(300);
