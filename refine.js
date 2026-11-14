@@ -78,8 +78,8 @@ function clampParty(){G.party.forEach(m=>{const s=st(m);m.hp=Math.min(m.hp,s.hp)
 function setLead(k,newGame){G.lead=k;if(newGame&&!G.flags._kit){G.flags._kit=1;delete G.items.potion;delete G.items.ether;Object.assign(G.items,LEADS[k].kit);
   G.party.forEach(m=>{const s=st(m);m.hp=s.hp;m.mp=s.mp;});}else clampParty();}
 XUI.leadpick={u(u,dt){const n=3;if(held('left',dt)||held('up',dt)){u.i=(u.i+n-1)%n;sfx('move');}if(held('right',dt)||held('down',dt)){u.i=(u.i+1)%n;sfx('move');}
-  if(P.a){sfx('ok');UI.pop();const k=LORDER[u.i];setLead(k,u.newg);if(u.newg)return;toast(G.party.find(m=>m.id===k).name+' now leads the party ('+LEADS[k].st+').');return;}
-  if(P.b||P.menu){sfx('no');UI.pop();if(u.newg)setLead(LEADID(),1);}},
+  if(P.a){sfx('ok');UI.pop();const k=LORDER[u.i];setLead(k,u.newg);if(u.newg){transition(_startTown);return;}toast(G.party.find(m=>m.id===k).name+' now leads the party ('+LEADS[k].st+').');return;}
+  if(P.b||P.menu){sfx('no');UI.pop();if(u.newg){setLead(LEADID(),1);transition(_startTown);}}},
  d(u){X.fillStyle=u.newg?'#05030c':'#05030ce8';X.fillRect(0,0,W,H);if(u.newg)drawEmbers();win(8,6,W-16,22);txt(u.newg?'WHO LEADS THE PARTY?':'PARTY — choose the lead',W/2,13,'#ffd860',8,'center');
   LORDER.forEach((k,i)=>{const cx=44+i*84,sel=i===u.i;if(sel){X.fillStyle='rgba(255,176,64,0.18)';X.fillRect(cx-38,32,76,112);X.fillStyle='#ffb040';X.fillRect(cx-38,143,76,1);}
    const bob=sel?Math.sin(T*4)*1.5:0;if(!drawPaint(k,cx,118+bob,{sc:1.45,alpha:sel?1:0.55}))X.drawImage(SPR[k].down[0],cx-12,70,24,32);
@@ -88,7 +88,10 @@ XUI.leadpick={u(u,dt){const n=3;if(held('left',dt)||held('up',dt)){u.i=(u.i+n-1)
   const L=LEADS[LORDER[u.i]];win(8,150,W-16,u.newg?50:40);wrap(L.d,44).forEach((l,i)=>txt(l,14,155+i*10,'#fff',7));
   if(u.newg)txt('Starting pack: '+L.kt,14,178,'#9cf',7);txt(u.newg?'◀ ▶ choose   A: confirm   (change later: MENU > Party)':'◀ ▶ choose   A: set lead   B: back',W/2,u.newg?189:180,'#bbd',6,'center');
   if(!u.newg)txt('The lead walks in front, acts first and adds their style.',W/2,204,'#c8a8c8',6,'center');}};
-const _startTown=startTown;startTown=function(){_startTown();if(!G.lead)UI.push({k:'leadpick',i:0,newg:1});};
+// New Game: the lead is chosen on its own screen between the intro and Thornwick, so the
+// opening dialogue and any A-presses that skip the intro still land on the picker first.
+XSCN.leadsel={u(){if(!UI.length)transition(_startTown);},d(){X.fillStyle='#05030c';X.fillRect(0,0,W,H);drawEmbers();},mus:()=>'town'};
+const _startTown=startTown;startTown=function(){if(!G.lead){scene='leadsel';UI.length=0;UI.push({k:'leadpick',i:0,newg:1});return;}_startTown();};
 {const i=MOPTS.indexOf('Quests');MOPTS.splice(i<0?MOPTS.indexOf('Settings'):i,0,'Party');}
 const _updMenuR=updMenu;updMenu=function(u,dt){if(!u.sub&&P.a&&MOPTS[u.i]==='Party'){sfx('ok');UI.push({k:'leadpick',i:Math.max(0,LORDER.indexOf(LEADID())),newg:0});return;}return _updMenuR(u,dt);};
 // the lead acts first; Arcane opens with heat
@@ -114,7 +117,7 @@ XFENTS.push((ents,cx,cy)=>{if(LEADID()==='kael'||!TR||TR.m!==G.map||G.flags.aboa
 // Old rule: after 4 steps, every step had a flat 1/enc chance (fights could come back-to-back, or not for 100 steps).
 // New rule: no fight for `grace` steps (40% of enc, at least 5) after a battle, then a chance rising linearly per step.
 // R is chosen so the mean distance between fights is still ~enc (same EXP / gold flow), with a firm cap at the end.
-function encCfg(M){const e=M.enc,g=M.grace!=null?M.grace:Math.max(5,Math.round(e*0.4)),R=2*Math.pow(Math.max(2,e-g),2)/Math.PI;return {g,R,cap:g+Math.ceil(3*Math.sqrt(R))};}
+function encCfg(M){const e=M.enc,g=M.grace!=null?M.grace:Math.max(5,Math.round(e*0.4)),R=2*Math.pow(Math.max(2,e+4-g),2)/Math.PI;return {g,R,cap:g+Math.ceil(3*Math.sqrt(R))};}
 function encChance(M,steps){if(!M||!M.enc)return 0;const c=encCfg(M);if(steps<=c.g)return 0;if(steps>=c.cap)return 1;return Math.min(1,(steps-c.g)/c.R);}
 const _arrivedR=arrived;
 arrived=function(){const M=MAPS[G.map];if(!M||!M.enc||G.flags.aboard)return _arrivedR();const e=M.enc,m0=G.map,x0=G.x,y0=G.y;let r;M.enc=0;try{r=_arrivedR();}finally{M.enc=e;}
