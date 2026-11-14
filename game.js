@@ -334,7 +334,7 @@ function camera(){const M=MAPS[G.map];const t=F.mv>0?F.mv:0;const ppx=(G.x-(G.x-
 function drawField(){const M=MAPS[G.map],[cx,cy,ppx,ppy]=camera();X.fillStyle='#000';X.fillRect(0,0,W,H);
  const x0=Math.floor(cx/16),y0=Math.floor(cy/16);for(let y=y0;y<=y0+15;y++)for(let x=x0;x<=x0+17;x++){if(x<0||y<0||x>=M.w||y>=M.h)continue;const t=M.rows[y][x],tl=TILES[t]||TILES['.'];if(!(window.drawPT&&drawPT(t,x,y,x*16-cx,y*16-cy)))X.drawImage(tl[Math.floor(T*2)%tl.length],x*16-cx,y*16-cy);}
  const ents=F.npcs.map(n=>({y:n.y*16,dr:()=>fspr(SPR[n.s][n.d][0],n.x*16-cx+2,n.y*16-cy-2)}));
- const fr=F.mv>0?(1+(Math.floor(F.anim*8)%2)):0;ents.push({y:ppy,dr:()=>fspr(SPR.kael[G.d][fr],ppx-cx+2,ppy-cy-2)});
+ const fr=F.mv>0?(1+(Math.floor(F.anim*8)%2)):0;ents.push({y:ppy,dr:()=>fspr(SPR[window.LEADID?LEADID():'kael'][G.d][fr],ppx-cx+2,ppy-cy-2)});
  if(G.map==='cave'&&!G.flags.boss){const b=EN_ART.boss.c,bob=Math.sin(T*2)*1.5;ents.push({y:32,dr:()=>{if(!drawPaint('boss',12*16-cx,3*16-cy+10+bob,{sc:0.55,alpha:0.95})){X.globalAlpha=0.9;X.drawImage(b,12*16-cx-b.width/2,1*16-cy-4+bob);X.globalAlpha=1;}}});}
  XFENTS.forEach(f=>f(ents,cx,cy));
  ents.sort((a,b)=>a.y-b.y).forEach(e=>e.dr());if(window.XFIELD)XFIELD(cx,cy);
@@ -371,11 +371,11 @@ function enemyAI(u){const P=alive(B.pt);let t=P[Math.random()*P.length|0];if(u.a
 function updCmd(dt){const m=B.menu,u=B.pt[B.act],mem=u.m,d=HERO_DEF[mem.id];
  const nav=(n)=>{if(held('up',dt)){m.i=(m.i+n-1)%n;sfx('move');}if(held('down',dt)){m.i=(m.i+1)%n;sfx('move');}};
  if(m.k==='cmd'){nav(4);if(P.a){sfx('ok');const c=m.i;if(c===0)B.menu={k:'tgt',side:'E',i:firstAlive('E'),all:0,back:{k:'cmd',i:0},act:{kind:'phys',pow:1,fx:'slash'}};
-   else if(c===1)B.menu={k:'skill',i:0};else if(c===2){if(!Object.keys(G.items).some(k=>G.items[k]>0)){sfx('no');B.menu={k:'cmd',i:2};}else B.menu={k:'item',i:0};}
+   else if(c===1)B.menu={k:'skill',i:0};else if(c===2){if(!Object.keys(G.items).some(k=>G.items[k]>0&&!ITEMS[k].field)){sfx('no');B.menu={k:'cmd',i:2};}else B.menu={k:'item',i:0};}
    else{u.def=1;commit({kind:'defend'},[u]);}}return;}
  if(m.k==='skill'){const L=d.sk.filter(k=>!(SK[k].lv>mem.lv));nav(L.length);if(P.b){B.menu={k:'cmd',i:1};sfx('no');return;}
   if(P.a){const s=SK[L[m.i]];if(mem.mp<s.mp){sfx('no');return;}sfx('ok');tgtFor(s.tgt,{kind:s.type,sk:L[m.i],pow:s.pow,el:s.el,fx:s.fx,name:s.n,mp:s.mp},{k:'skill',i:m.i});}return;}
- if(m.k==='item'){const L=Object.keys(G.items).filter(k=>G.items[k]>0);if(!L.length){B.menu={k:'cmd',i:2};return;}m.i=Math.min(m.i,L.length-1);nav(L.length);if(P.b){B.menu={k:'cmd',i:2};sfx('no');return;}
+ if(m.k==='item'){const L=Object.keys(G.items).filter(k=>G.items[k]>0&&!ITEMS[k].field);if(!L.length){B.menu={k:'cmd',i:2};return;}m.i=Math.min(m.i,L.length-1);nav(L.length);if(P.b){B.menu={k:'cmd',i:2};sfx('no');return;}
   if(P.a){sfx('ok');const it=ITEMS[L[m.i]];tgtFor(it.tgt,{kind:'item',it:L[m.i],fx:'heal',name:it.n},{k:'item',i:m.i});}return;}
  if(m.k==='tgt'){const list=m.side==='E'?B.en:B.pt;
   if(!m.all){const ok=j=>m.any?true:m.dead?(list[j].m.hp<=0):(uhp(list[j])>0);const mv=dir=>{let j=m.i;for(let n=0;n<list.length;n++){j=(j+dir+list.length)%list.length;if(ok(j)){m.i=j;sfx('move');break;}}};
@@ -461,7 +461,7 @@ function drawBattle(){const sh=B.shake?(Math.random()-0.5)*B.shake:0;X.save();X.
   if(m.k==='cmd'){if(window.CMDLIST){const L=CMDLIST(u),rh=L.length>4?11:15;L.forEach((o,i)=>{txt(o.n,22,by+(rh<15?5:8)+i*rh,o.ok===false?'#778':o.c||'#fff',rh<15?7:8);if(i===m.i)cursor(8,by+(rh<15?5:8)+i*rh);});}else ['Attack',d.skn,'Item','Defend'].forEach((o,i)=>{txt(o,22,by+8+i*15);if(i===m.i)cursor(8,by+8+i*15);});}
   else if(m.k==='skill'){win(0,by-50,140,124);const L=d.sk.filter(k=>!(SK[k].lv>u.m.lv));L.forEach((k,i)=>{const s=SK[k];txt(s.n,18,by-44+i*13,u.m.mp>=s.mp?'#fff':'#778');txt(s.mp+'',132,by-44+i*13,'#9cf',8,'right');if(i===m.i)cursor(5,by-44+i*13);});
    const s=SK[L[m.i]];if(s){txt(s.d,8,by+52,'#cde',7);txt(`MP ${u.m.mp}`,132,by+52,'#9cf',7,'right');}}
-  else if(m.k==='item'){win(0,by-50,140,124);const L=Object.keys(G.items).filter(k=>G.items[k]>0);L.forEach((k,i)=>{txt(ITEMS[k].n,18,by-44+i*13);txt('x'+G.items[k],132,by-44+i*13,'#9cf',8,'right');if(i===m.i)cursor(5,by-44+i*13);});if(L[m.i])txt(ITEMS[L[m.i]].d,8,by+52,'#cde',7);}
+  else if(m.k==='item'){win(0,by-50,140,124);const L=Object.keys(G.items).filter(k=>G.items[k]>0&&!ITEMS[k].field);L.forEach((k,i)=>{txt(ITEMS[k].n,18,by-44+i*13);txt('x'+G.items[k],132,by-44+i*13,'#9cf',8,'right');if(i===m.i)cursor(5,by-44+i*13);});if(L[m.i])txt(ITEMS[L[m.i]].d,8,by+52,'#cde',7);}
   else if(m.k==='tgt'){const list=m.side==='E'?B.en:B.pt;const tg=m.all?alive(list):[list[m.i]];tg.forEach(t=>{const[x,y]=upos(t);cursor(t.side==='E'?x+(t.boss?100:34):x-12,y+(t.boss?40:10));});
    if(m.side==='E')B.en.forEach((e,i)=>{if(e.hp>0)txt(e.n,10,by+8+i*13,(m.all||i===m.i)?'#ffd860':'#fff',7);});else txt(m.all?'All allies':'Choose ally',10,by+8,'#ffd860',7);}}
  else{alive(B.en).forEach((e,i)=>{txt(e.n,10,by+8+i*13,'#fff',7);});if(B.boss){const e=B.en[0];bar(10,by+24,80,e.hp/e.mhp,'#a02040','#ff6080');}}
@@ -482,7 +482,7 @@ function drawTitle(){const g=X.createLinearGradient(0,0,0,H);g.addColorStop(0,'#
  X.font='bold 30px "Courier New",monospace';X.textAlign='center';X.fillStyle='#000';X.fillText('EMBERFALL',W/2+1.5,y+1.5);X.fillStyle=tg;X.fillText('EMBERFALL',W/2,y);
  txt('— Chronicle of the Shattered Crown —',W/2,y+32,'#ffe0c0',7,'center');
  const opts=['New Game','Continue'];win(W/2-44,118,88,36);opts.forEach((o,i)=>{txt(o,W/2-24,124+i*13,i===1&&!hasSave()?'#667':'#fff');if(TT.i===i)cursor(W/2-38,124+i*13);});
- txt('© 2026 Skywield Games · Prototype',W/2,H-10,'#c8a8c8',6,'center');txt(isTouch?'D-pad + A/B · MENU':'Arrows/WASD · Z/Enter=OK · X/Esc=Back · C=Menu',W/2,H-19,'#c8a8c8',6,'center');}
+ txt('© 2026 Skywield Games',W/2,H-10,'#c8a8c8',6,'center');txt(isTouch?'D-pad + A/B · MENU':'Arrows/WASD · Z/Enter=OK · X/Esc=Back · C=Menu',W/2,H-19,'#c8a8c8',6,'center');}
 function updTitle(dt){if(held('up',dt)||held('down',dt)){TT.i^=1;sfx('move');}if(P.a){if(TT.i===1){if(!hasSave())return sfx('no');sfx('ok');load();transition(()=>{scene='map';enterMap(G.map,G.x,G.y,G.d);});}
  else{sfx('ok');newGame();transition(()=>{scene='intro';IN={p:0,t:0};});}}}
 const INTRO=['Long ago, the Ember Crown kept the world warm.','Its seven flames held back the Hollow — the cold dark beneath the earth.','Thirteen nights ago, the Crown shattered.','Its shards fell across the land, and the Hollow began to stir...','In the village of Thornwick, three wanderers answered the elder\'s call.'];
@@ -494,7 +494,7 @@ function drawIntro(){X.fillStyle='#05030c';X.fillRect(0,0,W,H);drawEmbers();cons
  const cx=W/2,cy=70;const sh=p>=2?Math.min(1,(p-2+IN.t)):0;for(let i=0;i<7;i++){const a=i/7*6.28+T*0.3,r=18+sh*60*(1+i%3*0.3);X.fillStyle=['#ff6020','#ffb030','#ffe060'][i%3];X.fillRect(cx+Math.cos(a)*r-2,cy+Math.sin(a)*r*0.6-2,4,4);}
  X.fillStyle='#ffd060';if(sh<1){X.globalAlpha=1-sh;X.fillRect(cx-10,cy-4,20,6);for(let i=0;i<5;i++)X.fillRect(cx-10+i*5,cy-9,2,5);X.globalAlpha=1;}
  X.globalAlpha=Math.min(1,IN.t*1.5);wrap(INTRO[p],38).forEach((l,i)=>txt(l,W/2,140+i*12,'#fff',8,'center'));X.globalAlpha=1;txt('A: next   B: skip',W-6,H-10,'#888',6,'right');}
-function drawEnd(){X.fillStyle='#05030c';X.fillRect(0,0,W,H);drawEmbers();txt('DEMO COMPLETE',W/2,40,'#ffd060',16,'center');txt(G.flags.wyrm?'Three shards reclaimed. The storm breaks.':G.flags.tyrant?'Two shards reclaimed. Ashmarch cools.':G.flags.corsair?'The skies of Emberfall are open.':'The first shard is reclaimed.',W/2,70,'#fff',8,'center');
+function drawEnd(){X.fillStyle='#05030c';X.fillRect(0,0,W,H);drawEmbers();txt('CHAPTER COMPLETE',W/2,40,'#ffd060',16,'center');txt(G.flags.wyrm?'Three shards reclaimed. The storm breaks.':G.flags.tyrant?'Two shards reclaimed. Ashmarch cools.':G.flags.corsair?'The skies of Emberfall are open.':'The first shard is reclaimed.',W/2,70,'#fff',8,'center');
  G.party.forEach((m,i)=>{X.drawImage(SPR[m.id].down[Math.floor(T*4+i)%3],W/2-60+i*44,94,24,32);txt(m.name+' Lv'+m.lv,W/2-48+i*44,130,'#fff',6,'center');});
  txt('Thank you for playing Emberfall.',W/2,160,'#fff',8,'center');txt('Skywield Games',W/2,174,'#c8a8c8',7,'center');txt('Press A to return to title',W/2,200,'#888',7,'center');}
 function drawOver(){X.fillStyle='#000';X.fillRect(0,0,W,H);txt('GAME OVER',W/2,80,'#c33',20,'center');txt('The ember gutters... but does not die.',W/2,116,'#ccc',7,'center');txt(hasSave()?'A: Load last save    B: Title':'A/B: Title',W/2,150,'#fff',7,'center');}

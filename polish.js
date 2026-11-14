@@ -6,7 +6,7 @@
 //    of the latest save, so older builds/tests that read it still work
 //  * New title screen (Continue / Load / Settings, painted party, version) and a letterboxed, typewriter intro
 //  * Chapter summary card (was a leftover "DEMO COMPLETE" screen) now returns you to where you were
-const VERSION='v1.0';
+const VERSION='v1.1';
 // ---------- options ----------
 const OPT=Object.assign({text:1,bspd:2,atb:1,fs:0},(()=>{try{return JSON.parse(localStorage.getItem('emberfall_opts'))||{}}catch(e){return{}}})());
 function saveOpt(){try{localStorage.setItem('emberfall_opts',JSON.stringify(OPT));}catch(e){}}
