@@ -80,9 +80,9 @@ function setLead(k,newGame){G.lead=k;if(newGame&&!G.flags._kit){G.flags._kit=1;d
 XUI.leadpick={u(u,dt){const n=3;if(held('left',dt)||held('up',dt)){u.i=(u.i+n-1)%n;sfx('move');}if(held('right',dt)||held('down',dt)){u.i=(u.i+1)%n;sfx('move');}
   if(P.a){sfx('ok');UI.pop();const k=LORDER[u.i];setLead(k,u.newg);if(u.newg)return;toast(G.party.find(m=>m.id===k).name+' now leads the party ('+LEADS[k].st+').');return;}
   if(P.b||P.menu){sfx('no');UI.pop();if(u.newg)setLead(LEADID(),1);}},
- d(u){X.fillStyle='#05030cdd';X.fillRect(0,0,W,H);win(8,6,W-16,22);txt(u.newg?'WHO LEADS THE PARTY?':'PARTY — choose the lead',W/2,13,'#ffd860',8,'center');
+ d(u){X.fillStyle=u.newg?'#05030c':'#05030ce8';X.fillRect(0,0,W,H);if(u.newg)drawEmbers();win(8,6,W-16,22);txt(u.newg?'WHO LEADS THE PARTY?':'PARTY — choose the lead',W/2,13,'#ffd860',8,'center');
   LORDER.forEach((k,i)=>{const cx=44+i*84,sel=i===u.i;if(sel){X.fillStyle='rgba(255,176,64,0.18)';X.fillRect(cx-38,32,76,112);X.fillStyle='#ffb040';X.fillRect(cx-38,143,76,1);}
-   const bob=sel?Math.sin(T*4)*1.5:0;if(!drawPaint(k,cx,118+bob,{sc:0.5,alpha:sel?1:0.6}))X.drawImage(SPR[k].down[0],cx-12,70,24,32);
+   const bob=sel?Math.sin(T*4)*1.5:0;if(!drawPaint(k,cx,118+bob,{sc:1.45,alpha:sel?1:0.55}))X.drawImage(SPR[k].down[0],cx-12,70,24,32);
    const m=G.party.find(p=>p.id===k);txt(m?m.name:HERO_DEF[k].name,cx,122,sel?'#fff':'#aab',8,'center');txt(LEADS[k].st,cx,132,sel?'#ffd860':'#889',7,'center');
    if(!u.newg&&k===LEADID())txt('★ lead',cx,36,'#ffd860',6,'center');});
   const L=LEADS[LORDER[u.i]];win(8,150,W-16,u.newg?50:40);wrap(L.d,44).forEach((l,i)=>txt(l,14,155+i*10,'#fff',7));
@@ -130,11 +130,13 @@ if(window.DBG)DBG.enterMap=enterMap;
 // 2b. EMBERLANDS DENSITY — chests, travellers, campfires, wayshrines, signposts
 // ======================================================================================================
 function poiCanvas(kind){const c=document.createElement('canvas');c.width=48;c.height=64;const g=c.getContext('2d');const R=(x,y,w,h,col)=>{g.fillStyle=col;g.fillRect(x,y,w,h);};
- if(kind==='sign'){R(21,30,6,32,'#3a2410');R(22,30,3,32,'#6a4422');R(6,18,36,18,'#2a1808');R(8,20,32,14,'#8a5a2e');R(8,20,32,3,'#a8743c');for(let i=0;i<3;i++)R(12,25+i*3,24-i*6,1,'#3a2410');R(18,58,12,4,'#00000040');}
- else if(kind==='camp'){R(8,52,32,8,'#00000050');[[8,50],[16,54],[26,54],[34,50],[12,46],[30,46]].forEach(([x,y])=>{R(x,y,7,5,'#55505a');R(x+1,y,5,2,'#8a8590');});
-  R(14,48,20,4,'#5a3418');R(18,44,12,4,'#7a4a22');R(16,46,2,2,'#3a2010');}
- else if(kind==='shrine'){R(10,56,28,6,'#00000050');R(14,50,20,8,'#4a4652');R(17,14,14,38,'#5e5a68');R(19,12,10,4,'#5e5a68');R(18,16,4,34,'#77738a');R(29,16,2,34,'#3a3644');
-  R(22,24,4,10,'#ff9030');R(21,27,6,4,'#ffc060');R(23,22,2,2,'#ffe0a0');}
+ const E=(x,y,rx,ry,col)=>{g.fillStyle=col;g.beginPath();g.ellipse(x,y,rx,ry,0,0,7);g.fill();};
+ if(kind==='sign'){E(24,60,14,3,'#00000055');R(20,26,8,36,'#3a2410');R(21,26,4,36,'#7a5028');R(2,10,44,22,'#2a1808');R(4,12,40,18,'#9a6634');R(4,12,40,4,'#c08a4a');
+  for(let i=0;i<3;i++)R(9,19+i*4,30-i*8,2,'#4a2c12');R(40,14,2,2,'#2a1808');R(6,14,2,2,'#2a1808');}
+ else if(kind==='camp'){E(24,56,22,8,'#00000055');E(24,54,17,6,'#2a1a12');[[4,52],[12,58],[24,60],[36,58],[42,52],[10,46],[38,46],[24,44]].forEach(([x,y])=>{E(x,y,5,4,'#4e4a56');E(x-1,y-1,3,2,'#8e8a98');});
+  g.save();g.translate(24,52);g.rotate(0.5);R(-12,-3,24,6,'#6a3a18');R(-12,-3,24,2,'#9a5a28');g.rotate(-1.0);R(-12,-3,24,6,'#5a3214');R(-12,-3,24,2,'#8a5022');g.restore();E(24,52,6,3,'#ff7a20');E(24,51,3,2,'#ffd070');}
+ else if(kind==='shrine'){E(24,60,18,4,'#00000055');R(8,52,32,10,'#3e3a46');R(8,52,32,2,'#6a6676');R(13,8,22,46,'#56525f');R(15,4,18,6,'#56525f');R(17,2,14,4,'#66626f');
+  R(14,10,5,42,'#77738a');R(31,10,3,42,'#3a3644');R(20,18,8,16,'#2a1810');R(21,20,6,12,'#ff8a20');R(22,23,4,6,'#ffd060');R(23,25,2,2,'#fff0c0');R(17,40,14,2,'#3a3644');R(17,45,14,2,'#3a3644');}
  return c;}
 ['sign','camp','shrine'].forEach(k=>{const c=poiCanvas(k),f=[c,c,c];SPR['poi_'+k]={down:f,up:f,left:f,right:f,side:f};});
 const BANTER={

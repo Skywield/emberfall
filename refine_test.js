@@ -27,8 +27,8 @@ await k('a');ok(await ev(()=>G.lead==='lyra'&&G.items.potion===2&&G.items.ether=
 ok(await ev(()=>{const m=G.party.find(x=>x.id==='lyra');return st(m).mp>m.b.mp*1.1&&m.mp===st(m).mp;}),'Arcane style: Lyra +15% MP, topped up at the start');
 await until(()=>DBG.UI.length===0);
 // walk: the lead walks in front, Kael follows one tile behind
-await ev(()=>{DBG.enterMap('town',10,12,'up');G.flags.noenc=1;});await w(300);
-for(const d of ['up','up','right','right']){await ev(d=>DBG.press(d),d);await w(150);await ev(d=>DBG.rel(d),d);await w(140);}
+await ev(()=>{DBG.enterMap('town',5,12,'down');G.flags.noenc=1;});await w(300);
+for(const d of ['down','right','right','right']){await ev(d=>DBG.press(d),d);await w(150);await ev(d=>DBG.rel(d),d);await w(140);}
 await w(400);ok(await ev(()=>{const t=REFINE.TR;return REFINE.LEADID()==='lyra'&&t&&t.m==='town'&&(t.x!==G.x||t.y!==G.y)&&Math.abs(t.x-G.x)+Math.abs(t.y-G.y)===1;}),'Kael follows one step behind the lead');
 await shot('03_field_lyra_leads_kael_follows');
 // MENU > Party
@@ -60,15 +60,15 @@ ok(await ev(()=>{G.flags=Object.assign(G.flags,{boss:1,harbor:1,corsair:1,tyrant
 console.log(JSON.stringify(await ev(()=>window.__d)));
 ok(await ev(()=>REFINE.GPOI.length>=15&&Object.keys(REFINE.GCHEST).length>=8),'15+ sights and 8+ chests on the Emberlands');
 // campfire
-const camp=await ev(()=>{const c=REFINE.GPOI.find(p=>p.id==='camp_center');DBG.UI.length=0;DBG.enterMap('ground',c.x,c.y+1,'up');G.party.forEach(m=>m.hp=Math.max(1,Math.floor(st(m).hp/3)));return [c.x,c.y];});
-await w(900);await shot('05_emberlands_campfire');await k('a');ok((await top())==='choice','campfire offers a rest');await w(300);await shot('06_campfire_rest_prompt');await k('a');
+const camp=await ev(()=>{const c=REFINE.GPOI.find(p=>p.id==='camp_center');DBG.UI.length=0;DBG.enterMap('ground',c.x+2,c.y+1,'left');G.party.forEach(m=>m.hp=Math.max(1,Math.floor(st(m).hp/3)));return [c.x,c.y];});
+await w(900);await shot('05_emberlands_campfire');await ev(()=>{const c=REFINE.GPOI.find(p=>p.id==='camp_center');DBG.enterMap('ground',c.x+1,c.y,'left');});await w(200);await k('a');ok((await top())==='choice','campfire offers a rest');await w(300);await shot('06_campfire_rest_prompt');await k('a');
 ok(await until(()=>DBG.UI.some(u=>u.k==='dlg'&&u.lines.some(l=>/fire catches/.test(l))),'',30),'resting starts a party scene');await w(500);await k('a');await w(500);await shot('07_campfire_banter');
 ok(await ev(()=>G.party.every(m=>m.hp>Math.floor(st(m).hp/3))&&!!G.flags.gp_camp_center),'campfire restores some HP and counts as a discovery');await until(()=>DBG.UI.length===0);
 // chest with ore + shrine
 ok(await ev(()=>{DBG.enterMap('ground',33,20,'up');return tileAt('ground',33,19)==='c';}),'desert cache is on the map');await w(200);await k('a');
 ok(await ev(()=>REFINE.FG().ore===2&&tileAt('ground',33,19)==='o'&&G.flags['cground33,19']),'chest gives Ember Ore x2');await until(()=>DBG.UI.length===0);
 ok(await ev(()=>{DBG.enterMap('ground',33,20,'up');return tileAt('ground',33,19)==='o';}),'opened chest stays open after re-entering');
-await ev(()=>{const s=REFINE.GPOI.find(p=>p.id==='shrine_nw');DBG.enterMap('ground',s.x,s.y+1,'up');});await w(800);await shot('08_emberlands_wayshrine');await k('a');
+await ev(()=>{const s=REFINE.GPOI.find(p=>p.id==='shrine_nw');DBG.enterMap('ground',s.x+1,s.y,'left');});await w(800);await shot('08_emberlands_wayshrine');await k('a');
 ok(await until(()=>REFINE.FG().ore===4,'a',20),'wayshrine gift: Ember Ore x2');await until(()=>DBG.UI.length===0);
 ok(await ev(()=>{const c=REFINE.GCHEST['8,10'];DBG.enterMap('ground',8,11,'up');return tileAt('ground',8,10)==='c'&&c==='tonic';}),'item chest in the north-west');await k('a');ok(await ev(()=>G.items.tonic>=1),'item chest uses the normal chest path');await until(()=>DBG.UI.length===0);
 await ev(()=>{const c=REFINE.GPOI.find(p=>p.id==='cartog');DBG.enterMap('ground',c.x,c.y+1,'up');});await k('a');ok(await until(()=>DBG.UI.some(u=>u.k==='dlg'&&/Cartographer/.test(u.lines[0]||'')),'',10),'cartographer explains the discovery reward');await until(()=>DBG.UI.length===0);
@@ -94,11 +94,11 @@ ok(await ev(()=>{G.sky=newSky();G.sky.tier=3;G.gold=20000;Object.assign(G.sky.ma
   return a&&t4===4&&b2&&G.sky.tier===5&&!c&&TIERS[5].n==='Ember Dreadnought'&&G.gold===20000-4000-8000&&SKY.shipStats().hull===3400;}),'two new hull tiers: Galleon and Ember Dreadnought');
 await ev(()=>{G.sky.tier=3;G.gold=6000;DBG.UI.length=0;SKY.openYard();const u=DBG.UI[DBG.UI.length-1];u.i=1;});await w(300);await shot('11_shipyard_galleon');await ev(()=>{DBG.UI.length=0;});
 // colosseum fees
-await ev(()=>{G.flags.wyrm=1;EX.EXS().arena=0;G.gold=50;DBG.UI.length=0;XDOOR.ex_arena();});await k('a');await w(300);ok(await ev(()=>DBG.UI.some(u=>u.k==='choice'&&/entry fee is 100 G/.test(u.prompt))),'the Bronze Cup asks a 100 G entry fee');await shot('12_colosseum_entry_fee');
+await ev(()=>{G.flags.wyrm=1;EX.EXS().arena=0;G.gold=50;DBG.UI.length=0;DBG.enterMap('ex_valor',10,8,'up');DBG.UI.length=0;XDOOR.ex_arena();});await w(300);await k('a');await w(300);ok(await ev(()=>DBG.UI.some(u=>u.k==='choice'&&/entry fee is 100 G/.test(u.prompt))),'the Bronze Cup asks a 100 G entry fee');await shot('12_colosseum_entry_fee');
 await k('a');ok(await ev(()=>DBG.scene==='map'&&G.gold===50&&DBG.UI.some(u=>u.k==='dlg'&&/fuller purse/.test(u.lines[0]))),'no fight without the fee');await until(()=>DBG.UI.length===0);
 await ev(()=>{G.gold=500;XDOOR.ex_arena();});await k('a');await k('a');ok(await until(()=>DBG.scene==='battle','a',40)&&await ev(()=>G.gold===400),'paid 100 G and the Bronze Cup starts');await ev(()=>{DBG.setScene('map');DBG.UI.length=0;window.B=null;});
 // champion's exchange + seeds
-ok(await ev(()=>{const n=NPCS.ex_valor.find(n=>n.x===8&&n.y===11);EX.EXS().arena=0;DBG.UI.length=0;n.act();const lock=DBG.UI.some(u=>u.k==='dlg'&&/cup winners/.test(u.lines[0]));DBG.UI.length=0;EX.EXS().arena=1;n.act();return lock&&DBG.UI.some(u=>u.k==='shop');}),'Champion\'s Exchange opens after the first cup');
+ok(await ev(()=>{DBG.enterMap('ex_valor',8,12,'up');const n=NPCS.ex_valor.find(n=>n.x===8&&n.y===11);EX.EXS().arena=0;DBG.UI.length=0;n.act();const lock=DBG.UI.some(u=>u.k==='dlg'&&/cup winners/.test(u.lines[0]));DBG.UI.length=0;EX.EXS().arena=1;n.act();return lock&&DBG.UI.some(u=>u.k==='shop');}),'Champion\'s Exchange opens after the first cup');
 await until(()=>(DBG.UI[DBG.UI.length-1]||{}).k==='shop','a',10);await w(200);await shot('13_champions_exchange');await ev(()=>{DBG.UI.length=0;});
 ok(await ev(()=>{G.items={mightseed:1};const m=G.party[0],a=m.b.atk;const r=useItem('mightseed',m);return r&&m.b.atk===a+2&&ITEMS.mightseed.field===1;}),'a Might Seed gives +2 ATK for good');
 ok(await ev(()=>{G.items={mightseed:2};DBG.startBattle(['slime']);DBG.B.menu={k:'item',i:0};let e=null;try{drawBattle();}catch(x){e=x;}DBG.setScene('map');G.items={potion:2};return !e&&Object.keys({mightseed:2}).filter(k=>!ITEMS[k].field).length===0;}),'seeds stay out of the battle item list');
