@@ -444,8 +444,9 @@ function migrateGround(g){
  return g;
 }
 // polish.js replaces load/save after this file. Hook the final ones once every script has run.
-setTimeout(function(){
- if(typeof window.drawPT!=='function'||typeof load!=='function')return;
+// Scripts after this one (world.js etc.) may not have run yet when the timer fires, so retry until they have.
+(function hookGround(){
+ if(typeof window.drawPT!=='function'||typeof load!=='function'||typeof window.REFINE==='undefined'&&document.readyState!=='complete')return setTimeout(hookGround,30);
  const _load=load,_save=save;
  load=function(i){let r;try{r=_load(i);}catch(e){G=null;}if(G)migrateGround(G);return r;};
  save=function(){if(G)G.v=Math.max(2,G.v|0);return _save.apply(this,arguments);};
@@ -466,7 +467,7 @@ setTimeout(function(){
  const _xf=window.XFIELD;
  window.XFIELD=function(cx,cy){if(_xf)_xf(cx,cy);
   if(G&&G.map==='ground'&&G.flags.aboard&&SKYART.cinderwing){const[, ,ppx,ppy]=camera();dImg(SKYART.cinderwing,ppx-cx+8,ppy-cy+2,G.flags.skyOpen?0.34:0.42,{flip:G.d==='right'||G.d==='down'});}};
-},0);
+})();
 
 const _trG=transition;
 transition=function(cb){
