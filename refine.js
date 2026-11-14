@@ -141,7 +141,7 @@ function poiCanvas(kind){const c=document.createElement('canvas');c.width=48;c.h
  else if(kind==='shrine'){E(24,60,18,4,'#00000055');R(8,52,32,10,'#3e3a46');R(8,52,32,2,'#6a6676');R(13,8,22,46,'#56525f');R(15,4,18,6,'#56525f');R(17,2,14,4,'#66626f');
   R(14,10,5,42,'#77738a');R(31,10,3,42,'#3a3644');R(20,18,8,16,'#2a1810');R(21,20,6,12,'#ff8a20');R(22,23,4,6,'#ffd060');R(23,25,2,2,'#fff0c0');R(17,40,14,2,'#3a3644');R(17,45,14,2,'#3a3644');}
  return c;}
-['sign','camp','shrine'].forEach(k=>{const c=poiCanvas(k),f=[c,c,c];SPR['poi_'+k]={down:f,up:f,left:f,right:f,side:f};});
+['sign','camp','shrine'].forEach(k=>{const c=poiCanvas(k),f=[c,c,c];SPR['poi_'+k]={down:f,up:f,left:f,right:f,side:f};if(typeof FPAINT!=='undefined')FPAINT['poi_'+k]={down:c};});   // 48x64 hi-res art, like field.js paints
 const BANTER={
  kael:[['Kael: Sit. Eat. We move at first light.','Mira: Is that an order, or are you worried about us?','Kael: ...Both.'],['Kael: The shards are heavier than they look.','Lyra: That\'s the Hollow pressing back. Fascinating.','Kael: Less fascinating when it\'s in your pack.']],
  lyra:[['Lyra: Every shard hums at a different pitch. I\'ve started writing them down.','Kael: You\'re studying it. Out here.','Lyra: Someone should understand what we\'re carrying.'],['Lyra: The frozen towns didn\'t just lose warmth. They lost songs. Colours. Names.','Mira: Then we give them back. One fire at a time.']],
