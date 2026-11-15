@@ -38,7 +38,7 @@ await ev(()=>{window.__pad.axes[1]=0.9;});await w(120);await ev(()=>{window.__pa
 await padTap(2);ok(await until(()=>DBG.scene==='intro','',30),'pad button 2 starts a New Game -> intro');await w(900);await shot('150_intro_phone.png');
 ok(await ev(()=>POLISH.SLOT===1),'new game goes into the first empty slot');
 // text speed: Fast types twice as fast as Normal
-await ev(()=>{DBG.UI.length=0;});await k('b');ok(await until(()=>DBG.scene==='map','',40),'B skips the intro');await until(()=>DBG.UI.length===0);
+await ev(()=>{DBG.UI.length=0;});await k('b');ok(await until(()=>DBG.scene==='map'||DBG.scene==='leadsel','',40),'B skips the intro');await w(700);await until(()=>DBG.scene==='map','a',40);await until(()=>DBG.UI.length===0);
 const typed=async sp=>{await ev(sp=>{POLISH.OPT.text=sp;DBG.UI.length=0;dialog(['Elder Bran: '+'x'.repeat(200)]);},sp);await w(500);const n=await ev(()=>DBG.UI[0].ch);await ev(()=>DBG.UI.length=0);return n;};
 const n1=await typed(1),n2=await typed(2),n3=await typed(3);ok(n2>n1*1.5&&n3>=200,'text speed changes typing ('+n1.toFixed(0)+' / '+n2.toFixed(0)+' / instant)');
 // ATB modes + battle speed
